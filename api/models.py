@@ -1,6 +1,6 @@
 from django.db import models
 
-class Dectection(models.Model):
+class Detection(models.Model):
     thread_id = models.IntegerField(null=True)
     home_latitude = models.DecimalField(max_digits=5, decimal_places=2)
     home_longitude = models.DecimalField(max_digits=5, decimal_places=2)
