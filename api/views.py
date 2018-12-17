@@ -4,6 +4,9 @@ from django.shortcuts import render
 # Dependencies
 from rest_framework import viewsets
 from rest_framework.renderers import JSONRenderer
+from rest_framework.authentication import SessionAuthentication, BasicAuthentication
+from rest_framework.permissions import IsAuthenticated
+
 
 # Project
 from .serializers import DetectionSerializer
@@ -11,6 +14,10 @@ from .models import Detection
 
 # Create your views here.
 class DetectionViewSet(viewsets.ModelViewSet):
+    #authentication_classes = (SessionAuthentication, BasicAuthentication)
+    authentication_classes = (BasicAuthentication,)
+    permission_classes = (IsAuthenticated,)
+
     """
     retrieve:
         Return a single item of Detection
@@ -33,4 +40,4 @@ class DetectionViewSet(viewsets.ModelViewSet):
 
     queryset = Detection.objects.all()
     serializer_class = DetectionSerializer
-    #renderer_classes = (JSONRenderer, )
+    renderer_classes = (JSONRenderer, )
