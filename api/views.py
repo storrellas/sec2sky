@@ -4,7 +4,7 @@ from django.shortcuts import render
 # Dependencies
 from rest_framework import viewsets
 from rest_framework.renderers import JSONRenderer
-from rest_framework.authentication import SessionAuthentication, BasicAuthentication
+from rest_framework.authentication import SessionAuthentication, BasicAuthentication, TokenAuthentication
 from rest_framework.permissions import IsAuthenticated
 
 
@@ -18,7 +18,8 @@ logger = utils.get_logger()
 # Create your views here.
 class DetectionViewSet(viewsets.ModelViewSet):
     #authentication_classes = (SessionAuthentication, BasicAuthentication)
-    authentication_classes = (BasicAuthentication,)
+    #authentication_classes = (BasicAuthentication,)
+    authentication_classes = (TokenAuthentication,)
     permission_classes = (IsAuthenticated,)
 
     """
