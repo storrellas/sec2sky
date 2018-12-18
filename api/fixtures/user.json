@@ -340,21 +340,5 @@
     "groups": [],
     "user_permissions": []
   }
-},
-{
-  "model": "authtoken.token",
-  "pk": "7279d8dcea7bff649bffec38848eaf1dda8465db",
-  "fields": {
-    "user": 3,
-    "created": "2018-12-18T08:03:01.785Z"
-  }
-},
-{
-  "model": "authtoken.token",
-  "pk": "f8c8f3d8546f69ba8cff57d979ed7448bc33be39",
-  "fields": {
-    "user": 2,
-    "created": "2018-12-18T08:02:45.385Z"
-  }
 }
 ]
