@@ -3,7 +3,7 @@
   "model": "api.detection",
   "pk": 1,
   "fields": {
-    "owner": 1,
+    "owner": 2,
     "description": "Detected in Barcelona",
     "thread_id": 23,
     "home_latitude": "41.81",
@@ -21,7 +21,7 @@
   "model": "api.detection",
   "pk": 2,
   "fields": {
-    "owner": 1,
+    "owner": 2,
     "description": "Detected in Mataro",
     "thread_id": 23,
     "home_latitude": "41.81",
@@ -39,7 +39,7 @@
   "model": "api.detection",
   "pk": 3,
   "fields": {
-    "owner": 1,
+    "owner": 2,
     "description": "Detected in Tarragona",
     "thread_id": 23,
     "home_latitude": "41.81",
@@ -57,7 +57,7 @@
   "model": "api.detection",
   "pk": 4,
   "fields": {
-    "owner": 2,
+    "owner": 3,
     "description": "Detected in Terrassa",
     "thread_id": 23,
     "home_latitude": "41.81",
@@ -75,7 +75,7 @@
   "model": "api.detection",
   "pk": 5,
   "fields": {
-    "owner": 2,
+    "owner": 3,
     "description": "Detected in SantCugat",
     "thread_id": 23,
     "home_latitude": "41.81",
