@@ -255,16 +255,16 @@
   "model": "auth.user",
   "pk": 1,
   "fields": {
-    "password": "pbkdf2_sha256$120000$9qAv9Rw4IAl8$0fe4FfI1fdV86c6ipZRzlMqQR737XSc0DWAZMw/kejg=",
-    "last_login": "2018-12-18T07:22:17.201Z",
+    "password": "pbkdf2_sha256$120000$aCuhdQ9tuenF$9dSTDZpwU5T5QJqMoAyuka6q+A2rDuM8rrYlG+P2yyc=",
+    "last_login": null,
     "is_superuser": true,
     "username": "admin",
     "first_name": "",
     "last_name": "",
-    "email": "admin@example.com",
+    "email": "admin@mail.com",
     "is_staff": true,
     "is_active": true,
-    "date_joined": "2018-12-17T14:33:16.068Z",
+    "date_joined": "2018-12-18T07:33:53.417Z",
     "groups": [],
     "user_permissions": []
   }
