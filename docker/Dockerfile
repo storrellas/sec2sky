@@ -15,12 +15,12 @@ WORKDIR /repo/
 RUN pip3 install -r requirements.txt
 RUN python3 manage.py makemigrations api
 RUN python3 manage.py migrate
-RUN python3 manage.py loaddata api
+RUN python3 manage.py loaddata api user
 
 
 # Create superuser (if necessary)
-RUN echo "from django.contrib.auth.models import User; User.objects.create_superuser('admin', 'admin@example.com', 'admin123')" \
-           | python3 manage.py shell
+#RUN echo "from django.contrib.auth.models import User; User.objects.create_superuser('admin', 'admin@example.com', 'admin123')" \
+#           | python3 manage.py shell
 
 EXPOSE 8000
 
