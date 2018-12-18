@@ -1,7 +1,10 @@
 from django.db import models
+from django.conf import settings
 
 
 class Detection(models.Model):
+
+    owner = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, null=True)
     description = models.CharField(max_length=500, null=True)
     thread_id = models.IntegerField(null=True)
     home_latitude = models.DecimalField(max_digits=5, decimal_places=2)
