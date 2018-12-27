@@ -288,11 +288,155 @@
   }
 },
 {
+  "model": "auth.permission",
+  "pk": 33,
+  "fields": {
+    "name": "Can add sensor manager",
+    "content_type": 9,
+    "codename": "add_sensormanager"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 34,
+  "fields": {
+    "name": "Can change sensor manager",
+    "content_type": 9,
+    "codename": "change_sensormanager"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 35,
+  "fields": {
+    "name": "Can delete sensor manager",
+    "content_type": 9,
+    "codename": "delete_sensormanager"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 36,
+  "fields": {
+    "name": "Can view sensor manager",
+    "content_type": 9,
+    "codename": "view_sensormanager"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 37,
+  "fields": {
+    "name": "Can add detection",
+    "content_type": 10,
+    "codename": "add_detection"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 38,
+  "fields": {
+    "name": "Can change detection",
+    "content_type": 10,
+    "codename": "change_detection"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 39,
+  "fields": {
+    "name": "Can delete detection",
+    "content_type": 10,
+    "codename": "delete_detection"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 40,
+  "fields": {
+    "name": "Can view detection",
+    "content_type": 10,
+    "codename": "view_detection"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 41,
+  "fields": {
+    "name": "Can add sensor group",
+    "content_type": 11,
+    "codename": "add_sensorgroup"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 42,
+  "fields": {
+    "name": "Can change sensor group",
+    "content_type": 11,
+    "codename": "change_sensorgroup"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 43,
+  "fields": {
+    "name": "Can delete sensor group",
+    "content_type": 11,
+    "codename": "delete_sensorgroup"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 44,
+  "fields": {
+    "name": "Can view sensor group",
+    "content_type": 11,
+    "codename": "view_sensorgroup"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 45,
+  "fields": {
+    "name": "Can add sensor",
+    "content_type": 12,
+    "codename": "add_sensor"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 46,
+  "fields": {
+    "name": "Can change sensor",
+    "content_type": 12,
+    "codename": "change_sensor"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 47,
+  "fields": {
+    "name": "Can delete sensor",
+    "content_type": 12,
+    "codename": "delete_sensor"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 48,
+  "fields": {
+    "name": "Can view sensor",
+    "content_type": 12,
+    "codename": "view_sensor"
+  }
+},
+{
   "model": "auth.user",
   "pk": 1,
   "fields": {
     "password": "pbkdf2_sha256$120000$aCuhdQ9tuenF$9dSTDZpwU5T5QJqMoAyuka6q+A2rDuM8rrYlG+P2yyc=",
-    "last_login": "2018-12-18T07:35:25.088Z",
+    "last_login": "2018-12-26T23:54:25.280Z",
     "is_superuser": true,
     "username": "admin",
     "first_name": "",
@@ -309,16 +453,16 @@
   "model": "auth.user",
   "pk": 2,
   "fields": {
-    "password": "pbkdf2_sha256$120000$qLVOgFykBOHw$cz4B8z3hcpgWTSkfYhCjaRHm2RHrfRlmxXh41z/3KG8=",
+    "password": "pbkdf2_sha256$120000$ZsfOqXRvBjWA$C5skGRtjwtH5zApp3csh9nvk9Ooea0c3ael8HKEack8=",
     "last_login": null,
     "is_superuser": false,
-    "username": "rocio",
+    "username": "admincarmaker",
     "first_name": "",
     "last_name": "",
-    "email": "rocio@jurado.com",
+    "email": "",
     "is_staff": false,
     "is_active": true,
-    "date_joined": "2018-12-18T07:21:50.403Z",
+    "date_joined": "2018-12-26T23:58:27.275Z",
     "groups": [],
     "user_permissions": []
   }
@@ -327,16 +471,52 @@
   "model": "auth.user",
   "pk": 3,
   "fields": {
-    "password": "pbkdf2_sha256$120000$m0J3lvk432Q3$bzdJ2Pv6PIjGlo+Gi72S0d7ZrvU+L4eTWTSy3UlDqHc=",
+    "password": "pbkdf2_sha256$120000$XTIDA8t5646J$6AMxLbs6kSPT468u+meP3+l0Baoy1eg3GXrXHRmpTLU=",
     "last_login": null,
     "is_superuser": false,
-    "username": "carmen",
+    "username": "admincentral1",
     "first_name": "",
     "last_name": "",
-    "email": "carmen@sevilla.com",
+    "email": "",
     "is_staff": false,
     "is_active": true,
-    "date_joined": "2018-12-18T07:21:50.554Z",
+    "date_joined": "2018-12-26T23:58:51Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "auth.user",
+  "pk": 4,
+  "fields": {
+    "password": "pbkdf2_sha256$120000$sl8JFRbVYknu$wTzBZ/x2Wv90GY6UuEaSLjX+CbQGykArUlluF7o3Tpg=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "admincentral2",
+    "first_name": "",
+    "last_name": "",
+    "email": "",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2018-12-26T23:58:54Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "auth.user",
+  "pk": 5,
+  "fields": {
+    "password": "pbkdf2_sha256$120000$QGKQosgkaL6g$ZT5SXsJAWAaPvViSb/yTuwW5x6nYmOeKtDQ6HGshvjQ=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "admincentral3",
+    "first_name": "",
+    "last_name": "",
+    "email": "",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2018-12-26T23:58:58Z",
     "groups": [],
     "user_permissions": []
   }
