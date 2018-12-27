@@ -12,7 +12,9 @@ class Company(models.Model):
     def __str__(self):
         return self.name
 
-
+# TODO: Change this with Abstract user
+# See https://simpleisbetterthancomplex.com/tutorial/2016/07/22/how-to-extend-django-user-model.html
+# Admin https://stackoverflow.com/questions/15012235/using-django-auth-useradmin-for-a-custom-user-model
 class SensorManager(models.Model):
 
     VIEWER = 'VI'
