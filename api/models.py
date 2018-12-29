@@ -13,43 +13,6 @@ class Company(models.Model):
     def __str__(self):
         return self.name
 
-# # TODO: Change this with Abstract user
-# # See https://simpleisbetterthancomplex.com/tutorial/2016/07/22/how-to-extend-django-user-model.html
-# # Admin https://stackoverflow.com/questions/15012235/using-django-auth-useradmin-for-a-custom-user-model
-# class SensorManager(models.Model):
-#
-#     VIEWER = 'VI'
-#     OPERATOR = 'OP'
-#     CONFIGURATOR = 'CO'
-#     ADMINISTRATOR = 'AD'
-#     EMPOWERED = 'EM'
-#     S2S_MANAGER = 'SM'
-#     S2S_TECHNICIAN = 'ST'
-#     ROLE_CHOICES = (
-#         (VIEWER, 'viewer'),
-#         (OPERATOR, 'operator'),
-#         (CONFIGURATOR, 'configurator'),
-#         (ADMINISTRATOR, 'administrator'),
-#         (EMPOWERED, 'empowered'),
-#         (S2S_MANAGER, 's2s_manager'),
-#         (S2S_TECHNICIAN, 's2s_technician'),
-#     )
-#
-#     user = models.OneToOneField(User, on_delete=models.CASCADE, null=True)
-#     role = models.CharField(max_length=2, choices=ROLE_CHOICES, default=VIEWER,)
-#     company = models.ForeignKey(Company, on_delete=models.CASCADE, null=True)
-#
-#     def __str__(self):
-#         return self.user.username
-#
-# @receiver(post_save, sender=User)
-# def create_user_profile(sender, instance, created, **kwargs):
-#     if created:
-#         SensorManager.objects.create(user=instance)
-#
-# @receiver(post_save, sender=User)
-# def save_user_profile(sender, instance, **kwargs):
-#     instance.sensormanager.save()
 
 # See https://wsvincent.com/django-custom-user-model-tutorial/
 class SensorUser(AbstractUser):
