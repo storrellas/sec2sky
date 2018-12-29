@@ -73,6 +73,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'sec2sky.wsgi.application'
 
+AUTH_USER_MODEL = 'api.SensorUser'
 
 # Database
 # https://docs.djangoproject.com/en/2.1/ref/settings/#databases
