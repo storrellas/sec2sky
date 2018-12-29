@@ -13,7 +13,7 @@
     "is_staff": true,
     "is_active": true,
     "date_joined": "2018-12-29T23:18:46.217Z",
-    "role": "VI",
+    "role": "administrator",
     "company": null,
     "groups": [],
     "user_permissions": []
@@ -33,7 +33,7 @@
     "is_staff": false,
     "is_active": true,
     "date_joined": "2018-12-29T23:21:33.435Z",
-    "role": "VI",
+    "role": "administrator",
     "company": 1,
     "groups": [],
     "user_permissions": []
@@ -53,7 +53,7 @@
     "is_staff": false,
     "is_active": true,
     "date_joined": "2018-12-29T23:21:41.291Z",
-    "role": "VI",
+    "role": "administrator",
     "company": 2,
     "groups": [],
     "user_permissions": []
@@ -73,7 +73,7 @@
     "is_staff": false,
     "is_active": true,
     "date_joined": "2018-12-29T23:21:45.219Z",
-    "role": "VI",
+    "role": "administrator",
     "company": 2,
     "groups": [],
     "user_permissions": []
@@ -93,7 +93,7 @@
     "is_staff": false,
     "is_active": true,
     "date_joined": "2018-12-29T23:21:49.130Z",
-    "role": "VI",
+    "role": "administrator",
     "company": 2,
     "groups": [],
     "user_permissions": []

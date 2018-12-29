@@ -16,13 +16,13 @@ class Company(models.Model):
 
 # See https://wsvincent.com/django-custom-user-model-tutorial/
 class SensorUser(AbstractUser):
-    VIEWER = 'VI'
-    OPERATOR = 'OP'
-    CONFIGURATOR = 'CO'
-    ADMINISTRATOR = 'AD'
-    EMPOWERED = 'EM'
-    S2S_MANAGER = 'SM'
-    S2S_TECHNICIAN = 'ST'
+    VIEWER = 'viewer'
+    OPERATOR = 'operator'
+    CONFIGURATOR = 'configurator'
+    ADMINISTRATOR = 'administrator'
+    EMPOWERED = 'empowered'
+    S2S_MANAGER = 's2s_manager'
+    S2S_TECHNICIAN = 's2s_technician'
     ROLE_CHOICES = (
         (VIEWER, 'viewer'),
         (OPERATOR, 'operator'),
@@ -33,7 +33,7 @@ class SensorUser(AbstractUser):
         (S2S_TECHNICIAN, 's2s_technician'),
     )
 
-    role = models.CharField(max_length=2, choices=ROLE_CHOICES, default=VIEWER,)
+    role = models.CharField(max_length=20, choices=ROLE_CHOICES, default=VIEWER,)
     company = models.ForeignKey(Company, on_delete=models.CASCADE, null=True)
 
     class Meta:
