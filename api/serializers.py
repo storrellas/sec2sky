@@ -14,7 +14,7 @@ class SensorUserSerializer(serializers.ModelSerializer):
     class Meta:
         model = SensorUser
         #fields = '__all__'
-        fields = ('id', 'username', 'role', 'company')
+        fields = ('id', 'username', 'role', 'company', 'sensor_groups')
 
 class DetectionSerializer(serializers.ModelSerializer):
     class Meta:

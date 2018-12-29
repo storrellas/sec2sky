@@ -100,6 +100,26 @@
   }
 },
 {
+  "model": "api.sensoruser",
+  "pk": 6,
+  "fields": {
+    "password": "!vw5LDsf0i6jg3kE0pEZpLcD3OSr935t88iNgwKzU",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "adminnuclear",
+    "first_name": "",
+    "last_name": "",
+    "email": "admin123",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2018-12-29T23:53:53.850Z",
+    "role": "administrator",
+    "company": 2,
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
   "model": "api.company",
   "pk": 1,
   "fields": {

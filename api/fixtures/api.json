@@ -17,7 +17,7 @@
     "name": "GRPCENTRAL1",
     "description": "GRPCENTRAL1",
     "managers": [
-      3
+      3, 6
     ]
   }
 },
@@ -28,7 +28,7 @@
     "name": "GRPCENTRAL2",
     "description": "GRPCENTRAL2",
     "managers": [
-      4
+      4, 6
     ]
   }
 },
@@ -39,7 +39,7 @@
     "name": "GRPCENTRAL3",
     "description": "GRPCENTRAL3",
     "managers": [
-      5
+      5, 6
     ]
   }
 },
