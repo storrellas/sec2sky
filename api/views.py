@@ -65,8 +65,8 @@ class SensorViewSet(viewsets.ViewSet):
         return Response(serializer.data)
 
     def retrieve(self, request, pk=None):
-        queryset = self.model.objects.filter(pk=pk)
-        serializer = self.serializer_class(queryset, many=True)
+        queryset = self.model.objects.get(pk=pk)
+        serializer = self.serializer_class(queryset)
         return Response(serializer.data)
 
 
