@@ -6,11 +6,12 @@ from rest_framework import routers
 from rest_framework.authtoken import views
 
 # Project imports
-from .views import DetectionViewSet, SensorUserViewSet
+from .views import DetectionViewSet, SensorUserViewSet, SensorGroupViewSet
 
 router = routers.DefaultRouter()
 router.register(r'detection', DetectionViewSet)
 router.register(r'user', SensorUserViewSet)
+router.register(r'sensorgroup', SensorGroupViewSet)
 
 urlpatterns = [
     url(r'^', include(router.urls)),

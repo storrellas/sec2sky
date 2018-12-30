@@ -124,7 +124,7 @@
   "model": "api.sensor",
   "pk": 8,
   "fields": {
-    "sensor_group": 2,
+    "sensor_group": 3,
     "name": "CMF008",
     "description": "CMF008",
     "latitude": "43.20",
@@ -135,7 +135,7 @@
   "model": "api.sensor",
   "pk": 9,
   "fields": {
-    "sensor_group": 2,
+    "sensor_group": 3,
     "name": "CMF009",
     "description": "CMF009",
     "latitude": "43.20",
@@ -146,7 +146,7 @@
   "model": "api.sensor",
   "pk": 10,
   "fields": {
-    "sensor_group": 2,
+    "sensor_group": 4,
     "name": "CMF010",
     "description": "CMF010",
     "latitude": "43.20",
@@ -157,7 +157,7 @@
   "model": "api.sensor",
   "pk": 11,
   "fields": {
-    "sensor_group": 2,
+    "sensor_group": 4,
     "name": "CMF011",
     "description": "CMF011",
     "latitude": "43.20",
