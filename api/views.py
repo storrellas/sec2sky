@@ -6,7 +6,8 @@ from rest_framework import viewsets
 from rest_framework.renderers import JSONRenderer
 from rest_framework.authentication import SessionAuthentication, BasicAuthentication, TokenAuthentication
 from rest_framework.permissions import IsAuthenticated
-
+from rest_framework.views import APIView
+from rest_framework.response import Response
 
 # Project
 from .serializers import DetectionSerializer, SensorUserSerializer
@@ -16,134 +17,69 @@ from sec2sky import utils
 
 logger = utils.get_logger()
 
-class SensorUserViewSet(viewsets.ModelViewSet):
-    #authentication_classes = (SessionAuthentication, BasicAuthentication)
-    #authentication_classes = (BasicAuthentication,)
+
+class SensorUserAPIView(APIView):
     authentication_classes = (TokenAuthentication,)
     permission_classes = (IsAuthenticated,)
 
-    """
-    retrieve:
-        Return a single item of Detection
+    def get(self, request, format=None):
+        # User is admin
+        if request.user.is_superuser:
+            queryset = SensorUser.objects.all()
+            serializer = SensorUserSerializer(queryset, many=True)
+            return Response(serializer.data)
 
-    list:
-        Return a list of Detection
-
-    create:
-        Creates a Detection model
-
-    destroy:
-        Delete a Detection model
-
-    update:
-        Update a Detection model
-
-    partial_update:
-        Update a Detection model
-    """
-
-    model = SensorUser
-    queryset = SensorUser.objects.all()
-    serializer_class = SensorUserSerializer
-    renderer_classes = (JSONRenderer, )
+        # Other users
+        serializer = SensorUserSerializer(request.user)
+        return Response(serializer.data)
 
 
-# Create your views here.
+
 class SensorGroupViewSet(viewsets.ModelViewSet):
-    #authentication_classes = (SessionAuthentication, BasicAuthentication)
-    #authentication_classes = (BasicAuthentication,)
     authentication_classes = (TokenAuthentication,)
     permission_classes = (IsAuthenticated,)
 
-    """
-    retrieve:
-        Return a single item of Detection
-
-    list:
-        Return a list of Detection
-
-    create:
-        Creates a Detection model
-
-    destroy:
-        Delete a Detection model
-
-    update:
-        Update a Detection model
-
-    partial_update:
-        Update a Detection model
-    """
 
     model = SensorGroup
     queryset = SensorGroup.objects.all()
     serializer_class = SensorGroupExtendedSerializer
     renderer_classes = (JSONRenderer, )
 
+    def get_queryset(self):
+        logger.info("Get Queryset for user '" + str(self.request.user) +  "'")
+        return self.model.objects.filter(managers=self.request.user)
 
-class SensorViewSet(viewsets.ModelViewSet):
-    #authentication_classes = (SessionAuthentication, BasicAuthentication)
-    #authentication_classes = (BasicAuthentication,)
+
+class SensorViewSet(viewsets.ViewSet):
     authentication_classes = (TokenAuthentication,)
     permission_classes = (IsAuthenticated,)
-
-    """
-    retrieve:
-        Return a single item of Detection
-
-    list:
-        Return a list of Detection
-
-    create:
-        Creates a Detection model
-
-    destroy:
-        Delete a Detection model
-
-    update:
-        Update a Detection model
-
-    partial_update:
-        Update a Detection model
-    """
 
     model = Sensor
     queryset = Sensor.objects.all()
     serializer_class = SensorExtendedSerializer
     renderer_classes = (JSONRenderer, )
 
+    def list(self, request):
+        queryset = self.model.objects.all()
+        serializer = self.serializer_class(queryset, many=True)
+        return Response(serializer.data)
 
-class DetectionViewSet(viewsets.ModelViewSet):
-    #authentication_classes = (SessionAuthentication, BasicAuthentication)
-    #authentication_classes = (BasicAuthentication,)
-    authentication_classes = (TokenAuthentication,)
-    permission_classes = (IsAuthenticated,)
+    def retrieve(self, request, pk=None):
+        queryset = self.model.objects.filter(pk=pk)
+        serializer = self.serializer_class(queryset, many=True)
+        return Response(serializer.data)
 
-    """
-    retrieve:
-        Return a single item of Detection
 
-    list:
-        Return a list of Detection
-
-    create:
-        Creates a Detection model
-
-    destroy:
-        Delete a Detection model
-
-    update:
-        Update a Detection model
-
-    partial_update:
-        Update a Detection model
-    """
-
-    model = Detection
-    queryset = Detection.objects.all()
-    serializer_class = DetectionSerializer
-    renderer_classes = (JSONRenderer, )
-
-    def get_queryset(self):
-        logger.info("Get Queryset for user '" + str(self.request.user) +  "'")
-        return self.model.objects.filter(owner=self.request.user)
+# class DetectionViewSet(viewsets.ModelViewSet):
+#     authentication_classes = (TokenAuthentication,)
+#     permission_classes = (IsAuthenticated,)
+#
+#
+#     model = Detection
+#     queryset = Detection.objects.all()
+#     serializer_class = DetectionSerializer
+#     renderer_classes = (JSONRenderer, )
+#
+#     def get_queryset(self):
+#         logger.info("Get Queryset for user '" + str(self.request.user) +  "'")
+#         return self.model.objects.filter(owner=self.request.user)

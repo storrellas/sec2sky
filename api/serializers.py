@@ -41,7 +41,7 @@ class DetectionSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 class SensorExtendedSerializer(serializers.ModelSerializer):
-    detection_list = SensorSerializer(source='detection_set', many=True)
+    detection_list = DetectionSerializer(source='detection_set', many=True)
     class Meta:
         model = Sensor
         fields = '__all__'
