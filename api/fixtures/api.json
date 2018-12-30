@@ -163,5 +163,59 @@
     "latitude": "43.20",
     "longitude": "2.10"
   }
+},
+{
+  "model": "api.detection",
+  "pk": 1,
+  "fields": {
+    "sensor": 1,
+    "description": "MyDetection1",
+    "thread_id": 123,
+    "home_latitude": "43.20",
+    "home_longitude": "2.40",
+    "latitude": "43.20",
+    "altitude": "23.00",
+    "longitude": "3.20",
+    "rssi": "123.00",
+    "signal_type": "MySignalType",
+    "created_at": "2018-12-30T00:13:25.626Z",
+    "updated_at": "2018-12-30T00:13:25.626Z"
+  }
+},
+{
+  "model": "api.detection",
+  "pk": 2,
+  "fields": {
+    "sensor": 1,
+    "description": "MyDetection2",
+    "thread_id": 123,
+    "home_latitude": "43.20",
+    "home_longitude": "2.40",
+    "latitude": "43.20",
+    "altitude": "23.00",
+    "longitude": "3.20",
+    "rssi": "123.00",
+    "signal_type": "MySignalType",
+    "created_at": "2018-12-30T00:13:25.626Z",
+    "updated_at": "2018-12-30T00:13:25.626Z"
+  }
+},
+{
+  "model": "api.detection",
+  "pk": 3,
+  "fields": {
+    "sensor": 2,
+    "description": "MyDetection2",
+    "thread_id": 123,
+    "home_latitude": "43.20",
+    "home_longitude": "2.40",
+    "latitude": "43.20",
+    "altitude": "23.00",
+    "longitude": "3.20",
+    "rssi": "123.00",
+    "signal_type": "MySignalType",
+    "created_at": "2018-12-30T00:13:25.626Z",
+    "updated_at": "2018-12-30T00:13:25.626Z"
+  }
 }
 ]

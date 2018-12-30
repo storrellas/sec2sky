@@ -10,8 +10,8 @@ from rest_framework.permissions import IsAuthenticated
 
 # Project
 from .serializers import DetectionSerializer, SensorUserSerializer
-from .serializers import SensorGroupExtendedSerializer
-from .models import Detection, SensorUser, SensorGroup
+from .serializers import SensorGroupExtendedSerializer, SensorExtendedSerializer
+from .models import Detection, SensorUser, SensorGroup, Sensor
 from sec2sky import utils
 
 logger = utils.get_logger()
@@ -78,6 +78,38 @@ class SensorGroupViewSet(viewsets.ModelViewSet):
     model = SensorGroup
     queryset = SensorGroup.objects.all()
     serializer_class = SensorGroupExtendedSerializer
+    renderer_classes = (JSONRenderer, )
+
+
+class SensorViewSet(viewsets.ModelViewSet):
+    #authentication_classes = (SessionAuthentication, BasicAuthentication)
+    #authentication_classes = (BasicAuthentication,)
+    authentication_classes = (TokenAuthentication,)
+    permission_classes = (IsAuthenticated,)
+
+    """
+    retrieve:
+        Return a single item of Detection
+
+    list:
+        Return a list of Detection
+
+    create:
+        Creates a Detection model
+
+    destroy:
+        Delete a Detection model
+
+    update:
+        Update a Detection model
+
+    partial_update:
+        Update a Detection model
+    """
+
+    model = Sensor
+    queryset = Sensor.objects.all()
+    serializer_class = SensorExtendedSerializer
     renderer_classes = (JSONRenderer, )
 
 

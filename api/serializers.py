@@ -34,7 +34,14 @@ class SensorGroupExtendedSerializer(serializers.ModelSerializer):
         model = Company
         fields = ('id', 'name', 'description', 'sensor_list')
 
+
 class DetectionSerializer(serializers.ModelSerializer):
     class Meta:
         model = Detection
+        fields = '__all__'
+
+class SensorExtendedSerializer(serializers.ModelSerializer):
+    detection_list = SensorSerializer(source='detection_set', many=True)
+    class Meta:
+        model = Sensor
         fields = '__all__'

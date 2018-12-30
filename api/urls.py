@@ -7,11 +7,14 @@ from rest_framework.authtoken import views
 
 # Project imports
 from .views import DetectionViewSet, SensorUserViewSet, SensorGroupViewSet
+from .views import SensorViewSet
+
 
 router = routers.DefaultRouter()
 router.register(r'detection', DetectionViewSet)
 router.register(r'user', SensorUserViewSet)
 router.register(r'sensorgroup', SensorGroupViewSet)
+router.register(r'sensor', SensorViewSet)
 
 urlpatterns = [
     url(r'^', include(router.urls)),
