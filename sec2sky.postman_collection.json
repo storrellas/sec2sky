@@ -266,7 +266,7 @@
 					"raw": ""
 				},
 				"url": {
-					"raw": "http://localhost:8080/api/detection/",
+					"raw": "http://localhost:8080/api/sensor/1/detection/",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -274,6 +274,8 @@
 					"port": "8080",
 					"path": [
 						"api",
+						"sensor",
+						"1",
 						"detection",
 						""
 					]
