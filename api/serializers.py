@@ -40,6 +40,9 @@ class DetectionSerializer(serializers.ModelSerializer):
         model = Detection
         fields = '__all__'
 
+    def create(self, validated_data):
+        return self.Meta.model(**validated_data)
+
 class SensorExtendedSerializer(serializers.ModelSerializer):
     detection_list = DetectionSerializer(source='detection_set', many=True)
     class Meta:
