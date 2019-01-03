@@ -1,19 +1,28 @@
-import paho.mqtt.client as mqtt
+import sys
+import os
+sys.path.append(os.path.dirname(os.path.abspath(__file__)) + '/../')
+
 import time
 import json
 import signal
+
+# Libraries import
+import paho.mqtt.client as mqtt
+
+# Import Django
+import django
+from django.conf import settings
+
+# Project imports
 from random import randint
 from sec2sky import utils
 
+
 logger = utils.get_logger()
 
-import os
 # django project name is adleads, replace adleads with your project name
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "sec2sky.settings")
-import django
 django.setup()
-
-from django.conf import settings
 
 # Configuration values
 sensor_id = 1
