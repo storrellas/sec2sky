@@ -18,7 +18,6 @@ from django.conf import settings
 # Configuration values
 sensor_id = 1
 response_delay = 3
-topic = 'sensor'
 
 #
 # Name: on_connect
@@ -45,7 +44,7 @@ def alarm_handler(signum, frame):
 
     # MQTT publish message
     logger.info("Sending message '" + json.dumps(message) + "' ...")
-    client.publish(topic, json.dumps(message))
+    client.publish(settings.MQTT['topic'], json.dumps(message))
 
     # Create signal for next alarm
     signal.alarm(randint(1, 10))

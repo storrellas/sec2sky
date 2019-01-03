@@ -128,7 +128,8 @@ USE_L10N = True
 USE_TZ = True
 
 MQTT = {
-    'hostname': 'localhost'
+    'hostname': 'localhost',
+    'topic' : 'sec2sky'
 }
 
 # Static files (CSS, JavaScript, Images)
