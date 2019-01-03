@@ -20,27 +20,40 @@ sensor_id = 1
 response_delay = 3
 topic = 'sensor'
 
+#
+# Name: on_connect
+# Description: Handler when a connect is reached
+#
 def on_connect(client, userdata, flags, rc):
     logger.info("Connected with result code "+str(rc))
 
-    # MQTT publish message
-    logger.info("Sending message ...")
+#
+# Name: on_message
+# Description: Handler when a message is received
+#
+def on_message(client, userdata, msg):
+    logger.info("topic: '" + msg.topic + "'' payload: '" + str(msg.payload) + "'")
+
+#
+# Name: alarm_handler
+# Description: Handler when alarm is raised
+#
+def alarm_handler(signum, frame):
+    #logger.info('Signal handler called with signal' + str(signum) )
+
     message = {'id': 1, 'sender': 'sergi'}
+
+    # MQTT publish message
+    logger.info("Sending message '" + json.dumps(message) + "' ...")
     client.publish(topic, json.dumps(message))
 
-
-def on_message(client, userdata, msg):
-    print("topic: '" + msg.topic + "'' payload: '" + str(msg.payload) + "'")
-
-
-def handler(signum, frame):
-    logger.info('Signal handler called with signal' + str(signum) )
+    # Create signal for next alarm
     signal.alarm(randint(1, 10))
 
 if __name__ == "__main__":
 
     # Set the signal handler and a 5-second alarm
-    signal.signal(signal.SIGALRM, handler)
+    signal.signal(signal.SIGALRM, alarm_handler)
     signal.alarm(1)
 
     # Configure MQTT Client
