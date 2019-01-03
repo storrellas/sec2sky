@@ -60,10 +60,10 @@ class SensorViewSet(viewsets.ViewSet):
     serializer_class = SensorExtendedSerializer
     renderer_classes = (JSONRenderer, )
 
-    def list(self, request):
-        queryset = self.model.objects.all()
-        serializer = self.serializer_class(queryset, many=True)
-        return Response(serializer.data)
+    # def list(self, request):
+    #     queryset = self.model.objects.all()
+    #     serializer = self.serializer_class(queryset, many=True)
+    #     return Response(serializer.data)
 
     def retrieve(self, request, pk=None):
         queryset = self.model.objects.get(pk=pk)
