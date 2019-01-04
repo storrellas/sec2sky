@@ -49,34 +49,24 @@ def on_connect(client, userdata, flags, rc):
 # Description: Handler when a message is received
 #
 def on_message(client, userdata, msg):
-    logger.info("topic: '" + msg.topic + "'' payload: '" + str(msg.payload) + "'")
+    logger.info("Message Received [topic: '" + msg.topic + "' payload: '" + str(msg.payload) + "']")
+
+    stream = io.BytesIO(msg.payload)
+    data = JSONParser().parse(stream)
+
+    serializer = DetectionSerializer(data=data)
+    print(serializer.is_valid())
+
+    if serializer.is_valid():
+        detection = serializer.create(serializer.validated_data)
+        detection.save()
+        logger.info("Object creation successful!")
+    else:
+        logger.error("Object creation failed. Wrong input data")
 
 
 if __name__ == "__main__":
 
-    """
-    message = {
-               'sensor': 1,
-               'description': 'mydescription',
-               'thread_id': 1,
-               'home_latitude' : 43.2,
-               'home_longitude' : 2.2,
-               'latitude' : 43.2,
-               'altitude' : 256,
-               'longitude' : 2.1,
-               'rssi' : 43.2,
-               'signal_type' : "MySignalType"
-               }
-    serializer = DetectionSerializer(data=message)
-    print(serializer.is_valid())
-
-
-    print("----- Before create -- ")
-    print(serializer.data)
-    detection = serializer.create(serializer.validated_data)
-    detection.save()
-    sys.exit(0)
-    """
 
     # Configure MQTT Client
     client = mqtt.Client()

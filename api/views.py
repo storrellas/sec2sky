@@ -95,8 +95,8 @@ class MQTTTestAPIView(APIView):
 
     def post(self, request, format=None):
 
-        # # MQTT publish message
-        # message = { 'id': 1, 'sender': 'pumpclient/1/1'}
-        # publish.single(settings.MQTT['topic'], json.dumps(message), hostname=settings.MQTT['hostname'])
+        # MQTT publish message
+        publish.single(request.data['topic'], json.dumps(request.data['payload']), hostname=settings.MQTT['hostname'])
 
+        # Return generic response
         return Response({'response': 'ok'})

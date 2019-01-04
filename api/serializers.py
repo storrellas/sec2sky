@@ -36,15 +36,11 @@ class SensorGroupExtendedSerializer(serializers.ModelSerializer):
 
 
 class DetectionSerializer(serializers.ModelSerializer):
-    #sensor = serializers.PrimaryKeyRelatedField(read_only=True)
     class Meta:
         model = Detection
         fields = '__all__'
 
     def create(self, validated_data):
-        print("-- serializer CREATE --")
-        print(validated_data)
-
         return self.Meta.model(**validated_data)
 
 class SensorExtendedSerializer(serializers.ModelSerializer):
