@@ -41,8 +41,10 @@ response_delay = 3
 def on_connect(client, userdata, flags, rc):
     logger.info("Connected with result code "+str(rc))
 
-    # Subscribe to topic
-    client.subscribe(settings.MQTT['topic'])
+    # Subscribe to topic list
+    client.subscribe(settings.MQTT['topic_detection'])
+    client.subscribe(settings.MQTT['topic_sensor'])
+    client.subscribe(settings.MQTT['topic_status'])
 
 #
 # Name: on_message
@@ -55,8 +57,6 @@ def on_message(client, userdata, msg):
     data = JSONParser().parse(stream)
 
     serializer = DetectionSerializer(data=data)
-    print(serializer.is_valid())
-
     if serializer.is_valid():
         detection = serializer.create(serializer.validated_data)
         detection.save()
