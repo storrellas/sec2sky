@@ -2,7 +2,7 @@ FROM node:10.14.2-alpine
 MAINTAINER Sergi Torrellas
 
 # Add folder
-RUN apk add --no-cache --update python3 bash
+RUN apk add --no-cache --update python3 bash mosquitto
 ADD . /repo/
 
 # Configure Node
@@ -25,4 +25,4 @@ RUN python3 manage.py loaddata api user
 EXPOSE 8000
 
 # Run container
-CMD python3 /repo/manage.py runserver 0.0.0.0:$PORT
+CMD mosquitto & python3 /repo/mqtt/sensor_sink.py & python3 /repo/manage.py runserver 0.0.0.0:$PORT

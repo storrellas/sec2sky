@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "6553a29e-3abf-483b-b73c-71553718a7fd",
+		"_postman_id": "843195b9-6e13-47b1-815c-7326fa5a7a7a",
 		"name": "sec2sky",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -96,7 +96,7 @@
 			"response": []
 		},
 		{
-			"name": "UserList",
+			"name": "User",
 			"request": {
 				"method": "GET",
 				"header": [
@@ -191,43 +191,6 @@
 					"raw": ""
 				},
 				"url": {
-					"raw": "http://localhost:8080/api/sensor/",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"api",
-						"sensor",
-						""
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Sensor Detail",
-			"request": {
-				"method": "GET",
-				"header": [
-					{
-						"key": "Content-Type",
-						"name": "Content-Type",
-						"type": "text",
-						"value": "application/json"
-					},
-					{
-						"key": "Authorization",
-						"type": "text",
-						"value": "Token {{token}}"
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": ""
-				},
-				"url": {
 					"raw": "http://localhost:8080/api/sensor/1/",
 					"protocol": "http",
 					"host": [
@@ -277,6 +240,44 @@
 						"sensor",
 						"1",
 						"detection",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "MQTT - Detection",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "Token {{token}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{   \n\t\"topic\": \"sec2sky/detection\",\n\t\"payload\" : {\n\t\t\"sensor\": 1,\n\t\t\"description\": \"mydescription\",\n\t\t\"thread_id\": 1,\n\t\t\"home_latitude\" : 43.2,\n\t\t\"home_longitude\" : 2.2,\n\t\t\"latitude\" : 43.2,\n\t\t\"altitude\" : 256,\n\t\t\"longitude\" : 2.1,\n\t\t\"rssi\" : 43.2,\n\t\t\"signal_type\" : \"MySignalType\"\n    }\n}             "
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/test/mqtt/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"test",
+						"mqtt",
 						""
 					]
 				}
