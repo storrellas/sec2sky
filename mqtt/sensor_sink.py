@@ -54,39 +54,29 @@ def on_message(client, userdata, msg):
 
 if __name__ == "__main__":
 
-
+    """
     message = {
                'sensor': 1,
                'description': 'mydescription',
                'thread_id': 1,
                'home_latitude' : 43.2,
-               'home_longitude' : 43.2,
+               'home_longitude' : 2.2,
                'latitude' : 43.2,
-               'altitude' : 43.2,
-               'longitude' : 43.2,
+               'altitude' : 256,
+               'longitude' : 2.1,
                'rssi' : 43.2,
                'signal_type' : "MySignalType"
                }
-
-    # message_str = json.dumps(message)
-    # print( type(message) )
-    # print( type(message_str) )
-    # str = json.dumps(message)
-    # binary = ' '.join(format(ord(letter), 'b') for letter in str)
-    # stream = io.BytesIO(binary)
-    #
-    # data = JSONParser().parse(message)
     serializer = DetectionSerializer(data=message)
     print(serializer.is_valid())
 
-    sensor = Sensor.objects.get(id=serializer.data['sensor'])
-    #print(serializer.data['sensor'])
-    print(serializer.data['sensor'])
-    print(sensor)
 
-    serializer.data['sensor'] = sensor
-    print(serializer.create(serializer.data))
+    print("----- Before create -- ")
+    print(serializer.data)
+    detection = serializer.create(serializer.validated_data)
+    detection.save()
     sys.exit(0)
+    """
 
     # Configure MQTT Client
     client = mqtt.Client()
