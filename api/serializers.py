@@ -44,7 +44,12 @@ class DetectionSerializer(serializers.ModelSerializer):
         return self.Meta.model(**validated_data)
 
 class SensorExtendedSerializer(serializers.ModelSerializer):
-    detection_list = DetectionSerializer(source='detection_set', many=True)
+    n_detection = serializers.SerializerMethodField()
+
+    def get_n_detection(self, obj):
+        #return "Foo id: %i" % obj.pk
+        return Detection.objects.filter(sensor=obj).count()
+
     class Meta:
         model = Sensor
         fields = '__all__'
