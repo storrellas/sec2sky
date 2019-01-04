@@ -1,5 +1,9 @@
-# Django importts
+# Python imports
+import json
+
+# Django imports
 from django.shortcuts import render
+from django.conf import settings
 
 # Dependencies
 from rest_framework import viewsets
@@ -9,6 +13,8 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.generics import ListAPIView
+
+from paho.mqtt import publish
 
 # Project
 from .serializers import DetectionSerializer, SensorUserSerializer
@@ -81,3 +87,16 @@ class DetectionListAPIView(ListAPIView):
     def get_queryset(self):
         sensor = self.kwargs['sensor']
         return Detection.objects.filter(sensor__pk=sensor)
+
+
+class MQTTTestAPIView(APIView):
+    authentication_classes = (TokenAuthentication,)
+    permission_classes = (IsAuthenticated,)
+
+    def post(self, request, format=None):
+
+        # # MQTT publish message
+        # message = { 'id': 1, 'sender': 'pumpclient/1/1'}
+        # publish.single(settings.MQTT['topic'], json.dumps(message), hostname=settings.MQTT['hostname'])
+
+        return Response({'response': 'ok'})

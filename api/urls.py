@@ -6,8 +6,7 @@ from rest_framework import routers
 from rest_framework.authtoken import views
 
 # Project imports
-from .views import SensorUserAPIView, DetectionListAPIView
-from .views import SensorGroupViewSet, SensorViewSet
+from .views import *
 #from .views import DetectionViewSet
 
 
@@ -21,6 +20,7 @@ urlpatterns = [
     url(r'^', include(router.urls)),
     url(r'^user/', SensorUserAPIView.as_view()),
     url('^sensor/(?P<sensor>.+)/detection/$', DetectionListAPIView.as_view()),
+    url('^test/mqtt/$', MQTTTestAPIView.as_view()),
     url(r'^auth/', views.obtain_auth_token),
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework'))
 ]
