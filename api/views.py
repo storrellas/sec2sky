@@ -64,17 +64,17 @@ class SensorViewSet(viewsets.ViewSet):
     serializer_class = SensorExtendedSerializer
     renderer_classes = (JSONRenderer, )
 
-    # def list(self, request):
-    #     queryset = self.model.objects.all()
-    #     serializer = self.serializer_class(queryset, many=True)
-    #     return Response(serializer.data)
+    def list(self, request):
+        queryset = self.model.objects.all()
+        serializer = self.serializer_class(queryset, many=True)
+        return Response(serializer.data)
 
     def retrieve(self, request, pk=None):
         queryset = self.model.objects.get(pk=pk)
         serializer = self.serializer_class(queryset)
         return Response(serializer.data)
 
-    @action(detail=True, methods=['get'], permission_classes=[IsAuthenticated])
+    @action(detail=True, methods=['get'])
     def detection(self, request, pk=None):
         queryset = Detection.objects.filter(sensor__pk=pk)
         serializer = DetectionSerializer(queryset, many=True)
