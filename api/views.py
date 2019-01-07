@@ -41,8 +41,16 @@ class SensorUserViewSet(viewsets.ModelViewSet):
 
     model = SensorUser
     queryset = SensorUser.objects.all()
-    serializer_class = serializers.SensorUserSerializer
+    serializer_class = serializers.SensorUserExtendedSerializer
     renderer_classes = (JSONRenderer, )
+
+    def create(self, request, format=None):
+        serializer = serializers.SensorUserSerializer(data=request.data)
+        user = SensorUser.objects.create_user(**serializer.validated_data)
+
+        # Return complete response
+        serializer = serializers.SensorUserExtendedSerializer(user)
+        return Response(serializer.data)
 
     @action(detail=False, methods=['get'], permission_classes=[IsAuthenticated])
     def whoami(self, request, pk=None):

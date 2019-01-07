@@ -15,13 +15,20 @@ class CompanySerializer(serializers.ModelSerializer):
         model = Company
         fields = ('id', 'name', 'description')
 
-class SensorUserSerializer(serializers.ModelSerializer):
-    company = CompanySerializer()
-    sensor_groups = SensorGroupSerializer(source='sensor_groups_set', many=True)
+class SensorUserExtendedSerializer(serializers.ModelSerializer):
+    company_detail = CompanySerializer(required=False, source='company')
+    sensor_groups = SensorGroupSerializer(required=False, source='sensor_groups_set', many=True)
+
     class Meta:
         model = SensorUser
         #fields = '__all__'
-        fields = ('id', 'username', 'role', 'company', 'sensor_groups')
+        fields = ('id', 'username', 'role', 'company_detail', 'sensor_groups')
+
+class SensorUserSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = SensorUser
+        fields = '__all__'
 
 class SensorSerializer(serializers.ModelSerializer):
     class Meta:

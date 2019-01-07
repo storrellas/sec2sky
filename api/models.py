@@ -34,7 +34,7 @@ class SensorUser(AbstractUser):
     )
 
     role = models.CharField(max_length=20, choices=ROLE_CHOICES, default=VIEWER,)
-    company = models.ForeignKey(Company, on_delete=models.CASCADE, null=True)
+    company = models.ForeignKey(Company, on_delete=models.SET_NULL, null=True)
 
     class Meta:
         verbose_name = 'SensorUser'
@@ -50,7 +50,7 @@ class SensorGroup(models.Model):
 
 
 class Sensor(models.Model):
-    sensor_group = models.ForeignKey(SensorGroup, on_delete=models.CASCADE, null=True)
+    sensor_group = models.ForeignKey(SensorGroup, on_delete=models.SET_NULL, null=True)
     name = models.CharField(max_length=500, null=True)
     description = models.CharField(max_length=500, null=True)
     latitude = models.DecimalField(max_digits=5, decimal_places=2)
@@ -61,7 +61,7 @@ class Sensor(models.Model):
 
 class Detection(models.Model):
 
-    sensor = models.ForeignKey(Sensor, on_delete=models.CASCADE, null=True)
+    sensor = models.ForeignKey(Sensor, on_delete=models.SET_NULL, null=True)
     description = models.CharField(max_length=500, null=True)
     thread_id = models.IntegerField(null=True)
     home_latitude = models.DecimalField(max_digits=5, decimal_places=2)
