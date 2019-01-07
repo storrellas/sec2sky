@@ -26,7 +26,7 @@ os.environ.setdefault("DJANGO_SETTINGS_MODULE", "sec2sky.settings")
 django.setup()
 
 from rest_framework.parsers import JSONParser
-from api.serializers import DetectionSerializer
+from api.serializers import *
 from api.models import Detection, Sensor
 
 
@@ -42,10 +42,23 @@ def on_connect(client, userdata, flags, rc):
     logger.info("Connected with result code "+str(rc))
 
     # Subscribe to topic list
-    client.subscribe(settings.MQTT['topic_detection'])
-    client.subscribe(settings.MQTT['topic_sensor'])
-    client.subscribe(settings.MQTT['topic_status'])
+    client.subscribe(settings.MQTT['topic_sensor_detection'])
+    client.subscribe(settings.MQTT['topic_sensor_register'])
+    client.subscribe(settings.MQTT['topic_sensor_status'])
 
+
+#
+# Name: on_message
+# Description: Handler when a message is received
+#
+def create_model(serializer, data):
+    serializer = serializer(data=data)
+    if serializer.is_valid():
+        model = serializer.create(serializer.validated_data)
+        model.save()
+        logger.info("Object creation successful!")
+    else:
+        logger.error("Object creation failed. Wrong input data")
 #
 # Name: on_message
 # Description: Handler when a message is received
@@ -53,19 +66,51 @@ def on_connect(client, userdata, flags, rc):
 def on_message(client, userdata, msg):
     logger.info("Message Received [topic: '" + msg.topic + "' payload: '" + str(msg.payload) + "']")
 
+    # Deserialize JSON
     stream = io.BytesIO(msg.payload)
     data = JSONParser().parse(stream)
 
-    serializer = DetectionSerializer(data=data)
-    if serializer.is_valid():
-        detection = serializer.create(serializer.validated_data)
-        detection.save()
-        logger.info("Object creation successful!")
+    # Detection Topic
+    if msg.topic == settings.MQTT['topic_sensor_detection']:
+        create_model(DetectionSerializer, data)
+    # Sensor Topic
+    elif msg.topic == settings.MQTT['topic_sensor_register']:
+        create_model(SensorSerializer, data)
+    # Status Topic
+    elif msg.topic == settings.MQTT['topic_sensor_status']:
+        pass
     else:
-        logger.error("Object creation failed. Wrong input data")
+        pass
+
+
+
+
+
 
 
 if __name__ == "__main__":
+
+    ##################################################
+    """
+    message = {
+                "name": "CMF023",
+                "description": "Development Dept. Sensor1",
+                "latitude": "43.20",
+                "longitude": "2.10"
+            }
+
+    serializer = SensorSerializer(data=message)
+    print(serializer.is_valid())
+    print(serializer.data)
+
+    sensor = serializer.create(serializer.validated_data)
+    sensor.save()
+
+
+    logger.info("Stopping abruptly")
+    sys.exit()
+    """
+    ##################################################
 
 
     # Configure MQTT Client

@@ -28,6 +28,9 @@ class SensorSerializer(serializers.ModelSerializer):
         model = Sensor
         fields = '__all__'
 
+    def create(self, validated_data):
+        return self.Meta.model(**validated_data)
+
 class SensorGroupExtendedSerializer(serializers.ModelSerializer):
     sensor_list = SensorSerializer(source='sensor_set', many=True)
     class Meta:
