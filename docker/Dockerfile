@@ -13,6 +13,7 @@ ADD . /repo/
 # Configure Django
 WORKDIR /repo/
 RUN pip3 install -r requirements.txt
+RUN pip3 install gunicorn
 RUN python3 manage.py makemigrations api
 RUN python3 manage.py migrate
 RUN python3 manage.py loaddata api user
@@ -25,4 +26,5 @@ RUN python3 manage.py loaddata api user
 EXPOSE 8000
 
 # Run container
-CMD mosquitto & python3 /repo/mqtt/sensor_sink.py & python3 /repo/manage.py runserver 0.0.0.0:$PORT
+#CMD mosquitto & python3 /repo/mqtt/sensor_sink.py & python3 /repo/manage.py runserver 0.0.0.0:$PORT
+CMD mosquitto & python3 /repo/mqtt/sensor_sink.py & gunicorn --access-logfile=- --bind 0.0.0.0:8080 sec2sky.wsgi

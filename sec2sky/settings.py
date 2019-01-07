@@ -130,7 +130,7 @@ USE_TZ = True
 MQTT = {
     'hostname': 'localhost',
     'topic_detection': 'sec2sky/detection',
-    'topic_sensor': 'sec2sky/sensor',
+    'topic_sensor': 'sec2sky/announcement',
     'topic_status': 'sec2sky/status'
 }
 

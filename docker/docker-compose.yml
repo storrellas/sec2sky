@@ -27,4 +27,4 @@ services:
     ports:
       - $PORT:8080
     environment:
-      - PORT=8080
+      - TEST_VAR=8080

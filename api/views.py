@@ -30,6 +30,7 @@ class SensorUserAPIView(APIView):
     permission_classes = (IsAuthenticated,)
 
     def get(self, request, format=None):
+
         # User is admin
         if request.user.is_superuser:
             queryset = SensorUser.objects.all()
