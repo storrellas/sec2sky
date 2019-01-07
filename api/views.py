@@ -41,26 +41,31 @@ class SensorUserViewSet(viewsets.ModelViewSet):
 
     model = SensorUser
     queryset = SensorUser.objects.all()
-    serializer_class = serializers.SensorUserExtendedSerializer
+    serializer_class = serializers.SensorUserSerializer
     renderer_classes = (JSONRenderer, )
 
     def create(self, request, format=None):
-        serializer = serializers.SensorUserSerializer(data=request.data)
-        user = SensorUser.objects.create_user(**serializer.validated_data)
+        serializer = self.serializer_class(data=request.data)
+        if serializer.is_valid():
+            user = SensorUser.objects.create_user(**serializer.validated_data)
 
-        # Return complete response
-        serializer = serializers.SensorUserExtendedSerializer(user)
-        return Response(serializer.data)
+            # Assign sensor groups requested
+
+            # Generate response
+            serializer = self.serializer_class(user)
+            return Response(serializer.data)
+
+
+        return Response({'message': serializer.errors})
 
     @action(detail=False, methods=['get'], permission_classes=[IsAuthenticated])
     def whoami(self, request, pk=None):
-        serializer = self.serializer_class(request.user)
+        serializer = self.SensorUserExtendedSerializer(request.user)
         return Response(serializer.data)
 
 class SensorGroupViewSet(viewsets.ModelViewSet):
     authentication_classes = (TokenAuthentication,)
     permission_classes = (IsAuthenticated,)
-
 
     model = SensorGroup
     queryset = SensorGroup.objects.all()

@@ -25,10 +25,11 @@ class SensorUserExtendedSerializer(serializers.ModelSerializer):
         fields = ('id', 'username', 'role', 'company_detail', 'sensor_groups')
 
 class SensorUserSerializer(serializers.ModelSerializer):
+    sensor_groups = SensorGroupSerializer(required=False, source='sensor_groups_set', many=True)
 
     class Meta:
         model = SensorUser
-        fields = '__all__'
+        fields = ('id', 'username', 'password', 'role', 'company', 'sensor_groups')
 
 class SensorSerializer(serializers.ModelSerializer):
     class Meta:
