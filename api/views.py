@@ -5,15 +5,17 @@ import json
 from django.shortcuts import render
 from django.conf import settings
 
-# Dependencies
+# REST framework
 from rest_framework import viewsets
 from rest_framework.renderers import JSONRenderer
 from rest_framework.authentication import SessionAuthentication, BasicAuthentication, TokenAuthentication
-from rest_framework.permissions import IsAuthenticated
+from rest_framework.permissions import IsAuthenticated, IsAdminUser
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.generics import ListAPIView
+from rest_framework.decorators import action
 
+# MQTT
 from paho.mqtt import publish
 
 # Project
@@ -24,24 +26,19 @@ from sec2sky import utils
 
 logger = utils.get_logger()
 
-
-class SensorUserAPIView(APIView):
+class SensorUserViewSet(viewsets.ModelViewSet):
     authentication_classes = (TokenAuthentication,)
-    permission_classes = (IsAuthenticated,)
+    permission_classes = (IsAdminUser,)
 
-    def get(self, request, format=None):
+    model = SensorUser
+    queryset = SensorUser.objects.all()
+    serializer_class = SensorUserSerializer
+    renderer_classes = (JSONRenderer, )
 
-        # User is admin
-        if request.user.is_superuser:
-            queryset = SensorUser.objects.all()
-            serializer = SensorUserSerializer(queryset, many=True)
-            return Response(serializer.data)
-
-        # Other users
+    @action(detail=False, methods=['get'], permission_classes=[IsAuthenticated])
+    def whoami(self, request, pk=None):
         serializer = SensorUserSerializer(request.user)
         return Response(serializer.data)
-
-
 
 class SensorGroupViewSet(viewsets.ModelViewSet):
     authentication_classes = (TokenAuthentication,)

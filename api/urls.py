@@ -14,11 +14,10 @@ from .views import *
 router = routers.DefaultRouter()
 router.register(r'sensorgroup', SensorGroupViewSet)
 router.register(r'sensor', SensorViewSet)
-#router.register(r'detection', DetectionViewSet)
+router.register(r'user', SensorUserViewSet)
 
 urlpatterns = [
     url(r'^', include(router.urls)),
-    url(r'^user/', SensorUserAPIView.as_view()),
     url('^sensor/(?P<sensor>.+)/detection/$', DetectionListAPIView.as_view()),
     url('^test/mqtt/$', MQTTTestAPIView.as_view()),
     url(r'^auth/', views.obtain_auth_token),
