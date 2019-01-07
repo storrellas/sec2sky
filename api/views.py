@@ -74,6 +74,11 @@ class SensorViewSet(viewsets.ViewSet):
         serializer = self.serializer_class(queryset)
         return Response(serializer.data)
 
+    @action(detail=True, methods=['get'], permission_classes=[IsAuthenticated])
+    def detection(self, request, pk=None):
+        queryset = Detection.objects.filter(sensor__pk=pk)
+        serializer = DetectionSerializer(queryset, many=True)
+        return Response(serializer.data)
 
 class DetectionListAPIView(ListAPIView):
     authentication_classes = (TokenAuthentication,)
