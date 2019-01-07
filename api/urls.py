@@ -9,6 +9,7 @@ from rest_framework.authtoken import views
 from .views import *
 
 router = routers.DefaultRouter()
+router.register(r'company', CompanyViewSet)
 router.register(r'sensorgroup', SensorGroupViewSet)
 router.register(r'sensor', SensorViewSet)
 router.register(r'user', SensorUserViewSet)

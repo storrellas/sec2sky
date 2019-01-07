@@ -96,6 +96,194 @@
 			"response": []
 		},
 		{
+			"name": "Company List",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "Token {{token}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/company/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"company",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Company Retrieve",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "Token {{token}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/company/1/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"company",
+						"1",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Company Create",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "Token {{token}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"MyCompany\",\n    \"description\": \"MyCompanyDescription\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/company/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"company",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Company Update",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "Token {{token}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"id\": 1,\n    \"name\": \"CARMAKER_UPDATED\",\n    \"description\": \"CARMAKER DESCRIPTION UPDATED\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/company/1/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"company",
+						"1",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Company Delete",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "Token {{token}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/company/1/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"company",
+						"1",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "User",
 			"request": {
 				"method": "GET",
@@ -126,6 +314,44 @@
 					"path": [
 						"api",
 						"user",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "User WhoAmI",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "Token {{token}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/user/whoami/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"user",
+						"whoami",
 						""
 					]
 				}
@@ -171,6 +397,43 @@
 		},
 		{
 			"name": "Sensor",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "Token {{token}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/sensor/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"sensor",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Sensor Retrieve",
 			"request": {
 				"method": "GET",
 				"header": [
@@ -266,6 +529,44 @@
 				"body": {
 					"mode": "raw",
 					"raw": "{   \n\t\"topic\": \"sec2sky/detection\",\n\t\"payload\" : {\n\t\t\"sensor\": 1,\n\t\t\"description\": \"mydescription\",\n\t\t\"thread_id\": 1,\n\t\t\"home_latitude\" : 43.2,\n\t\t\"home_longitude\" : 2.2,\n\t\t\"latitude\" : 43.2,\n\t\t\"altitude\" : 256,\n\t\t\"longitude\" : 2.1,\n\t\t\"rssi\" : 43.2,\n\t\t\"signal_type\" : \"MySignalType\"\n    }\n}             "
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/test/mqtt/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"test",
+						"mqtt",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "MQTT - Sensor",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "Token {{token}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{   \n\t\"topic\": \"sec2sky/register\",\n\t\"payload\" : {\n        \"name\": \"CMF023\",\n        \"description\": \"Development Dept. Sensor1\",\n        \"latitude\": \"43.20\",\n        \"longitude\": \"2.10\"\n    }\n}             "
 				},
 				"url": {
 					"raw": "http://localhost:8080/api/test/mqtt/",

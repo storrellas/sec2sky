@@ -20,12 +20,20 @@ from rest_framework import mixins
 from paho.mqtt import publish
 
 # Project
-from .serializers import DetectionSerializer, SensorUserSerializer
-from .serializers import SensorGroupExtendedSerializer, SensorExtendedSerializer
-from .models import Detection, SensorUser, SensorGroup, Sensor
+from . import serializers
+from .models import Detection, SensorUser, SensorGroup, Sensor, Company
 from sec2sky import utils
 
 logger = utils.get_logger()
+
+class CompanyViewSet(viewsets.ModelViewSet):
+    authentication_classes = (TokenAuthentication,)
+    permission_classes = (IsAdminUser,)
+
+    model = Company
+    queryset = Company.objects.all()
+    serializer_class = serializers.CompanySerializer
+    renderer_classes = (JSONRenderer, )
 
 class SensorUserViewSet(viewsets.ModelViewSet):
     authentication_classes = (TokenAuthentication,)
@@ -33,12 +41,12 @@ class SensorUserViewSet(viewsets.ModelViewSet):
 
     model = SensorUser
     queryset = SensorUser.objects.all()
-    serializer_class = SensorUserSerializer
+    serializer_class = serializers.SensorUserSerializer
     renderer_classes = (JSONRenderer, )
 
     @action(detail=False, methods=['get'], permission_classes=[IsAuthenticated])
     def whoami(self, request, pk=None):
-        serializer = SensorUserSerializer(request.user)
+        serializer = self.serializer_class(request.user)
         return Response(serializer.data)
 
 class SensorGroupViewSet(viewsets.ModelViewSet):
@@ -48,7 +56,7 @@ class SensorGroupViewSet(viewsets.ModelViewSet):
 
     model = SensorGroup
     queryset = SensorGroup.objects.all()
-    serializer_class = SensorGroupExtendedSerializer
+    serializer_class = serializers.SensorGroupExtendedSerializer
     renderer_classes = (JSONRenderer, )
 
     def get_queryset(self):
@@ -61,19 +69,19 @@ class SensorViewSet(mixins.ListModelMixin, mixins.RetrieveModelMixin, viewsets.G
 
     model = Sensor
     queryset = Sensor.objects.all()
-    serializer_class = SensorExtendedSerializer
+    serializer_class = serializers.SensorExtendedSerializer
     renderer_classes = (JSONRenderer, )
 
     @action(detail=True, methods=['get'])
     def detection(self, request, pk=None):
         queryset = Detection.objects.filter(sensor__pk=pk)
-        serializer = DetectionSerializer(queryset, many=True)
+        serializer = serializers.DetectionSerializer(queryset, many=True)
         return Response(serializer.data)
 
 class DetectionListAPIView(ListAPIView):
     authentication_classes = (TokenAuthentication,)
     permission_classes = (IsAuthenticated,)
-    serializer_class = DetectionSerializer
+    serializer_class = serializers.DetectionSerializer
     renderer_classes = (JSONRenderer, )
 
 
