@@ -14,6 +14,7 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.generics import ListAPIView
 from rest_framework.decorators import action
+from rest_framework import mixins
 
 # MQTT
 from paho.mqtt import publish
@@ -54,8 +55,7 @@ class SensorGroupViewSet(viewsets.ModelViewSet):
         logger.info("Get Queryset for user '" + str(self.request.user) +  "'")
         return self.model.objects.filter(managers=self.request.user)
 
-
-class SensorViewSet(viewsets.ViewSet):
+class SensorViewSet(mixins.ListModelMixin, mixins.RetrieveModelMixin, viewsets.GenericViewSet):
     authentication_classes = (TokenAuthentication,)
     permission_classes = (IsAuthenticated,)
 
@@ -63,16 +63,6 @@ class SensorViewSet(viewsets.ViewSet):
     queryset = Sensor.objects.all()
     serializer_class = SensorExtendedSerializer
     renderer_classes = (JSONRenderer, )
-
-    def list(self, request):
-        queryset = self.model.objects.all()
-        serializer = self.serializer_class(queryset, many=True)
-        return Response(serializer.data)
-
-    def retrieve(self, request, pk=None):
-        queryset = self.model.objects.get(pk=pk)
-        serializer = self.serializer_class(queryset)
-        return Response(serializer.data)
 
     @action(detail=True, methods=['get'])
     def detection(self, request, pk=None):

@@ -48,8 +48,8 @@ def on_connect(client, userdata, flags, rc):
 
 
 #
-# Name: on_message
-# Description: Handler when a message is received
+# Name: creates_model
+# Description: Creates a model given some JSON data
 #
 def create_model(serializer, data):
     serializer = serializer(data=data)
@@ -59,6 +59,7 @@ def create_model(serializer, data):
         logger.info("Object creation successful!")
     else:
         logger.error("Object creation failed. Wrong input data")
+
 #
 # Name: on_message
 # Description: Handler when a message is received
