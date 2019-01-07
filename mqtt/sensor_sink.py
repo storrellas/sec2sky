@@ -82,36 +82,7 @@ def on_message(client, userdata, msg):
     else:
         pass
 
-
-
-
-
-
-
 if __name__ == "__main__":
-
-    ##################################################
-    """
-    message = {
-                "name": "CMF023",
-                "description": "Development Dept. Sensor1",
-                "latitude": "43.20",
-                "longitude": "2.10"
-            }
-
-    serializer = SensorSerializer(data=message)
-    print(serializer.is_valid())
-    print(serializer.data)
-
-    sensor = serializer.create(serializer.validated_data)
-    sensor.save()
-
-
-    logger.info("Stopping abruptly")
-    sys.exit()
-    """
-    ##################################################
-
 
     # Configure MQTT Client
     client = mqtt.Client()
