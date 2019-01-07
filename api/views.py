@@ -98,7 +98,6 @@ class SensorGroupViewSet(viewsets.ModelViewSet):
     model = SensorGroup
     queryset = SensorGroup.objects.all()
     serializer_class = serializers.SensorGroupExtendedSerializer
-    #serializer_class = serializers.SensorGroupSerializer
     renderer_classes = (JSONRenderer, )
 
     def get_queryset(self):
@@ -132,7 +131,6 @@ class DetectionListAPIView(ListAPIView):
     permission_classes = (IsAuthenticated,)
     serializer_class = serializers.DetectionSerializer
     renderer_classes = (JSONRenderer, )
-
 
     def get_queryset(self):
         sensor = self.kwargs['sensor']

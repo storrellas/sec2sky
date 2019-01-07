@@ -284,7 +284,7 @@
 			"response": []
 		},
 		{
-			"name": "User",
+			"name": "User List",
 			"request": {
 				"method": "GET",
 				"header": [
@@ -314,6 +314,157 @@
 					"path": [
 						"api",
 						"user",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "User Retrieve",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "Token {{token}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/user/2/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"user",
+						"2",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "User Create",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "Token {{token}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"username\": \"sergi\",\n    \"password\": \"sergi\",\n    \"role\": \"administrator\",\n    \"company\": 1,\n    \"sensor_groups\" : [ 1, 2 ]\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/user/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"user",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "User Update",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "Token {{token}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"username\": \"sergi_updated\",\n    \"password\": \"sergi_updated\",\n    \"role\": \"administrator\",\n    \"company\": 1,\n    \"sensor_groups\" : [ 3, 2 ]\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/user/12/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"user",
+						"12",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "User Delete",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "Token {{token}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/user/11/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"user",
+						"11",
 						""
 					]
 				}
@@ -359,7 +510,7 @@
 			"response": []
 		},
 		{
-			"name": "SensorGroup",
+			"name": "SensorGroup List",
 			"request": {
 				"method": "GET",
 				"header": [
@@ -396,7 +547,82 @@
 			"response": []
 		},
 		{
-			"name": "Sensor",
+			"name": "SensorGroup Create",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "Token {{token}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"test group\",\n    \"description\": \"test group description\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/sensorgroup/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"sensorgroup",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "SensorGroup Delete",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "Token {{token}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"test group\",\n    \"description\": \"test group description\",\n    \"sensor_list_detail\": [ 1, 2]\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/sensorgroup/8/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"sensorgroup",
+						"8",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Sensor List",
 			"request": {
 				"method": "GET",
 				"header": [
@@ -426,6 +652,44 @@
 					"path": [
 						"api",
 						"sensor",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Sensor Update",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "Token {{token}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"id\": 12,\n    \"n_detection\": 0,\n    \"name\": \"CMF023\",\n    \"description\": \"Development Dept. Sensor1\",\n    \"latitude\": \"43.20\",\n    \"longitude\": \"2.10\",\n    \"sensor_group\": 1\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/sensor/12/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"sensor",
+						"12",
 						""
 					]
 				}
