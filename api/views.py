@@ -98,6 +98,7 @@ class SensorGroupViewSet(viewsets.ModelViewSet):
     model = SensorGroup
     queryset = SensorGroup.objects.all()
     serializer_class = serializers.SensorGroupExtendedSerializer
+    #serializer_class = serializers.SensorGroupSerializer
     renderer_classes = (JSONRenderer, )
 
     def get_queryset(self):
@@ -107,7 +108,11 @@ class SensorGroupViewSet(viewsets.ModelViewSet):
         else:
             return self.model.objects.filter(managers=self.request.user)
 
-class SensorViewSet(mixins.ListModelMixin, mixins.RetrieveModelMixin, viewsets.GenericViewSet):
+
+class SensorViewSet(mixins.ListModelMixin,
+                    mixins.RetrieveModelMixin,
+                    mixins.UpdateModelMixin,
+                    viewsets.GenericViewSet):
     authentication_classes = (TokenAuthentication,)
     permission_classes = (IsAuthenticated,)
 

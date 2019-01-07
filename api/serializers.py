@@ -2,11 +2,11 @@
 from rest_framework import serializers
 
 # Project imports
-from .models import Detection, SensorUser, Company, Sensor
+from .models import Detection, SensorUser, Company, Sensor, SensorGroup
 
-class SensorGroupExtendedSerializer(serializers.ModelSerializer):
+class SensorGroupSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Company
+        model = SensorGroup
         fields = ('id', 'name', 'description')
 
 class CompanySerializer(serializers.ModelSerializer):
@@ -16,7 +16,7 @@ class CompanySerializer(serializers.ModelSerializer):
 
 class SensorUserExtendedSerializer(serializers.ModelSerializer):
     company_detail = CompanySerializer(required=False, source='company')
-    sensor_groups = SensorGroupExtendedSerializer(required=False, source='sensor_groups_set', many=True)
+    sensor_groups = SensorGroupSerializer(required=False, source='sensor_groups_set', many=True)
 
     class Meta:
         model = SensorUser
@@ -39,11 +39,10 @@ class SensorSerializer(serializers.ModelSerializer):
         return self.Meta.model(**validated_data)
 
 class SensorGroupExtendedSerializer(serializers.ModelSerializer):
-    sensor_list = SensorSerializer(source='sensor_set', many=True)
+    sensor_list_detail = SensorSerializer(required=False, source='sensor_set', many=True)
     class Meta:
-        model = Company
-        fields = ('id', 'name', 'description', 'sensor_list')
-
+        model = SensorGroup
+        fields = ('id', 'name', 'description', 'sensor_list_detail')
 
 class DetectionSerializer(serializers.ModelSerializer):
     class Meta:

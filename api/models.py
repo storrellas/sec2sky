@@ -61,7 +61,7 @@ class Sensor(models.Model):
 
 class Detection(models.Model):
 
-    sensor = models.ForeignKey(Sensor, on_delete=models.ON_CASCADE, null=True)
+    sensor = models.ForeignKey(Sensor, on_delete=models.CASCADE, null=True)
     description = models.CharField(max_length=500, null=True)
     thread_id = models.IntegerField(null=True)
     home_latitude = models.DecimalField(max_digits=5, decimal_places=2)
