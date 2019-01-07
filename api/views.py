@@ -41,15 +41,42 @@ class SensorUserViewSet(viewsets.ModelViewSet):
 
     model = SensorUser
     queryset = SensorUser.objects.all()
-    serializer_class = serializers.SensorUserSerializer
+    serializer_class = serializers.SensorUserExtendedSerializer
     renderer_classes = (JSONRenderer, )
 
     def create(self, request, format=None):
-        serializer = self.serializer_class(data=request.data)
+        serializer = serializers.SensorUserSerializer(data=request.data)
         if serializer.is_valid():
             user = SensorUser.objects.create_user(**serializer.validated_data)
 
             # Assign sensor groups requested
+            user.sensor_groups_set.clear()
+            for sensor_group_id in request.data['sensor_groups']:
+                print("Adding group -> " + str(sensor_group_id))
+                user.sensor_groups_set.add(sensor_group_id)
+
+            # Generate response
+            serializer = self.serializer_class(user)
+            return Response(serializer.data)
+
+        return Response({'message': serializer.errors})
+
+    def update(self, request, pk=None, format=None):
+
+        user = SensorUser.objects.get(pk=pk)
+        serializer = serializers.SensorUserSerializer(user, data=request.data)
+        if serializer.is_valid() and user is not None:
+            serializer.save()
+
+            # Assign sensor groups requested
+            user.sensor_groups_set.clear()
+            for sensor_group_id in request.data['sensor_groups']:
+                print("Adding group -> " + str(sensor_group_id))
+                user.sensor_groups_set.add(sensor_group_id)
+
+            # Update password
+            user.set_password(serializer.data['password'])
+            user.save()
 
             # Generate response
             serializer = self.serializer_class(user)
@@ -58,9 +85,10 @@ class SensorUserViewSet(viewsets.ModelViewSet):
 
         return Response({'message': serializer.errors})
 
+
     @action(detail=False, methods=['get'], permission_classes=[IsAuthenticated])
     def whoami(self, request, pk=None):
-        serializer = self.SensorUserExtendedSerializer(request.user)
+        serializer = self.serializer_class(request.user)
         return Response(serializer.data)
 
 class SensorGroupViewSet(viewsets.ModelViewSet):
@@ -74,7 +102,10 @@ class SensorGroupViewSet(viewsets.ModelViewSet):
 
     def get_queryset(self):
         logger.info("Get Queryset for user '" + str(self.request.user) +  "'")
-        return self.model.objects.filter(managers=self.request.user)
+        if self.request.user.is_superuser:
+            return self.model.objects.all()
+        else:
+            return self.model.objects.filter(managers=self.request.user)
 
 class SensorViewSet(mixins.ListModelMixin, mixins.RetrieveModelMixin, viewsets.GenericViewSet):
     authentication_classes = (TokenAuthentication,)
