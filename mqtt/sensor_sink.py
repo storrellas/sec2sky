@@ -55,6 +55,10 @@ def create_model(serializer, data):
     serializer = serializer(data=data)
     if serializer.is_valid():
         model = serializer.create(serializer.validated_data)
+
+        print("Create Model")
+        print(serializer.validated_data)
+
         model.save()
         logger.info("Object creation successful!")
     else:
@@ -79,7 +83,7 @@ def on_message(client, userdata, msg):
         create_model(SensorSerializer, data)
     # Status Topic
     elif msg.topic == settings.MQTT['topic_sensor_status']:
-        pass
+        create_model(StatusSerializer, data)
     else:
         pass
 

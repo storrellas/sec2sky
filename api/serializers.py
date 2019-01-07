@@ -2,7 +2,7 @@
 from rest_framework import serializers
 
 # Project imports
-from .models import Detection, SensorUser, Company, Sensor, SensorGroup
+from .models import *
 
 class SensorGroupSerializer(serializers.ModelSerializer):
     class Meta:
@@ -62,3 +62,11 @@ class SensorExtendedSerializer(serializers.ModelSerializer):
     class Meta:
         model = Sensor
         fields = '__all__'
+
+class StatusSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Status
+        fields = '__all__'
+
+    def create(self, validated_data):
+        return self.Meta.model(**validated_data)

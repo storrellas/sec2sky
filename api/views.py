@@ -21,7 +21,7 @@ from paho.mqtt import publish
 
 # Project
 from . import serializers
-from .models import Detection, SensorUser, SensorGroup, Sensor, Company
+from .models import *
 from sec2sky import utils
 
 logger = utils.get_logger()
@@ -125,6 +125,13 @@ class SensorViewSet(mixins.ListModelMixin,
         queryset = Detection.objects.filter(sensor__pk=pk)
         serializer = serializers.DetectionSerializer(queryset, many=True)
         return Response(serializer.data)
+
+    @action(detail=True, methods=['get'])
+    def status(self, request, pk=None):
+        queryset = Status.objects.filter(sensor__pk=pk)
+        serializer = serializers.StatusSerializer(queryset, many=True)
+        return Response(serializer.data)
+
 
 class DetectionListAPIView(ListAPIView):
     authentication_classes = (TokenAuthentication,)
