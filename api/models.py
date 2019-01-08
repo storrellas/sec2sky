@@ -40,17 +40,17 @@ class SensorUser(AbstractUser):
         verbose_name = 'SensorUser'
         verbose_name_plural = 'SensorUsers'
 
-class SensorGroup(models.Model):
+class SensorSwarm(models.Model):
     name = models.CharField(max_length=500, null=True)
     description = models.CharField(max_length=500, null=True)
-    sensor_user_set = models.ManyToManyField(SensorUser, related_name="sensor_groups_set", blank=True)
+    sensor_user_set = models.ManyToManyField(SensorUser, related_name="sensor_swarm_set", blank=True)
 
     def __str__(self):
         return self.name
 
 
 class Sensor(models.Model):
-    sensor_group = models.ForeignKey(SensorGroup, on_delete=models.SET_NULL, null=True)
+    sensor_swarm = models.ForeignKey(SensorSwarm, on_delete=models.SET_NULL, null=True)
     name = models.CharField(max_length=500, null=True)
     description = models.CharField(max_length=500, null=True)
     latitude = models.DecimalField(max_digits=5, decimal_places=2)

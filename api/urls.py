@@ -10,7 +10,7 @@ from .views import *
 
 router = routers.DefaultRouter()
 router.register(r'company', CompanyViewSet)
-router.register(r'sensorgroup', SensorGroupViewSet)
+router.register(r'sensorswarm', SensorSwarmViewSet)
 router.register(r'sensor', SensorViewSet)
 router.register(r'user', SensorUserViewSet)
 

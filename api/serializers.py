@@ -4,9 +4,9 @@ from rest_framework import serializers
 # Project imports
 from .models import *
 
-class SensorGroupSerializer(serializers.ModelSerializer):
+class SensorSwarmSerializer(serializers.ModelSerializer):
     class Meta:
-        model = SensorGroup
+        model = SensorSwarm
         fields = ('id', 'name', 'description')
 
 class CompanySerializer(serializers.ModelSerializer):
@@ -16,12 +16,12 @@ class CompanySerializer(serializers.ModelSerializer):
 
 class SensorUserExtendedSerializer(serializers.ModelSerializer):
     company_detail = CompanySerializer(required=False, source='company')
-    sensor_groups = SensorGroupSerializer(required=False, source='sensor_groups_set', many=True)
+    sensor_swarms = SensorSwarmSerializer(required=False, source='sensor_swarms_set', many=True)
 
     class Meta:
         model = SensorUser
         #fields = '__all__'
-        fields = ('id', 'username', 'role', 'company_detail', 'sensor_groups')
+        fields = ('id', 'username', 'role', 'company_detail', 'sensor_swarms')
 
 class SensorUserSerializer(serializers.ModelSerializer):
 
@@ -43,11 +43,11 @@ class SensorSerializer(serializers.ModelSerializer):
     def create(self, validated_data):
         return self.Meta.model(**validated_data)
 
-class SensorGroupExtendedSerializer(serializers.ModelSerializer):
+class SensorSwarmExtendedSerializer(serializers.ModelSerializer):
     sensor_list_detail = SensorSerializer(required=False, source='sensor_set', many=True)
     sensor_user_set = serializers.PrimaryKeyRelatedField(required=False, many=True, read_only=True)
     class Meta:
-        model = SensorGroup
+        model = SensorSwarm
         fields = ('id', 'name', 'description', 'sensor_list_detail', 'sensor_user_set')
 
 class DetectionSerializer(serializers.ModelSerializer):

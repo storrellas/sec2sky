@@ -79,13 +79,13 @@ class SensorUserViewSet(viewsets.ModelViewSet):
         serializer = self.serializer_class(request.user)
         return Response(serializer.data)
 
-class SensorGroupViewSet(viewsets.ModelViewSet):
+class SensorSwarmViewSet(viewsets.ModelViewSet):
     authentication_classes = (TokenAuthentication,)
     permission_classes = (IsAuthenticated,)
 
-    model = SensorGroup
-    queryset = SensorGroup.objects.all()
-    serializer_class = serializers.SensorGroupExtendedSerializer
+    model = SensorSwarm
+    queryset = SensorSwarm.objects.all()
+    serializer_class = serializers.SensorSwarmExtendedSerializer
     renderer_classes = (JSONRenderer, )
 
     def get_queryset(self):
@@ -101,9 +101,9 @@ class SensorGroupViewSet(viewsets.ModelViewSet):
         # TODO: Check whether all users belong to same company
 
         # Assign new sensor_user_set
-        sensor_group = self.model.objects.get(pk=pk)
-        sensor_group.sensor_user_set.set(request.data['sensor_user_set'])
-        serializer = self.serializer_class(sensor_group)
+        sensor_swarm = self.model.objects.get(pk=pk)
+        sensor_swarm.sensor_user_set.set(request.data['sensor_user_set'])
+        serializer = self.serializer_class(sensor_swarm)
         return Response(serializer.data)
 
 class SensorViewSet(mixins.ListModelMixin,

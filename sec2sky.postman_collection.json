@@ -583,7 +583,7 @@
 			]
 		},
 		{
-			"name": "SensorGroup",
+			"name": "SensorSwarm",
 			"item": [
 				{
 					"name": "SensorGroup List",
@@ -607,7 +607,7 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "http://localhost:8080/api/sensorgroup/",
+							"raw": "http://localhost:8080/api/sensorswarm/",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -615,7 +615,7 @@
 							"port": "8080",
 							"path": [
 								"api",
-								"sensorgroup",
+								"sensorswarm",
 								""
 							]
 						}
@@ -644,7 +644,7 @@
 							"raw": "{\n    \"name\": \"test group\",\n    \"description\": \"test group description\"\n}"
 						},
 						"url": {
-							"raw": "http://localhost:8080/api/sensorgroup/",
+							"raw": "http://localhost:8080/api/sensorswarm/",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -652,7 +652,7 @@
 							"port": "8080",
 							"path": [
 								"api",
-								"sensorgroup",
+								"sensorswarm",
 								""
 							]
 						}
@@ -681,7 +681,7 @@
 							"raw": "{\n    \"sensor_user_set\": [3, 4]\n}"
 						},
 						"url": {
-							"raw": "http://localhost:8080/api/sensorgroup/2/sensoruser/",
+							"raw": "http://localhost:8080/api/sensorgroup/2/sensorswarm/",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -691,7 +691,7 @@
 								"api",
 								"sensorgroup",
 								"2",
-								"sensoruser",
+								"sensorswarm",
 								""
 							]
 						}
@@ -720,7 +720,7 @@
 							"raw": "{\n    \"name\": \"test group\",\n    \"description\": \"test group description\",\n    \"sensor_list_detail\": [ 1, 2]\n}"
 						},
 						"url": {
-							"raw": "http://localhost:8080/api/sensorgroup/8/",
+							"raw": "http://localhost:8080/api/sensorswarm/8/",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -728,7 +728,7 @@
 							"port": "8080",
 							"path": [
 								"api",
-								"sensorgroup",
+								"sensorswarm",
 								"8",
 								""
 							]
