@@ -25,9 +25,15 @@ class SensorUserExtendedSerializer(serializers.ModelSerializer):
 
 class SensorUserSerializer(serializers.ModelSerializer):
 
+
     class Meta:
         model = SensorUser
         fields = ('id', 'username', 'password', 'role', 'company')
+
+    def create(self, validated_data):
+        user = self.Meta.model.objects.create_user(**validated_data)
+        return user
+
 
 class SensorSerializer(serializers.ModelSerializer):
     class Meta:

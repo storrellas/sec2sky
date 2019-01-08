@@ -105,7 +105,6 @@ class SensorGroupViewSet(viewsets.ModelViewSet):
         sensor_group.sensor_user_set.set(request.data['sensor_user_set'])
         serializer = self.serializer_class(sensor_group)
         return Response(serializer.data)
-        #return Response({'message':'ok'})
 
 class SensorViewSet(mixins.ListModelMixin,
                     mixins.RetrieveModelMixin,
