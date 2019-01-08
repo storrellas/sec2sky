@@ -49,12 +49,6 @@ class SensorUserViewSet(viewsets.ModelViewSet):
         if serializer.is_valid():
             user = SensorUser.objects.create_user(**serializer.validated_data)
 
-            # Assign sensor groups requested
-            user.sensor_groups_set.clear()
-            for sensor_group_id in request.data['sensor_groups']:
-                print("Adding group -> " + str(sensor_group_id))
-                user.sensor_groups_set.add(sensor_group_id)
-
             # Generate response
             serializer = self.serializer_class(user)
             return Response(serializer.data)
@@ -67,12 +61,6 @@ class SensorUserViewSet(viewsets.ModelViewSet):
         serializer = serializers.SensorUserSerializer(user, data=request.data)
         if serializer.is_valid() and user is not None:
             serializer.save()
-
-            # Assign sensor groups requested
-            user.sensor_groups_set.clear()
-            for sensor_group_id in request.data['sensor_groups']:
-                print("Adding group -> " + str(sensor_group_id))
-                user.sensor_groups_set.add(sensor_group_id)
 
             # Update password
             user.set_password(serializer.data['password'])
@@ -107,6 +95,17 @@ class SensorGroupViewSet(viewsets.ModelViewSet):
         else:
             return self.model.objects.filter(sensor_user_set=self.request.user)
 
+    @action(detail=True, methods=['post'], permission_classes=[IsAuthenticated])
+    def sensoruser(self, request, pk=None):
+
+        # TODO: Check whether all users belong to same company
+
+        # Assign new sensor_user_set
+        sensor_group = self.model.objects.get(pk=pk)
+        sensor_group.sensor_user_set.set(request.data['sensor_user_set'])
+        serializer = self.serializer_class(sensor_group)
+        return Response(serializer.data)
+        #return Response({'message':'ok'})
 
 class SensorViewSet(mixins.ListModelMixin,
                     mixins.RetrieveModelMixin,

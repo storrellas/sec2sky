@@ -27,7 +27,6 @@ class SensorUserSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = SensorUser
-        #fields = ('id', 'username', 'password', 'role', 'company', 'sensor_groups')
         fields = ('id', 'username', 'password', 'role', 'company')
 
 class SensorSerializer(serializers.ModelSerializer):
@@ -40,9 +39,10 @@ class SensorSerializer(serializers.ModelSerializer):
 
 class SensorGroupExtendedSerializer(serializers.ModelSerializer):
     sensor_list_detail = SensorSerializer(required=False, source='sensor_set', many=True)
+    sensor_user_set = serializers.PrimaryKeyRelatedField(required=False, many=True, read_only=True)
     class Meta:
         model = SensorGroup
-        fields = ('id', 'name', 'description', 'sensor_list_detail')
+        fields = ('id', 'name', 'description', 'sensor_list_detail', 'sensor_user_set')
 
 class DetectionSerializer(serializers.ModelSerializer):
     class Meta:
