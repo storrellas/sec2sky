@@ -43,7 +43,7 @@ class SensorUser(AbstractUser):
 class SensorGroup(models.Model):
     name = models.CharField(max_length=500, null=True)
     description = models.CharField(max_length=500, null=True)
-    managers = models.ManyToManyField(SensorUser, related_name="sensor_groups_set", blank=True)
+    sensor_user_set = models.ManyToManyField(SensorUser, related_name="sensor_groups_set", blank=True)
 
     def __str__(self):
         return self.name

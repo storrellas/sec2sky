@@ -105,7 +105,7 @@ class SensorGroupViewSet(viewsets.ModelViewSet):
         if self.request.user.is_superuser:
             return self.model.objects.all()
         else:
-            return self.model.objects.filter(managers=self.request.user)
+            return self.model.objects.filter(sensor_user_set=self.request.user)
 
 
 class SensorViewSet(mixins.ListModelMixin,

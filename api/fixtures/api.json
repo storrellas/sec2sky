@@ -5,7 +5,7 @@
   "fields": {
     "name": "SGRP_CARMAKER",
     "description": "SGRP_CARMAKER",
-    "managers": [
+    "sensor_user_set": [
       2
     ]
   }
@@ -16,7 +16,7 @@
   "fields": {
     "name": "SGRP_PLANT1",
     "description": "SGRP_PLANT1",
-    "managers": [
+    "sensor_user_set": [
       3, 6
     ]
   }
@@ -27,7 +27,7 @@
   "fields": {
     "name": "SGRP_PLANT2",
     "description": "SGRP_PLANT2",
-    "managers": [
+    "sensor_user_set": [
       4, 6
     ]
   }
@@ -38,7 +38,7 @@
   "fields": {
     "name": "SGRP_PLANT3",
     "description": "SGRP_PLANT3",
-    "managers": [
+    "sensor_user_set": [
       5, 6
     ]
   }
