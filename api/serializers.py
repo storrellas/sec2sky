@@ -60,10 +60,14 @@ class DetectionSerializer(serializers.ModelSerializer):
 
 class SensorExtendedSerializer(serializers.ModelSerializer):
     n_detection = serializers.SerializerMethodField()
+    n_status = serializers.SerializerMethodField()
 
     def get_n_detection(self, obj):
-        #return "Foo id: %i" % obj.pk
         return Detection.objects.filter(sensor=obj).count()
+
+    def get_n_status(self, obj):
+        #return "Foo id: %i" % obj.pk
+        return Status.objects.filter(sensor=obj).count()
 
     class Meta:
         model = Sensor

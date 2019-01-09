@@ -137,15 +137,15 @@ class SensorViewSet(mixins.ListModelMixin,
         return Response(serializer.data)
 
 
-class DetectionListAPIView(ListAPIView):
-    authentication_classes = (TokenAuthentication,)
-    permission_classes = (IsAuthenticated,)
-    serializer_class = serializers.DetectionSerializer
-    renderer_classes = (JSONRenderer, )
-
-    def get_queryset(self):
-        sensor = self.kwargs['sensor']
-        return Detection.objects.filter(sensor__pk=sensor)
+# class DetectionListAPIView(ListAPIView):
+#     authentication_classes = (TokenAuthentication,)
+#     permission_classes = (IsAuthenticated,)
+#     serializer_class = serializers.DetectionSerializer
+#     renderer_classes = (JSONRenderer, )
+#
+#     def get_queryset(self):
+#         sensor = self.kwargs['sensor']
+#         return Detection.objects.filter(sensor__pk=sensor)
 
 
 class MQTTTestAPIView(APIView):

@@ -9,7 +9,7 @@ from rest_framework.authtoken.models import Token
 # Project includes
 from .models import *
 
-class UserTestCase(APITestCase):
+class TestCase(APITestCase):
 
     def setUp(self):
 
