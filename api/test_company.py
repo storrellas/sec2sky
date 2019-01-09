@@ -27,6 +27,9 @@ class CompanyTestCase(APITestCase):
         Company Creation
         """
 
+        self.assertEqual(Company.objects.count(), 0)
+
+
         # Get token header
         token = Token.objects.get(user__username='admin')
         self.client.credentials(HTTP_AUTHORIZATION='Token ' + token.key)
