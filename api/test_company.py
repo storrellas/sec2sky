@@ -19,9 +19,12 @@ class CompanyTestCase(APITestCase):
         self.admin.is_staff=True
         self.admin.save()
 
+        # Create user
+        self.user = SensorUser.objects.create_user('user', password='user')
+
     def test_company_crud(self):
         """
-        Animals that can speak are correctly identified
+        Company Creation
         """
 
         # Get token header
@@ -64,3 +67,17 @@ class CompanyTestCase(APITestCase):
         response = self.client.delete(url, format='json')
         self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)
         self.assertEqual(Company.objects.count(), 0)
+
+    def test_company_crud_not_authorized(self):
+        """
+        Company Creation
+        """
+
+        # Get token header
+        token = Token.objects.get(user__username='user')
+        self.client.credentials(HTTP_AUTHORIZATION='Token ' + token.key)
+
+        # Get list of companies
+        url = reverse('company-list')
+        response = self.client.get(url, {}, format='json')
+        self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)

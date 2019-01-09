@@ -9,10 +9,10 @@ from rest_framework.authtoken import views
 from .views import *
 
 router = routers.DefaultRouter()
-router.register(r'company', CompanyViewSet)
-router.register(r'sensorswarm', SensorSwarmViewSet)
-router.register(r'sensor', SensorViewSet)
-router.register(r'user', SensorUserViewSet)
+router.register(r'company', CompanyViewSet, basename='company')
+router.register(r'sensorswarm', SensorSwarmViewSet, basename='sensorswarm')
+router.register(r'sensor', SensorViewSet, basename='sensor')
+router.register(r'user', SensorUserViewSet, basename='user')
 
 urlpatterns = [
     url(r'^', include(router.urls)),

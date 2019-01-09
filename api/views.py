@@ -15,6 +15,9 @@ from rest_framework.response import Response
 from rest_framework.generics import ListAPIView
 from rest_framework.decorators import action
 from rest_framework import mixins
+from rest_framework.exceptions import APIException
+from rest_framework import status
+
 
 # MQTT
 from paho.mqtt import publish
@@ -51,9 +54,9 @@ class SensorUserViewSet(viewsets.ModelViewSet):
 
             # Generate response
             serializer = self.serializer_class(user)
-            return Response(serializer.data)
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
 
-        return Response({'message': serializer.errors})
+        return Response({'message': serializer.errors}, status=status.HTTP_400_BAD_REQUEST)
 
     def update(self, request, pk=None, format=None):
 
@@ -68,18 +71,16 @@ class SensorUserViewSet(viewsets.ModelViewSet):
 
             # Generate response
             serializer = self.serializer_class(user)
-            return Response(serializer.data)
+            return Response(serializer.data, status=status.HTTP_200_OK)
 
 
-        return Response({'message': serializer.errors})
+        return Response({'message': serializer.errors}, status=status.HTTP_400_BAD_REQUEST)
 
 
     @action(detail=False, methods=['get'], permission_classes=[IsAuthenticated])
     def whoami(self, request, pk=None):
         serializer = self.serializer_class(request.user)
         return Response(serializer.data)
-
-from rest_framework.exceptions import APIException
 
 
 class SensorSwarmViewSet(viewsets.ModelViewSet):
