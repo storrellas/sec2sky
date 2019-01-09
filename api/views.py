@@ -79,6 +79,9 @@ class SensorUserViewSet(viewsets.ModelViewSet):
         serializer = self.serializer_class(request.user)
         return Response(serializer.data)
 
+from rest_framework.exceptions import APIException
+
+
 class SensorSwarmViewSet(viewsets.ModelViewSet):
     authentication_classes = (TokenAuthentication,)
     permission_classes = (IsAuthenticated,)
@@ -99,6 +102,9 @@ class SensorSwarmViewSet(viewsets.ModelViewSet):
     def sensoruser(self, request, pk=None):
 
         # TODO: Check whether all users belong to same company
+        #raise APIException("My first exception")
+        #SensorUser.objects.filter(pk__in=[3, 4]).values_list('company', flat=True)
+        #request.user.company_id
 
         # Assign new sensor_user_set
         sensor_swarm = self.model.objects.get(pk=pk)
