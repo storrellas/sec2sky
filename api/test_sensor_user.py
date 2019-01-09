@@ -106,3 +106,19 @@ class UserTestCase(APITestCase):
         url = reverse('user-list')
         response = self.client.get(url, {}, format='json')
         self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
+
+
+    def test_user_whoami(self):
+        """
+        Company Creation
+        """
+
+        # Get token header
+        token = Token.objects.get(user__username='user')
+        self.client.credentials(HTTP_AUTHORIZATION='Token ' + token.key)
+
+        # Get list of companies
+        url = reverse('user-whoami')
+        response = self.client.get(url, {}, format='json')
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(response.data['username'], 'user')

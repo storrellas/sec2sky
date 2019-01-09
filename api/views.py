@@ -79,7 +79,7 @@ class SensorUserViewSet(viewsets.ModelViewSet):
     @action(detail=False, methods=['get'], permission_classes=[IsAuthenticated])
     def whoami(self, request, pk=None):
         serializer = self.serializer_class(request.user)
-        return Response(serializer.data)
+        return Response(serializer.data, status=status.HTTP_200_OK)
 
 
 class SensorSwarmViewSet(viewsets.ModelViewSet):
