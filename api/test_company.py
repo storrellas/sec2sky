@@ -43,10 +43,10 @@ class CompanyTestCase(APITestCase):
         self.assertEqual(Company.objects.get().name, 'MyCompany')
 
         # Store company ID
-        company_id = response.data['id']
+        id = response.data['id']
 
         # Update Company
-        url = reverse('company-detail', args=[company_id])
+        url = reverse('company-detail', args=[id])
         data = {
             'name' : "MyCompanyUpdated",
             'description': "MyCompanyDescription"
@@ -63,7 +63,7 @@ class CompanyTestCase(APITestCase):
         self.assertEqual(len(response.data), 1)
 
         # Delete Company
-        url = reverse('company-detail', args=[company_id])
+        url = reverse('company-detail', args=[id])
         response = self.client.delete(url, format='json')
         self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)
         self.assertEqual(Company.objects.count(), 0)

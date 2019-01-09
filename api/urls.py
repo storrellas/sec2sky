@@ -17,6 +17,6 @@ router.register(r'user', SensorUserViewSet, basename='user')
 urlpatterns = [
     url(r'^', include(router.urls)),
     url('^test/mqtt/$', MQTTTestAPIView.as_view()),
-    url(r'^auth/', views.obtain_auth_token),
+    url(r'^auth/', views.obtain_auth_token, name='api-token'),
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework'))
 ]

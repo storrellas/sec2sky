@@ -73,7 +73,6 @@ class SensorUserViewSet(viewsets.ModelViewSet):
             serializer = self.serializer_class(user)
             return Response(serializer.data, status=status.HTTP_200_OK)
 
-
         return Response({'message': serializer.errors}, status=status.HTTP_400_BAD_REQUEST)
 
 

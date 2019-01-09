@@ -34,60 +34,75 @@ class UserTestCase(APITestCase):
         token = Token.objects.get(user__username='admin')
         self.client.credentials(HTTP_AUTHORIZATION='Token ' + token.key)
 
-        # Create Company
+        # Create User
         url = reverse('user-list')
         data = {
             'username' : "user_test",
-            'password': "user",
+            'password': "user_test",
             'role': "administrator",
             'company': self.company.pk
         }
         response = self.client.post(url, data, format='json')
 
         # Store company ID
-        user_id = response.data['id']
-
+        id = response.data['id']
 
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
         self.assertEqual(SensorUser.objects.count(), 3)
-        self.assertEqual(SensorUser.objects.get(pk=user_id).username, 'user_test')
+        self.assertEqual(SensorUser.objects.get(pk=id).username, 'user_test')
 
-
-        """
-        # Update Company
-        url = reverse('company-detail', args=[company_id])
+        # Token for created user
+        url = reverse('api-token')
         data = {
-            'name' : "MyCompanyUpdated",
-            'description': "MyCompanyDescription"
+            'username' : "user_test",
+            'password': "user_test"
+        }
+        response = self.client.post(url, data, format='json')
+
+
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(response.data['token'], Token.objects.get(user__username='user_test').key)
+
+        # Update User
+        url = reverse('user-detail', args=[id])
+        data = {
+            'username' : "user_updated",
+            'password': "user_updated",
+            'role': "administrator",
+            'company': self.company.pk
         }
         response = self.client.put(url, data, format='json')
         self.assertEqual(response.status_code, status.HTTP_200_OK)
-        self.assertEqual(Company.objects.count(), 1)
-        self.assertEqual(Company.objects.get().name, 'MyCompanyUpdated')
+        self.assertEqual(SensorUser.objects.count(), 3)
+        self.assertEqual(SensorUser.objects.get(pk=id).username, 'user_updated')
 
-        # Company List
-        url = reverse('company-list')
-        response = self.client.get(url, data, format='json')
+        # Token for created user
+        url = reverse('api-token')
+        data = {
+            'username' : "user_updated",
+            'password': "user_updated"
+        }
+        response = self.client.post(url, data, format='json')
         self.assertEqual(response.status_code, status.HTTP_200_OK)
-        self.assertEqual(len(response.data), 1)
+        self.assertEqual(response.data['token'], Token.objects.get(user__username='user_updated').key)
 
-        # Delete Company
-        url = reverse('company-detail', args=[company_id])
+        # Delete User
+        url = reverse('user-detail', args=[id])
         response = self.client.delete(url, format='json')
         self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)
-        self.assertEqual(Company.objects.count(), 0)
+        self.assertEqual(SensorUser.objects.count(), 2)
+
+
+    def test_user_crud_not_authorized(self):
+        """
+        Company Creation
         """
 
-    # def test_company_crud_not_authorized(self):
-    #     """
-    #     Company Creation
-    #     """
-    #
-    #     # Get token header
-    #     token = Token.objects.get(user__username='user')
-    #     self.client.credentials(HTTP_AUTHORIZATION='Token ' + token.key)
-    #
-    #     # Get list of companies
-    #     url = reverse('company-list')
-    #     response = self.client.get(url, {}, format='json')
-    #     self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
+        # Get token header
+        token = Token.objects.get(user__username='user')
+        self.client.credentials(HTTP_AUTHORIZATION='Token ' + token.key)
+
+        # Get list of companies
+        url = reverse('user-list')
+        response = self.client.get(url, {}, format='json')
+        self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
