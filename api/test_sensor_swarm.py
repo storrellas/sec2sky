@@ -27,6 +27,7 @@ class UserTestCase(APITestCase):
 
         # Create Sensor Swarm
         self.sensor_swarm = SensorSwarm.objects.create(name='sensor_swarm', description='sensor_swarm_description')
+        self.sensor_swarm.sensor_user_set.set([self.user])
 
     def test_sensorswarm_crud(self):
         """
@@ -34,11 +35,11 @@ class UserTestCase(APITestCase):
         """
         self.assertEqual(SensorSwarm.objects.count(), 1)
 
-        # Get token header
+        # Set token header
         token = Token.objects.get(user__username='admin')
         self.client.credentials(HTTP_AUTHORIZATION='Token ' + token.key)
 
-        # Create User
+        # Create Swarm
         url = reverse('sensorswarm-list')
         data = {
             'name' : "sensor_swarm_new",
@@ -46,7 +47,7 @@ class UserTestCase(APITestCase):
         }
         response = self.client.post(url, data, format='json')
 
-        # Store company ID
+        # Store ID
         id = response.data['id']
 
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
@@ -64,68 +65,65 @@ class UserTestCase(APITestCase):
         self.assertEqual(SensorSwarm.objects.count(), 2)
         self.assertEqual(SensorSwarm.objects.get(pk=id).name, 'sensor_swarm_updated')
 
-        # Delete User
+        # Swarm List - admin
+        url = reverse('sensorswarm-list')
+        response = self.client.get(url, data, format='json')
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(len(response.data), 2)
+
+        # Set token header
+        token = Token.objects.get(user__username='user')
+        self.client.credentials(HTTP_AUTHORIZATION='Token ' + token.key)
+
+        # Swarm List - user
+        url = reverse('sensorswarm-list')
+        response = self.client.get(url, data, format='json')
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(len(response.data), 1)
+
+        # Set token header
+        token = Token.objects.get(user__username='admin')
+        self.client.credentials(HTTP_AUTHORIZATION='Token ' + token.key)
+
+        # Delete Swarm
         url = reverse('sensorswarm-detail', args=[id])
         response = self.client.delete(url, format='json')
         self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)
         self.assertEqual(SensorSwarm.objects.count(), 1)
 
+
+
+    def test_sensorswarm_sensoruser(self):
         """
-        # Token for created user
-        url = reverse('api-token')
-        data = {
-            'username' : "user_test",
-            'password': "user_test"
-        }
-        response = self.client.post(url, data, format='json')
-
-
-        self.assertEqual(response.status_code, status.HTTP_200_OK)
-        self.assertEqual(response.data['token'], Token.objects.get(user__username='user_test').key)
-
-        # Update User
-        url = reverse('user-detail', args=[id])
-        data = {
-            'username' : "user_updated",
-            'password': "user_updated",
-            'role': "administrator",
-            'company': self.company.pk
-        }
-        response = self.client.put(url, data, format='json')
-        self.assertEqual(response.status_code, status.HTTP_200_OK)
-        self.assertEqual(SensorUser.objects.count(), 3)
-        self.assertEqual(SensorUser.objects.get(pk=id).username, 'user_updated')
-
-        # Token for created user
-        url = reverse('api-token')
-        data = {
-            'username' : "user_updated",
-            'password': "user_updated"
-        }
-        response = self.client.post(url, data, format='json')
-        self.assertEqual(response.status_code, status.HTTP_200_OK)
-        self.assertEqual(response.data['token'], Token.objects.get(user__username='user_updated').key)
-
-        # Delete User
-        url = reverse('user-detail', args=[id])
-        response = self.client.delete(url, format='json')
-        self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)
-        self.assertEqual(SensorUser.objects.count(), 2)
+        Company Creation
         """
 
-    # def test_user_crud_not_authorized(self):
-    #     """
-    #     Company Creation
-    #     """
-    #
-    #     # Get token header
-    #     token = Token.objects.get(user__username='user')
-    #     self.client.credentials(HTTP_AUTHORIZATION='Token ' + token.key)
-    #
-    #     # Get list of companies
-    #     url = reverse('user-list')
-    #     response = self.client.get(url, {}, format='json')
-    #     self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
+        # Get token header
+        token = Token.objects.get(user__username='user')
+        self.client.credentials(HTTP_AUTHORIZATION='Token ' + token.key)
+
+        self.sensor_swarm.sensor_user_set.set([])
+
+        # Swarm List - user
+        url = reverse('sensorswarm-list')
+        response = self.client.get(url, {}, format='json')
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(len(response.data), 0)
+
+        # Add user to swarm
+        data = {
+            "sensor_user_set": [self.user.id]
+        }
+        url = reverse('sensorswarm-sensoruser', args=[self.sensor_swarm.id])
+        response = self.client.post(url, data, format='json')
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+
+        # Swarm List - user
+        url = reverse('sensorswarm-list')
+        response = self.client.get(url, {}, format='json')
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(len(response.data), 1)
+
     #
     #
     # def test_user_whoami(self):
