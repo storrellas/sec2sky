@@ -14,13 +14,13 @@ class TestCase(APITestCase):
     def setUp(self):
 
         # Create superuser
-        self.admin = SensorUser.objects.create_user('admin', password='admin')
+        self.admin = User.objects.create_user('admin', password='admin')
         self.admin.is_superuser=True
         self.admin.is_staff=True
         self.admin.save()
 
         # Create user
-        self.user = SensorUser.objects.create_user('user', password='user')
+        self.user = User.objects.create_user('user', password='user')
 
     def test_company_crud(self):
         """

@@ -14,20 +14,20 @@ class CompanySerializer(serializers.ModelSerializer):
         model = Company
         fields = ('id', 'name', 'description')
 
-class SensorUserExtendedSerializer(serializers.ModelSerializer):
+class UserExtendedSerializer(serializers.ModelSerializer):
     company_detail = CompanySerializer(required=False, source='company')
     sensor_swarms = SensorSwarmSerializer(required=False, source='sensor_swarms_set', many=True)
 
     class Meta:
-        model = SensorUser
+        model = User
         #fields = '__all__'
         fields = ('id', 'username', 'role', 'company_detail', 'sensor_swarms')
 
-class SensorUserSerializer(serializers.ModelSerializer):
+class UserSerializer(serializers.ModelSerializer):
 
 
     class Meta:
-        model = SensorUser
+        model = User
         fields = ('id', 'username', 'password', 'role', 'company')
 
     def create(self, validated_data):
@@ -45,10 +45,10 @@ class SensorSerializer(serializers.ModelSerializer):
 
 class SensorSwarmExtendedSerializer(serializers.ModelSerializer):
     sensor_list_detail = SensorSerializer(required=False, source='sensor_set', many=True)
-    sensor_user_set = serializers.PrimaryKeyRelatedField(required=False, many=True, read_only=True)
+    user_set = serializers.PrimaryKeyRelatedField(required=False, many=True, read_only=True)
     class Meta:
         model = SensorSwarm
-        fields = ('id', 'name', 'description', 'sensor_list_detail', 'sensor_user_set')
+        fields = ('id', 'name', 'description', 'sensor_list_detail', 'user_set')
 
 class DetectionSerializer(serializers.ModelSerializer):
     class Meta:

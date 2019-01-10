@@ -14,7 +14,7 @@ class TestCase(APITestCase):
     def setUp(self):
 
         # Create superuser
-        self.admin = SensorUser.objects.create_user('admin', password='admin')
+        self.admin = User.objects.create_user('admin', password='admin')
         self.admin.is_superuser=True
         self.admin.is_staff=True
         self.admin.save()
@@ -23,11 +23,11 @@ class TestCase(APITestCase):
         self.company = Company.objects.create(name="MyCompany",description="MyDescription")
 
         # Create user
-        self.user = SensorUser.objects.create_user('user', password='user', company= self.company)
+        self.user = User.objects.create_user('user', password='user', company= self.company)
 
         # Create Sensor Swarm
         self.sensor_swarm = SensorSwarm.objects.create(name='sensor_swarm', description='sensor_swarm_description')
-        self.sensor_swarm.sensor_user_set.set([self.user])
+        self.sensor_swarm.user_set.set([self.user])
 
     def test_sensorswarm_crud(self):
         """
@@ -93,7 +93,7 @@ class TestCase(APITestCase):
 
 
 
-    def test_sensorswarm_sensoruser(self):
+    def test_sensorswarm_user(self):
         """
         Company Creation
         """
@@ -102,7 +102,7 @@ class TestCase(APITestCase):
         token = Token.objects.get(user__username='user')
         self.client.credentials(HTTP_AUTHORIZATION='Token ' + token.key)
 
-        self.sensor_swarm.sensor_user_set.set([])
+        self.sensor_swarm.user_set.set([])
 
         # Swarm List - user
         url = reverse('sensorswarm-list')
@@ -112,9 +112,9 @@ class TestCase(APITestCase):
 
         # Add user to swarm
         data = {
-            "sensor_user_set": [self.user.id]
+            "user_set": [self.user.id]
         }
-        url = reverse('sensorswarm-sensoruser', args=[self.sensor_swarm.id])
+        url = reverse('sensorswarm-user', args=[self.sensor_swarm.id])
         response = self.client.post(url, data, format='json')
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 

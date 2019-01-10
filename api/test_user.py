@@ -14,13 +14,13 @@ class TestCase(APITestCase):
     def setUp(self):
 
         # Create superuser
-        self.admin = SensorUser.objects.create_user('admin', password='admin')
+        self.admin = User.objects.create_user('admin', password='admin')
         self.admin.is_superuser=True
         self.admin.is_staff=True
         self.admin.save()
 
         # Create user
-        self.user = SensorUser.objects.create_user('user', password='user')
+        self.user = User.objects.create_user('user', password='user')
 
         # Create Company
         self.company = Company.objects.create(name="MyCompany",description="MyDescription")
@@ -29,7 +29,7 @@ class TestCase(APITestCase):
         """
         Company Creation
         """
-        self.assertEqual(SensorUser.objects.count(), 2)
+        self.assertEqual(User.objects.count(), 2)
 
         # Get token header
         token = Token.objects.get(user__username='admin')
@@ -49,8 +49,8 @@ class TestCase(APITestCase):
         id = response.data['id']
 
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
-        self.assertEqual(SensorUser.objects.count(), 3)
-        self.assertEqual(SensorUser.objects.get(pk=id).username, 'user_test')
+        self.assertEqual(User.objects.count(), 3)
+        self.assertEqual(User.objects.get(pk=id).username, 'user_test')
 
         # Token for created user
         url = reverse('api-token')
@@ -74,8 +74,8 @@ class TestCase(APITestCase):
         }
         response = self.client.put(url, data, format='json')
         self.assertEqual(response.status_code, status.HTTP_200_OK)
-        self.assertEqual(SensorUser.objects.count(), 3)
-        self.assertEqual(SensorUser.objects.get(pk=id).username, 'user_updated')
+        self.assertEqual(User.objects.count(), 3)
+        self.assertEqual(User.objects.get(pk=id).username, 'user_updated')
 
         # Token for created user
         url = reverse('api-token')
@@ -91,7 +91,7 @@ class TestCase(APITestCase):
         url = reverse('user-detail', args=[id])
         response = self.client.delete(url, format='json')
         self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)
-        self.assertEqual(SensorUser.objects.count(), 2)
+        self.assertEqual(User.objects.count(), 2)
 
 
     def test_user_crud_not_authorized(self):

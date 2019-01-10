@@ -14,7 +14,7 @@ class TestCase(APITestCase):
     def setUp(self):
 
         # Create superuser
-        self.admin = SensorUser.objects.create_user('admin', password='admin')
+        self.admin = User.objects.create_user('admin', password='admin')
         self.admin.is_superuser=True
         self.admin.is_staff=True
         self.admin.save()
@@ -23,11 +23,11 @@ class TestCase(APITestCase):
         self.company = Company.objects.create(name="MyCompany",description="MyDescription")
 
         # Create user
-        self.user = SensorUser.objects.create_user('user', password='user', company=self.company)
+        self.user = User.objects.create_user('user', password='user', company=self.company)
 
         # Create Sensor Swarm
         self.sensor_swarm = SensorSwarm.objects.create(name='sensor_swarm', description='sensor_swarm_description')
-        self.sensor_swarm.sensor_user_set.set([self.user])
+        self.sensor_swarm.user_set.set([self.user])
 
         # Create Sensor
         self.sensor = Sensor.objects.create(name='CMF001',

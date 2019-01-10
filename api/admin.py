@@ -1,10 +1,13 @@
+# Django
 from django.contrib import admin
-from .models import Detection, SensorUser
 from django.apps import apps
 from django.contrib.admin.sites import AlreadyRegistered
 from django.contrib.auth.admin import UserAdmin
 from django.contrib.auth.forms import UserChangeForm, UserCreationForm
 from django.contrib.auth import get_user_model
+
+# Project includes
+from .models import *
 
 app_models = apps.get_app_config('api').get_models()
 for model in app_models:
@@ -18,23 +21,23 @@ for model in app_models:
         pass
 
 
-class SensorUserCreationForm(UserCreationForm):
+class UserCreationForm(UserCreationForm):
     class Meta(UserCreationForm):
-        model = SensorUser
+        model = User
         fields = ('username', 'first_name' , 'last_name', )
 
-class SensorUserChangeForm(UserChangeForm):
+class UserChangeForm(UserChangeForm):
     class Meta(UserChangeForm.Meta):
-        model = SensorUser
+        model = User
 
-class SensorUserAdmin(UserAdmin):
-    #add_form = SensorUserCreationForm
-    form = SensorUserChangeForm
-    model = SensorUser
+class UserAdmin(UserAdmin):
+    #add_form = UserCreationForm
+    form = UserChangeForm
+    model = User
 
     fieldsets = UserAdmin.fieldsets + (
             ('Extended', {'fields': ('company', 'role',)}),
     )
 
 # Re-register UserAdmin
-admin.site.register(SensorUser, SensorUserAdmin)
+admin.site.register(User, UserAdmin)

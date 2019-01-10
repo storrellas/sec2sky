@@ -15,7 +15,7 @@ class Company(models.Model):
 
 
 # See https://wsvincent.com/django-custom-user-model-tutorial/
-class SensorUser(AbstractUser):
+class User(AbstractUser):
     VIEWER = 'viewer'
     OPERATOR = 'operator'
     CONFIGURATOR = 'configurator'
@@ -37,13 +37,13 @@ class SensorUser(AbstractUser):
     company = models.ForeignKey(Company, on_delete=models.SET_NULL, null=True)
 
     class Meta:
-        verbose_name = 'SensorUser'
-        verbose_name_plural = 'SensorUsers'
+        verbose_name = 'User'
+        verbose_name_plural = 'Users'
 
 class SensorSwarm(models.Model):
     name = models.CharField(max_length=500, null=True)
     description = models.CharField(max_length=500, null=True)
-    sensor_user_set = models.ManyToManyField(SensorUser, related_name="sensor_swarm_set", blank=True)
+    user_set = models.ManyToManyField(User, related_name="sensor_swarm_set", blank=True)
 
     def __str__(self):
         return self.name

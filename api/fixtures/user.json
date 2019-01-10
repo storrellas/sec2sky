@@ -1,6 +1,6 @@
 [
 {
-  "model": "api.sensoruser",
+  "model": "api.user",
   "pk": 1,
   "fields": {
     "password": "pbkdf2_sha256$120000$ZEm7Or7FhABG$uomfi7OpwAoDtsNTM7LlfjTPPFh4Qt6ChOk/o09SHl0=",
@@ -20,7 +20,7 @@
   }
 },
 {
-  "model": "api.sensoruser",
+  "model": "api.user",
   "pk": 2,
   "fields": {
     "password": "pbkdf2_sha256$120000$prZOryxpjALB$e59l92bLBQsmxycBj72J8axHVlZz7pp3YGtSQ3rvnmI=",
@@ -40,7 +40,7 @@
   }
 },
 {
-  "model": "api.sensoruser",
+  "model": "api.user",
   "pk": 3,
   "fields": {
     "password": "pbkdf2_sha256$120000$SUDq48tMGoNq$pDsbd227N3jeXteMKjjv4pCRTtBZvzpVCILUBWJ8ouo=",
@@ -60,7 +60,7 @@
   }
 },
 {
-  "model": "api.sensoruser",
+  "model": "api.user",
   "pk": 4,
   "fields": {
     "password": "pbkdf2_sha256$120000$hWvB2vwGRb8o$1S6TGg8K4LNv7JFW2p1jWpAFZ2plzYodeSpRiTi04r4=",
@@ -80,7 +80,7 @@
   }
 },
 {
-  "model": "api.sensoruser",
+  "model": "api.user",
   "pk": 5,
   "fields": {
     "password": "pbkdf2_sha256$120000$2rGiUMRDuxZI$aOaRAGiO3fqSCjfPBC1Vz8GTbFby+4hzMXWFg/4uboM=",
@@ -100,7 +100,7 @@
   }
 },
 {
-  "model": "api.sensoruser",
+  "model": "api.user",
   "pk": 6,
   "fields": {
     "password": "!vw5LDsf0i6jg3kE0pEZpLcD3OSr935t88iNgwKzU",

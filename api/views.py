@@ -38,19 +38,19 @@ class CompanyViewSet(viewsets.ModelViewSet):
     serializer_class = serializers.CompanySerializer
     renderer_classes = (JSONRenderer, )
 
-class SensorUserViewSet(viewsets.ModelViewSet):
+class UserViewSet(viewsets.ModelViewSet):
     authentication_classes = (TokenAuthentication,)
     permission_classes = (IsAdminUser,)
 
-    model = SensorUser
-    queryset = SensorUser.objects.all()
-    serializer_class = serializers.SensorUserExtendedSerializer
+    model = User
+    queryset = User.objects.all()
+    serializer_class = serializers.UserExtendedSerializer
     renderer_classes = (JSONRenderer, )
 
     def create(self, request, format=None):
-        serializer = serializers.SensorUserSerializer(data=request.data)
+        serializer = serializers.UserSerializer(data=request.data)
         if serializer.is_valid():
-            user = SensorUser.objects.create_user(**serializer.validated_data)
+            user = User.objects.create_user(**serializer.validated_data)
 
             # Generate response
             serializer = self.serializer_class(user)
@@ -60,8 +60,8 @@ class SensorUserViewSet(viewsets.ModelViewSet):
 
     def update(self, request, pk=None, format=None):
 
-        user = SensorUser.objects.get(pk=pk)
-        serializer = serializers.SensorUserSerializer(user, data=request.data)
+        user = User.objects.get(pk=pk)
+        serializer = serializers.UserSerializer(user, data=request.data)
         if serializer.is_valid() and user is not None:
             serializer.save()
 
@@ -96,19 +96,19 @@ class SensorSwarmViewSet(viewsets.ModelViewSet):
         if self.request.user.is_superuser:
             return self.model.objects.all()
         else:
-            return self.model.objects.filter(sensor_user_set=self.request.user)
+            return self.model.objects.filter(user_set=self.request.user)
 
     @action(detail=True, methods=['post'], permission_classes=[IsAuthenticated])
-    def sensoruser(self, request, pk=None):
+    def user(self, request, pk=None):
 
         # TODO: Check whether all users belong to same company
         #raise APIException("My first exception")
-        #SensorUser.objects.filter(pk__in=[3, 4]).values_list('company', flat=True)
+        #User.objects.filter(pk__in=[3, 4]).values_list('company', flat=True)
         #request.user.company_id
 
-        # Assign new sensor_user_set
+        # Assign new user_set
         sensor_swarm = self.model.objects.get(pk=pk)
-        sensor_swarm.sensor_user_set.set(request.data['sensor_user_set'])
+        sensor_swarm.user_set.set(request.data['user_set'])
         serializer = self.serializer_class(sensor_swarm)
         return Response(serializer.data)
 
