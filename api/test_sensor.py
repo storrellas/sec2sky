@@ -26,8 +26,8 @@ class TestCase(APITestCase):
         self.user = User.objects.create_user('user', password='user', company=self.company)
 
         # Create Sensor Swarm
-        self.sensor_swarm = SensorSwarm.objects.create(name='sensor_swarm', description='sensor_swarm_description')
-        self.sensor_swarm.user_set.set([self.user])
+        self.swarm = Swarm.objects.create(name='swarm', description='swarm_description')
+        self.swarm.user_set.set([self.user])
 
         # Create Sensor
         self.sensor = Sensor.objects.create(name='CMF001',
@@ -92,7 +92,7 @@ class TestCase(APITestCase):
         self.assertEqual(len(response.data), 1)
 
         # Check no sensors in swarm
-        url = reverse('sensorswarm-detail', args=[id])
+        url = reverse('swarm-detail', args=[id])
         response = self.client.get(url, {}, format='json')
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(len(response.data['sensor_list_detail']), 0)
@@ -106,14 +106,14 @@ class TestCase(APITestCase):
             "description": "Development Dept. Sensor1",
             "latitude": "43.20",
             "longitude": "2.10",
-            "sensor_swarm": self.sensor_swarm.pk
+            "swarm": self.swarm.pk
         }
         response = self.client.put(url, data, format='json')
         self.assertEqual(response.status_code, status.HTTP_200_OK)
-        self.assertEqual(Sensor.objects.get(pk=id).sensor_swarm, self.sensor_swarm)
+        self.assertEqual(Sensor.objects.get(pk=id).swarm, self.swarm)
 
         # Get Swarm
-        url = reverse('sensorswarm-detail', args=[id])
+        url = reverse('swarm-detail', args=[id])
         response = self.client.get(url, {}, format='json')
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(len(response.data['sensor_list_detail']), 1)

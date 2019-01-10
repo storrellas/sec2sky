@@ -82,13 +82,13 @@ class UserViewSet(viewsets.ModelViewSet):
         return Response(serializer.data, status=status.HTTP_200_OK)
 
 
-class SensorSwarmViewSet(viewsets.ModelViewSet):
+class SwarmViewSet(viewsets.ModelViewSet):
     authentication_classes = (TokenAuthentication,)
     permission_classes = (IsAuthenticated,)
 
-    model = SensorSwarm
-    queryset = SensorSwarm.objects.all()
-    serializer_class = serializers.SensorSwarmExtendedSerializer
+    model = Swarm
+    queryset = Swarm.objects.all()
+    serializer_class = serializers.SwarmExtendedSerializer
     renderer_classes = (JSONRenderer, )
 
     def get_queryset(self):
@@ -107,9 +107,9 @@ class SensorSwarmViewSet(viewsets.ModelViewSet):
         #request.user.company_id
 
         # Assign new user_set
-        sensor_swarm = self.model.objects.get(pk=pk)
-        sensor_swarm.user_set.set(request.data['user_set'])
-        serializer = self.serializer_class(sensor_swarm)
+        swarm = self.model.objects.get(pk=pk)
+        swarm.user_set.set(request.data['user_set'])
+        serializer = self.serializer_class(swarm)
         return Response(serializer.data)
 
 class SensorViewSet(mixins.ListModelMixin,

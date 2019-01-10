@@ -1,6 +1,6 @@
 [
 {
-  "model": "api.sensorswarm",
+  "model": "api.swarm",
   "pk": 1,
   "fields": {
     "name": "SGRP_CARMAKER",
@@ -11,7 +11,7 @@
   }
 },
 {
-  "model": "api.sensorswarm",
+  "model": "api.swarm",
   "pk": 2,
   "fields": {
     "name": "SGRP_PLANT1",
@@ -22,7 +22,7 @@
   }
 },
 {
-  "model": "api.sensorswarm",
+  "model": "api.swarm",
   "pk": 3,
   "fields": {
     "name": "SGRP_PLANT2",
@@ -33,7 +33,7 @@
   }
 },
 {
-  "model": "api.sensorswarm",
+  "model": "api.swarm",
   "pk": 4,
   "fields": {
     "name": "SGRP_PLANT3",
@@ -47,7 +47,7 @@
   "model": "api.sensor",
   "pk": 1,
   "fields": {
-    "sensor_swarm": 1,
+    "swarm": 1,
     "name": "CMF001",
     "description": "Development Dept. Sensor1",
     "latitude": "43.20",
@@ -58,7 +58,7 @@
   "model": "api.sensor",
   "pk": 2,
   "fields": {
-    "sensor_swarm": 1,
+    "swarm": 1,
     "name": "CMF002",
     "description": "Assembly line  Sensor1",
     "latitude": "43.20",
@@ -69,7 +69,7 @@
   "model": "api.sensor",
   "pk": 3,
   "fields": {
-    "sensor_swarm": 1,
+    "swarm": 1,
     "name": "CMF003",
     "description": "Assembly line  Sensor2",
     "latitude": "43.20",
@@ -80,7 +80,7 @@
   "model": "api.sensor",
   "pk": 4,
   "fields": {
-    "sensor_swarm": 1,
+    "swarm": 1,
     "name": "CMF004",
     "description": "Mobile Sensor1 (Car)",
     "latitude": "43.20",
@@ -91,7 +91,7 @@
   "model": "api.sensor",
   "pk": 5,
   "fields": {
-    "sensor_swarm": 1,
+    "swarm": 1,
     "name": "CMF005",
     "description": "Mobile Sensor2 (Mobile)",
     "latitude": "43.20",
@@ -102,7 +102,7 @@
   "model": "api.sensor",
   "pk": 6,
   "fields": {
-    "sensor_swarm": 2,
+    "swarm": 2,
     "name": "CMF006",
     "description": "Plant 1 Sensor 1",
     "latitude": "43.20",
@@ -113,7 +113,7 @@
   "model": "api.sensor",
   "pk": 7,
   "fields": {
-    "sensor_swarm": 2,
+    "swarm": 2,
     "name": "CMF007",
     "description": "Plant 1 Sensor 2",
     "latitude": "43.20",
@@ -124,7 +124,7 @@
   "model": "api.sensor",
   "pk": 8,
   "fields": {
-    "sensor_swarm": 3,
+    "swarm": 3,
     "name": "CMF008",
     "description": "Plant 2 Sensor 1",
     "latitude": "43.20",
@@ -135,7 +135,7 @@
   "model": "api.sensor",
   "pk": 9,
   "fields": {
-    "sensor_swarm": 3,
+    "swarm": 3,
     "name": "CMF009",
     "description": "Plant 2 Sensor 2",
     "latitude": "43.20",
@@ -146,7 +146,7 @@
   "model": "api.sensor",
   "pk": 10,
   "fields": {
-    "sensor_swarm": 4,
+    "swarm": 4,
     "name": "CMF010",
     "description": "Plant 3 Sensor 1",
     "latitude": "43.20",
@@ -157,7 +157,7 @@
   "model": "api.sensor",
   "pk": 11,
   "fields": {
-    "sensor_swarm": 4,
+    "swarm": 4,
     "name": "CMF011",
     "description": "Plant 3 Sensor 1",
     "latitude": "43.20",

@@ -4,9 +4,9 @@ from rest_framework import serializers
 # Project imports
 from .models import *
 
-class SensorSwarmSerializer(serializers.ModelSerializer):
+class SwarmSerializer(serializers.ModelSerializer):
     class Meta:
-        model = SensorSwarm
+        model = Swarm
         fields = ('id', 'name', 'description')
 
 class CompanySerializer(serializers.ModelSerializer):
@@ -16,12 +16,12 @@ class CompanySerializer(serializers.ModelSerializer):
 
 class UserExtendedSerializer(serializers.ModelSerializer):
     company_detail = CompanySerializer(required=False, source='company')
-    sensor_swarms = SensorSwarmSerializer(required=False, source='sensor_swarms_set', many=True)
+    swarms = SwarmSerializer(required=False, source='swarms_set', many=True)
 
     class Meta:
         model = User
         #fields = '__all__'
-        fields = ('id', 'username', 'role', 'company_detail', 'sensor_swarms')
+        fields = ('id', 'username', 'role', 'company_detail', 'swarms')
 
 class UserSerializer(serializers.ModelSerializer):
 
@@ -43,11 +43,11 @@ class SensorSerializer(serializers.ModelSerializer):
     def create(self, validated_data):
         return self.Meta.model(**validated_data)
 
-class SensorSwarmExtendedSerializer(serializers.ModelSerializer):
+class SwarmExtendedSerializer(serializers.ModelSerializer):
     sensor_list_detail = SensorSerializer(required=False, source='sensor_set', many=True)
     user_set = serializers.PrimaryKeyRelatedField(required=False, many=True, read_only=True)
     class Meta:
-        model = SensorSwarm
+        model = Swarm
         fields = ('id', 'name', 'description', 'sensor_list_detail', 'user_set')
 
 class DetectionSerializer(serializers.ModelSerializer):

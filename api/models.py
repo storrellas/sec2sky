@@ -40,17 +40,17 @@ class User(AbstractUser):
         verbose_name = 'User'
         verbose_name_plural = 'Users'
 
-class SensorSwarm(models.Model):
+class Swarm(models.Model):
     name = models.CharField(max_length=500, null=True)
     description = models.CharField(max_length=500, null=True)
-    user_set = models.ManyToManyField(User, related_name="sensor_swarm_set", blank=True)
+    user_set = models.ManyToManyField(User, related_name="swarm_set", blank=True)
 
     def __str__(self):
         return self.name
 
 
 class Sensor(models.Model):
-    sensor_swarm = models.ForeignKey(SensorSwarm, on_delete=models.SET_NULL, null=True)
+    swarm = models.ForeignKey(Swarm, on_delete=models.SET_NULL, null=True)
     name = models.CharField(max_length=500, null=True)
     description = models.CharField(max_length=500, null=True)
     latitude = models.DecimalField(max_digits=5, decimal_places=2)
