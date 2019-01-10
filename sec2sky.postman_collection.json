@@ -583,10 +583,10 @@
 			]
 		},
 		{
-			"name": "SensorSwarm",
+			"name": "Swarm",
 			"item": [
 				{
-					"name": "SensorGroup List",
+					"name": "Swarm List",
 					"request": {
 						"method": "GET",
 						"header": [
@@ -607,7 +607,7 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "http://localhost:8080/api/sensorswarm/",
+							"raw": "http://localhost:8080/api/swarm/",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -615,7 +615,7 @@
 							"port": "8080",
 							"path": [
 								"api",
-								"sensorswarm",
+								"swarm",
 								""
 							]
 						}
@@ -623,7 +623,45 @@
 					"response": []
 				},
 				{
-					"name": "SensorGroup Create",
+					"name": "Swarm Retrieve",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "Token {{token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/swarm/1/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"swarm",
+								"1",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Swarm Create",
 					"request": {
 						"method": "POST",
 						"header": [
@@ -644,7 +682,7 @@
 							"raw": "{\n    \"name\": \"test group\",\n    \"description\": \"test group description\"\n}"
 						},
 						"url": {
-							"raw": "http://localhost:8080/api/sensorswarm/",
+							"raw": "http://localhost:8080/api/swarm/",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -652,7 +690,7 @@
 							"port": "8080",
 							"path": [
 								"api",
-								"sensorswarm",
+								"swarm",
 								""
 							]
 						}
@@ -660,7 +698,7 @@
 					"response": []
 				},
 				{
-					"name": "SensorGroup SensorUser",
+					"name": "Swarm - User",
 					"request": {
 						"method": "POST",
 						"header": [
@@ -678,10 +716,10 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"sensor_user_set\": [3, 4]\n}"
+							"raw": "{\n    \"user_set\": [3, 4]\n}"
 						},
 						"url": {
-							"raw": "http://localhost:8080/api/sensorgroup/2/sensorswarm/",
+							"raw": "http://localhost:8080/api/swarm/2/user/",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -689,9 +727,9 @@
 							"port": "8080",
 							"path": [
 								"api",
-								"sensorgroup",
+								"swarm",
 								"2",
-								"sensorswarm",
+								"user",
 								""
 							]
 						}
@@ -699,7 +737,7 @@
 					"response": []
 				},
 				{
-					"name": "SensorGroup Delete",
+					"name": "Sensor Delete",
 					"request": {
 						"method": "DELETE",
 						"header": [
@@ -797,7 +835,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"id\": 12,\n    \"n_detection\": 0,\n    \"name\": \"CMF023\",\n    \"description\": \"Development Dept. Sensor1\",\n    \"latitude\": \"43.20\",\n    \"longitude\": \"2.10\",\n    \"sensor_group\": 1\n}"
+							"raw": "{\n    \"id\": 12,\n    \"n_detection\": 0,\n    \"name\": \"CMF023\",\n    \"description\": \"Development Dept. Sensor1\",\n    \"latitude\": \"43.20\",\n    \"longitude\": \"2.10\",\n    \"swarm\": 1\n}"
 						},
 						"url": {
 							"raw": "http://localhost:8080/api/sensor/12/",
