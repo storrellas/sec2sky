@@ -27,7 +27,7 @@ django.setup()
 
 from rest_framework.parsers import JSONParser
 from api.serializers import *
-from api.models import Detection, Sensor
+from api.models import *
 
 
 # Configuration values
@@ -41,10 +41,13 @@ response_delay = 3
 def on_connect(client, userdata, flags, rc):
     logger.info("Connected with result code "+str(rc))
 
+    # # Subscribe to topic list
+    # client.subscribe(settings.MQTT['topic_sensor_detection'])
+    # client.subscribe(settings.MQTT['topic_sensor_register'])
+    # client.subscribe(settings.MQTT['topic_sensor_status'])
+
     # Subscribe to topic list
-    client.subscribe(settings.MQTT['topic_sensor_detection'])
-    client.subscribe(settings.MQTT['topic_sensor_register'])
-    client.subscribe(settings.MQTT['topic_sensor_status'])
+    client.subscribe(settings.MQTT['topic'])
 
 
 #
@@ -75,17 +78,34 @@ def on_message(client, userdata, msg):
     stream = io.BytesIO(msg.payload)
     data = JSONParser().parse(stream)
 
-    # Detection Topic
-    if msg.topic == settings.MQTT['topic_sensor_detection']:
-        create_model(DetectionSerializer, data)
-    # Sensor Topic
-    elif msg.topic == settings.MQTT['topic_sensor_register']:
-        create_model(SensorSerializer, data)
-    # Status Topic
-    elif msg.topic == settings.MQTT['topic_sensor_status']:
-        create_model(StatusSerializer, data)
-    else:
+    if "discovery" in msg.topic:
+        logger.info("Discovery identified")
+        sensor_id = msg.topic.split("/")[1]
+        sensor = Sensor.objects.create(name=sensor_id,
+                                       description=data['description'],
+                                       latitude=data['latitude'],
+                                       longitude=data['longitude'])
+        logger.info("Sensor created sucessfully")
+
+    elif "state" in msg.topic:
         pass
+    elif "state" in msg.topic:
+        pass
+    else:
+        logger.error("topic not recognised")
+
+
+    # # Detection Topic
+    # if msg.topic == settings.MQTT['topic_sensor_detection']:
+    #     create_model(DetectionSerializer, data)
+    # # Sensor Topic
+    # elif msg.topic == settings.MQTT['topic_sensor_register']:
+    #     create_model(SensorSerializer, data)
+    # # Status Topic
+    # elif msg.topic == settings.MQTT['topic_sensor_status']:
+    #     create_model(StatusSerializer, data)
+    # else:
+    #     pass
 
 if __name__ == "__main__":
 
