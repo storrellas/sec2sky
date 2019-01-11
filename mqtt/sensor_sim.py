@@ -31,6 +31,7 @@ from api.models import *
 
 # Global variables
 sensor_discovery = {}
+sensor_discovery_period =  3
 
 #
 # Name: on_connect
@@ -40,8 +41,8 @@ def on_connect(client, userdata, flags, rc):
     logger.info("Connected with result code "+str(rc))
 
     # Subscribe to topic list
-    logger.info("Subscribe to topic "+ settings.MQTT['topic'])
-    client.subscribe(settings.MQTT['topic'])
+    logger.info("Subscribe to topic "+ settings.MQTT['topic_sensor'])
+    client.subscribe(settings.MQTT['topic_sensor'])
 
 #
 # Name: on_message
@@ -88,17 +89,22 @@ def alarm_handler(signum, frame):
     # MQTT publish message
     # logger.info("Sending message '" + json.dumps(message) + "' ...")
     # client.publish(settings.MQTT['topic'], json.dumps(message))
-    print(sensor_discovery)
+    #print(sensor_discovery)
+    if len(sensor_discovery) > 0:
+        logger.info("Sending message sensor discoveries pending ...")
+        for sensor_id in sensor_discovery:
+            topic = 'dronetrap/' + sensor_id + '/discovery'
+            client.publish(topic, json.dumps(sensor_discovery[sensor_id]))
 
     # Create signal for next alarm
     #signal.alarm(randint(1, 10))
-    signal.alarm(1)
+    signal.alarm(sensor_discovery_period)
 
 if __name__ == "__main__":
 
     # Set the signal handler and a 5-second alarm
     signal.signal(signal.SIGALRM, alarm_handler)
-    signal.alarm(1)
+    signal.alarm(sensor_discovery_period)
 
     # Configure MQTT Client
     client = mqtt.Client()

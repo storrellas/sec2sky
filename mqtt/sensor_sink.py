@@ -42,8 +42,8 @@ def on_connect(client, userdata, flags, rc):
     logger.info("Connected with result code "+str(rc))
 
     # Subscribe to topic list
-    logger.info("Subscribe to topic "+ settings.MQTT['topic'])
-    client.subscribe(settings.MQTT['topic'])
+    logger.info("Subscribe to topic "+ settings.MQTT['topic_dronetrap'])
+    client.subscribe(settings.MQTT['topic_dronetrap'])
 
 
 #
