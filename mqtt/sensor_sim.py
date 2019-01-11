@@ -29,9 +29,8 @@ from rest_framework.parsers import JSONParser
 from api.serializers import *
 from api.models import *
 
-# Configuration values
-sensor_id = 1
-response_delay = 3
+# Global variables
+sensor_discovery = {}
 
 #
 # Name: on_connect
@@ -63,8 +62,9 @@ def on_message(client, userdata, msg):
         if command == "start_discovery":
             logger.info("Start Discovery received")
             sensor_id = msg.topic.split("/")[1]
-            print(sensor_id)
-            print(data)
+
+            # Store new sensor to perform discovery
+            sensor_discovery[sensor_id] = data
 
         elif command == "state":
             logger.info("State received")
@@ -83,20 +83,22 @@ def on_message(client, userdata, msg):
 def alarm_handler(signum, frame):
     #logger.info('Signal handler called with signal' + str(signum) )
 
-    message = {'id': 1, 'sender': 'sergi'}
+    #message = {'id': 1, 'sender': 'sergi'}
 
     # MQTT publish message
-    logger.info("Sending message '" + json.dumps(message) + "' ...")
-    client.publish(settings.MQTT['topic'], json.dumps(message))
+    # logger.info("Sending message '" + json.dumps(message) + "' ...")
+    # client.publish(settings.MQTT['topic'], json.dumps(message))
+    print(sensor_discovery)
 
     # Create signal for next alarm
-    signal.alarm(randint(1, 10))
+    #signal.alarm(randint(1, 10))
+    signal.alarm(1)
 
 if __name__ == "__main__":
 
     # Set the signal handler and a 5-second alarm
-    # signal.signal(signal.SIGALRM, alarm_handler)
-    # signal.alarm(1)
+    signal.signal(signal.SIGALRM, alarm_handler)
+    signal.alarm(1)
 
     # Configure MQTT Client
     client = mqtt.Client()
