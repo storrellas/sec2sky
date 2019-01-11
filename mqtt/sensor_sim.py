@@ -41,8 +41,13 @@ def on_connect(client, userdata, flags, rc):
     logger.info("Connected with result code "+str(rc))
 
     # Subscribe to topic list
-    logger.info("Subscribe to topic "+ settings.MQTT['topic_sensor'])
-    client.subscribe(settings.MQTT['topic_sensor'])
+    #logger.info("Subscribe to topic "+ settings.MQTT['topic_sensor'])
+    #client.subscribe(settings.MQTT['topic_sensor'])
+
+    logger.info("Subscribe to topic "+ settings.MQTT['topic_start_discovery'])
+    client.subscribe(settings.MQTT['topic_start_discovery'])
+    logger.info("Subscribe to topic "+ settings.MQTT['topic_manager_set'])
+    client.subscribe(settings.MQTT['topic_manager_set'])
 
 #
 # Name: on_message

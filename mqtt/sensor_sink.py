@@ -42,9 +42,11 @@ def on_connect(client, userdata, flags, rc):
     logger.info("Connected with result code "+str(rc))
 
     # Subscribe to topic list
-    logger.info("Subscribe to topic "+ settings.MQTT['topic_dronetrap'])
-    client.subscribe(settings.MQTT['topic_dronetrap'])
+    # logger.info("Subscribe to topic "+ settings.MQTT['topic_dronetrap'])
+    # client.subscribe(settings.MQTT['topic_dronetrap'])
 
+    logger.info("Subscribe to topic "+ settings.MQTT['topic_discovery'])
+    client.subscribe(settings.MQTT['topic_discovery'])
 
 #
 # Name: creates_model
@@ -100,6 +102,10 @@ def on_message(client, userdata, msg):
                                                longitude=data['longitude'])
                 logger.info("Sensor created sucessfully")
 
+            if sensor.swarm is not None:
+                logger.info("Sensor ASSIGNED. Notify Sensor sim")
+            else:
+                logger.info("Sensor unassigned")
 
         elif command == "state":
             logger.info("State received")

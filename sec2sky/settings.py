@@ -129,11 +129,13 @@ USE_TZ = True
 
 MQTT = {
     'hostname': 'localhost',
+    # General topics
     'topic_dronetrap': 'dronetrap/#',
-    'topic_sensor': 'sensor/#'
-    # 'topic_sensor_detection': 'sec2sky/detection',
-    # 'topic_sensor_register': 'sec2sky/register',
-    # 'topic_sensor_status': 'sec2sky/status'
+    'topic_sensor': 'sensor/#',
+    # Specific command topics
+    'topic_discovery': 'dronetrap/+/discovery',
+    'topic_start_discovery': 'sensor/+/start_discovery',
+    'topic_manager_set': 'sensor/+/manager/set'
 }
 
 # Static files (CSS, JavaScript, Images)
