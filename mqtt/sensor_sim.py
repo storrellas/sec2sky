@@ -1,5 +1,6 @@
 import sys
 import os
+import io
 sys.path.append(os.path.dirname(os.path.abspath(__file__)) + '/../')
 
 import time
@@ -24,6 +25,10 @@ logger = utils.get_logger()
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "sec2sky.settings")
 django.setup()
 
+from rest_framework.parsers import JSONParser
+from api.serializers import *
+from api.models import *
+
 # Configuration values
 sensor_id = 1
 response_delay = 3
@@ -35,12 +40,41 @@ response_delay = 3
 def on_connect(client, userdata, flags, rc):
     logger.info("Connected with result code "+str(rc))
 
+    # Subscribe to topic list
+    logger.info("Subscribe to topic "+ settings.MQTT['topic'])
+    client.subscribe(settings.MQTT['topic'])
+
 #
 # Name: on_message
 # Description: Handler when a message is received
 #
 def on_message(client, userdata, msg):
     logger.info("topic: '" + msg.topic + "'' payload: '" + str(msg.payload) + "'")
+
+    try:
+
+        # Deserialize JSON
+        stream = io.BytesIO(msg.payload)
+        data = JSONParser().parse(stream)
+
+        # Parse topic
+        sensor_id = msg.topic.split("/")[1]
+        command = msg.topic.split("/")[2]
+        if command == "start_discovery":
+            logger.info("Start Discovery received")
+            sensor_id = msg.topic.split("/")[1]
+            print(sensor_id)
+            print(data)
+
+        elif command == "state":
+            logger.info("State received")
+        elif command == "detection":
+            logger.info("Detection received")
+        else:
+            logger.error("topic not recognised")
+
+    except Exception as e:
+        logger.error('Exception: '+ str(e))
 
 #
 # Name: alarm_handler
@@ -61,15 +95,15 @@ def alarm_handler(signum, frame):
 if __name__ == "__main__":
 
     # Set the signal handler and a 5-second alarm
-    signal.signal(signal.SIGALRM, alarm_handler)
-    signal.alarm(1)
+    # signal.signal(signal.SIGALRM, alarm_handler)
+    # signal.alarm(1)
 
     # Configure MQTT Client
     client = mqtt.Client()
     client.on_connect = on_connect
     client.on_message = on_message
 
-    client.connect("localhost", 1883, 60)
+    client.connect(settings.MQTT['hostname'], 1883, 60)
 
 
     # Blocking call that processes network traffic, dispatches callbacks and

@@ -41,12 +41,8 @@ response_delay = 3
 def on_connect(client, userdata, flags, rc):
     logger.info("Connected with result code "+str(rc))
 
-    # # Subscribe to topic list
-    # client.subscribe(settings.MQTT['topic_sensor_detection'])
-    # client.subscribe(settings.MQTT['topic_sensor_register'])
-    # client.subscribe(settings.MQTT['topic_sensor_status'])
-
     # Subscribe to topic list
+    logger.info("Subscribe to topic "+ settings.MQTT['topic'])
     client.subscribe(settings.MQTT['topic'])
 
 
@@ -74,25 +70,48 @@ def create_model(serializer, data):
 def on_message(client, userdata, msg):
     logger.info("Message Received [topic: '" + msg.topic + "' payload: '" + str(msg.payload) + "']")
 
-    # Deserialize JSON
-    stream = io.BytesIO(msg.payload)
-    data = JSONParser().parse(stream)
+    try:
 
-    if "discovery" in msg.topic:
-        logger.info("Discovery identified")
+        # Deserialize JSON
+        stream = io.BytesIO(msg.payload)
+        data = JSONParser().parse(stream)
+
+        # Parse topic
         sensor_id = msg.topic.split("/")[1]
-        sensor = Sensor.objects.create(name=sensor_id,
-                                       description=data['description'],
-                                       latitude=data['latitude'],
-                                       longitude=data['longitude'])
-        logger.info("Sensor created sucessfully")
+        command = msg.topic.split("/")[2]
+        if command == "discovery":
+            logger.info("Discovery received")
+            sensor_id = msg.topic.split("/")[1]
+            queryset = Sensor.objects.filter(name=sensor_id)
 
-    elif "state" in msg.topic:
-        pass
-    elif "state" in msg.topic:
-        pass
-    else:
-        logger.error("topic not recognised")
+            # NOTE: This should be done with primary keys
+            if queryset.exists():
+                sensor = queryset[0]
+                sensor.name = sensor_id
+                sensor.description = data['description']
+                sensor.latitude = data['latitude']
+                sensor.longitude = data['longitude']
+                sensor.save()
+                logger.info("Sensor updated successfully")
+            else:
+                sensor = Sensor.objects.create(name=sensor_id,
+                                               description=data['description'],
+                                               latitude=data['latitude'],
+                                               longitude=data['longitude'])
+                logger.info("Sensor created sucessfully")
+
+
+        elif command == "state":
+            logger.info("State received")
+        elif command == "detection":
+            logger.info("Detection received")
+        else:
+            logger.error("topic not recognised")
+
+    except Exception as e:
+        logger.error('Exception: '+ str(e))
+
+
 
 
     # # Detection Topic
