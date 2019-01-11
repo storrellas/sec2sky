@@ -1,5 +1,6 @@
 *__pycache__*
 *migrations*
 *venv*
+*localsettings.py
 db.sqlite3
 .env

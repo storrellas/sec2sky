@@ -17,14 +17,25 @@
 
 version: "3"
 services:
-  sec2sky:
-    image: sec2sky
+  sec2sky_api:
+    image: sec2sky_api
+    #restart: always
+    tty: true
+    depends_on:
+      - sec2sky_mosquitto
+    build:
+      context: ..
+      dockerfile: docker/DockerfileAPI
+    ports:
+      - $PORT:8080
+    environment:
+      - MOSQUITTO_HOST=sec2sky_mosquitto
+  sec2sky_mosquitto:
+    image: sec2sky_mosquitto
     #restart: always
     tty: true
     build:
       context: ..
-      dockerfile: docker/Dockerfile
-    ports:
-      - $PORT:8080
+      dockerfile: docker/DockerfileMosquitto
     environment:
       - TEST_VAR=8080

@@ -4,6 +4,7 @@ MAINTAINER Sergi Torrellas
 # Add folder
 RUN apk add --no-cache --update python3 bash mosquitto
 ADD . /repo/
+ADD ./docker/localsettings.py /repo/sec2sky/
 
 # Configure Node
 #WORKDIR /repo/react-ui
@@ -27,4 +28,4 @@ EXPOSE 8000
 
 # Run container
 #CMD mosquitto & python3 /repo/mqtt/sensor_sink.py & python3 /repo/manage.py runserver 0.0.0.0:$PORT
-CMD mosquitto & python3 /repo/mqtt/sensor_sink.py & gunicorn --access-logfile=- --bind 0.0.0.0:8080 sec2sky.wsgi
+CMD python3 /repo/mqtt/sensor_sink.py & gunicorn --access-logfile=- --bind 0.0.0.0:8080 sec2sky.wsgi

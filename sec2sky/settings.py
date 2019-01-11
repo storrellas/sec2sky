@@ -138,3 +138,9 @@ MQTT = {
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
 
 STATIC_URL = '/static/'
+
+# Import localsettings if any
+try:
+    from .localsettings import *
+except ImportError:
+    pass
