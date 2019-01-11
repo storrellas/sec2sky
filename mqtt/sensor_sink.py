@@ -31,8 +31,7 @@ from api.models import *
 
 
 # Configuration values
-sensor_id = 1
-response_delay = 3
+dronetrap_id = 1
 
 #
 # Name: on_connect
@@ -104,6 +103,9 @@ def on_message(client, userdata, msg):
 
             if sensor.swarm is not None:
                 logger.info("Sensor ASSIGNED. Notify Sensor sim")
+                topic = 'dronetrap/' + str(dronetrap_id) + '/manager/set'
+                serializer = SensorSerializer(sensor)
+                client.publish(topic, json.dumps(serializer.validated_data))
             else:
                 logger.info("Sensor unassigned")
 
