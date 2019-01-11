@@ -65,13 +65,20 @@ def on_message(client, userdata, msg):
         # Parse topic
         sensor_id = msg.topic.split("/")[1]
         command = msg.topic.split("/")[2]
+        if len(msg.topic.split("/")) > 3:
+            subcommand =  msg.topic.split("/")[3]
+
+        # Treat topic
         if command == "start_discovery":
             logger.info("Start Discovery received")
             sensor_id = msg.topic.split("/")[1]
 
             # Store new sensor to perform discovery
             sensor_discovery[sensor_id] = data
-
+        elif command == "manager":
+            if subcommand == "set":
+                logger.info("State manager/set received")
+                sensor_discovery.pop(data['name'])
         elif command == "state":
             logger.info("State received")
         elif command == "detection":

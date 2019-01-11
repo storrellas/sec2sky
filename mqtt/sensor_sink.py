@@ -105,7 +105,8 @@ def on_message(client, userdata, msg):
                 logger.info("Sensor ASSIGNED. Notify Sensor sim")
                 topic = 'dronetrap/' + str(dronetrap_id) + '/manager/set'
                 serializer = SensorSerializer(sensor)
-                client.publish(topic, json.dumps(serializer.validated_data))
+
+                client.publish(topic, json.dumps(serializer.data))
             else:
                 logger.info("Sensor unassigned")
 
