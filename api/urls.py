@@ -21,9 +21,7 @@ urlpatterns = [
     url(r'^', include(router.urls)),
     url('^test/mqtt/$', MQTTTestAPIView.as_view()),
     #url(r'^auth/', views.obtain_auth_token, name='api-token'),
-
     url(r'^token/$', TokenObtainPairView.as_view(), name='api-token'),
     url(r'^token/refresh/$', TokenRefreshView.as_view(), name='api-token-refresh'),
-
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework'))
 ]
