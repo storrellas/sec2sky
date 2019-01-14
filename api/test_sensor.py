@@ -56,6 +56,14 @@ class TestCase(APITestCase):
                                             code='MyDescription',
                                             description='MyDescription')
 
+    def set_jwt(self, username, password):
+        # Get JWT
+        url = reverse('api-token')
+        data = { 'username' : username, 'password': password }
+        response = self.client.post(url, data, format='json')
+        access_token = response.data['access']
+        self.client.credentials(HTTP_AUTHORIZATION='Bearer ' + access_token)
+
     def test_sensor(self):
         """
         Company Creation
@@ -63,8 +71,7 @@ class TestCase(APITestCase):
         self.assertEqual(Sensor.objects.count(), 1)
 
         # Get token header
-        token = Token.objects.get(user__username='user')
-        self.client.credentials(HTTP_AUTHORIZATION='Token ' + token.key)
+        self.set_jwt(username='user', password='user')
 
         # Get Sensor
         url = reverse('sensor-list')

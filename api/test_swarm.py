@@ -29,6 +29,14 @@ class TestCase(APITestCase):
         self.swarm = Swarm.objects.create(name='swarm', description='swarm_description')
         self.swarm.user_set.set([self.user])
 
+    def set_jwt(self, username, password):
+        # Get JWT
+        url = reverse('api-token')
+        data = { 'username' : username, 'password': password }
+        response = self.client.post(url, data, format='json')
+        access_token = response.data['access']
+        self.client.credentials(HTTP_AUTHORIZATION='Bearer ' + access_token)
+
     def test_swarm_crud(self):
         """
         Company Creation
@@ -36,8 +44,7 @@ class TestCase(APITestCase):
         self.assertEqual(Swarm.objects.count(), 1)
 
         # Set token header
-        token = Token.objects.get(user__username='admin')
-        self.client.credentials(HTTP_AUTHORIZATION='Token ' + token.key)
+        self.set_jwt(username='admin', password='admin')
 
         # Create Swarm
         url = reverse('swarm-list')
@@ -99,8 +106,7 @@ class TestCase(APITestCase):
         """
 
         # Get token header
-        token = Token.objects.get(user__username='user')
-        self.client.credentials(HTTP_AUTHORIZATION='Token ' + token.key)
+        self.set_jwt(username='user', password='user')
 
         self.swarm.user_set.set([])
 

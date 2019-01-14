@@ -19,6 +19,9 @@ from rest_framework.exceptions import APIException
 from rest_framework import status
 
 
+
+from rest_framework_simplejwt.authentication import JWTAuthentication
+
 # MQTT
 from paho.mqtt import publish
 
@@ -30,7 +33,7 @@ from sec2sky import utils
 logger = utils.get_logger()
 
 class CompanyViewSet(viewsets.ModelViewSet):
-    authentication_classes = (TokenAuthentication,)
+    authentication_classes = (JWTAuthentication,)
     permission_classes = (IsAdminUser,)
 
     model = Company
@@ -39,7 +42,7 @@ class CompanyViewSet(viewsets.ModelViewSet):
     renderer_classes = (JSONRenderer, )
 
 class UserViewSet(viewsets.ModelViewSet):
-    authentication_classes = (TokenAuthentication,)
+    authentication_classes = (JWTAuthentication,)
     permission_classes = (IsAdminUser,)
 
     model = User
@@ -83,7 +86,7 @@ class UserViewSet(viewsets.ModelViewSet):
 
 
 class SwarmViewSet(viewsets.ModelViewSet):
-    authentication_classes = (TokenAuthentication,)
+    authentication_classes = (JWTAuthentication,)
     permission_classes = (IsAuthenticated,)
 
     model = Swarm
@@ -116,7 +119,7 @@ class SensorViewSet(mixins.ListModelMixin,
                     mixins.RetrieveModelMixin,
                     mixins.UpdateModelMixin,
                     viewsets.GenericViewSet):
-    authentication_classes = (TokenAuthentication,)
+    authentication_classes = (JWTAuthentication,)
     permission_classes = (IsAuthenticated,)
 
     model = Sensor
@@ -149,7 +152,7 @@ class SensorViewSet(mixins.ListModelMixin,
 
 
 class MQTTTestAPIView(APIView):
-    authentication_classes = (TokenAuthentication,)
+    authentication_classes = (JWTAuthentication,)
     permission_classes = (IsAuthenticated,)
 
     def post(self, request, format=None):

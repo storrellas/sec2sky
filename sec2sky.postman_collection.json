@@ -142,6 +142,144 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "GetJWTToken - Admin",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "67ff0d83-d218-44db-8dc7-70cd8368eb4f",
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);",
+									"postman.setEnvironmentVariable(\"token_access\", jsonData.access);",
+									"postman.setEnvironmentVariable(\"token_refresh\", jsonData.refresh);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"username\": \"admin\",\n\t\"password\": \"admin123\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/token/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"token",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetJWTToken - User Nuclear",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "67ff0d83-d218-44db-8dc7-70cd8368eb4f",
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);",
+									"postman.setEnvironmentVariable(\"token_access\", jsonData.access);",
+									"postman.setEnvironmentVariable(\"token_refresh\", jsonData.refresh);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"username\": \"admin\",\n\t\"password\": \"admin123\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/token/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"token",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetJWTToken - User Carmaker",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "67ff0d83-d218-44db-8dc7-70cd8368eb4f",
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);",
+									"postman.setEnvironmentVariable(\"token_access\", jsonData.access);",
+									"postman.setEnvironmentVariable(\"token_refresh\", jsonData.refresh);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"username\": \"admin\",\n\t\"password\": \"admin123\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/token/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"token",
+								""
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		},
@@ -162,7 +300,7 @@
 							{
 								"key": "Authorization",
 								"type": "text",
-								"value": "Token {{token}}"
+								"value": "Bearer {{token_access}}"
 							}
 						],
 						"body": {
@@ -199,7 +337,7 @@
 							{
 								"key": "Authorization",
 								"type": "text",
-								"value": "Token {{token}}"
+								"value": "Bearer {{token_access}}"
 							}
 						],
 						"body": {
@@ -236,7 +374,7 @@
 							{
 								"key": "Authorization",
 								"type": "text",
-								"value": "Token {{token}}"
+								"value": "Bearer {{token_access}}"
 							}
 						],
 						"body": {
@@ -274,7 +412,7 @@
 							{
 								"key": "Authorization",
 								"type": "text",
-								"value": "Token {{token}}"
+								"value": "Bearer {{token_access}}"
 							}
 						],
 						"body": {
@@ -312,7 +450,7 @@
 							{
 								"key": "Authorization",
 								"type": "text",
-								"value": "Token {{token}}"
+								"value": "Bearer {{token_access}}"
 							}
 						],
 						"body": {
@@ -355,7 +493,7 @@
 							{
 								"key": "Authorization",
 								"type": "text",
-								"value": "Token {{token}}"
+								"value": "Bearer {{token_access}}"
 							}
 						],
 						"body": {
@@ -392,7 +530,7 @@
 							{
 								"key": "Authorization",
 								"type": "text",
-								"value": "Token {{token}}"
+								"value": "Bearer {{token_access}}"
 							}
 						],
 						"body": {
@@ -443,7 +581,7 @@
 							{
 								"key": "Authorization",
 								"type": "text",
-								"value": "Token {{token}}"
+								"value": "Bearer {{token_access}}"
 							}
 						],
 						"body": {
@@ -480,7 +618,7 @@
 							{
 								"key": "Authorization",
 								"type": "text",
-								"value": "Token {{token}}"
+								"value": "Bearer {{token_access}}"
 							}
 						],
 						"body": {
@@ -518,7 +656,7 @@
 							{
 								"key": "Authorization",
 								"type": "text",
-								"value": "Token {{token}}"
+								"value": "Bearer {{token_access}}"
 							}
 						],
 						"body": {
@@ -556,7 +694,7 @@
 							{
 								"key": "Authorization",
 								"type": "text",
-								"value": "Token {{token}}"
+								"value": "Bearer {{token_access}}"
 							}
 						],
 						"body": {
@@ -599,7 +737,7 @@
 							{
 								"key": "Authorization",
 								"type": "text",
-								"value": "Token {{token}}"
+								"value": "Bearer {{token_access}}"
 							}
 						],
 						"body": {
@@ -636,7 +774,7 @@
 							{
 								"key": "Authorization",
 								"type": "text",
-								"value": "Token {{token}}"
+								"value": "Bearer {{token_access}}"
 							}
 						],
 						"body": {
@@ -674,7 +812,7 @@
 							{
 								"key": "Authorization",
 								"type": "text",
-								"value": "Token {{token}}"
+								"value": "Bearer {{token_access}}"
 							}
 						],
 						"body": {
@@ -711,7 +849,7 @@
 							{
 								"key": "Authorization",
 								"type": "text",
-								"value": "Token {{token}}"
+								"value": "Bearer {{token_access}}"
 							}
 						],
 						"body": {
@@ -750,7 +888,7 @@
 							{
 								"key": "Authorization",
 								"type": "text",
-								"value": "Token {{token}}"
+								"value": "Bearer {{token_access}}"
 							}
 						],
 						"body": {
@@ -793,7 +931,7 @@
 							{
 								"key": "Authorization",
 								"type": "text",
-								"value": "Token {{token}}"
+								"value": "Bearer {{token_access}}"
 							}
 						],
 						"body": {
@@ -830,15 +968,15 @@
 							{
 								"key": "Authorization",
 								"type": "text",
-								"value": "Token {{token}}"
+								"value": "Bearer {{token_access}}"
 							}
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"id\": 12,\n    \"n_detection\": 0,\n    \"name\": \"CMF023\",\n    \"description\": \"Development Dept. Sensor1\",\n    \"latitude\": \"43.20\",\n    \"longitude\": \"2.10\",\n    \"swarm\": 1\n}"
+							"raw": "{\n    \"name\": \"CMF023\",\n    \"description\": \"Development Dept. Sensor1\",\n    \"latitude\": \"43.20\",\n    \"longitude\": \"2.10\",\n    \"swarm\": 1\n}"
 						},
 						"url": {
-							"raw": "http://localhost:8080/api/sensor/12/",
+							"raw": "http://localhost:8080/api/sensor/18/",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -847,7 +985,7 @@
 							"path": [
 								"api",
 								"sensor",
-								"12",
+								"18",
 								""
 							]
 						}
@@ -868,7 +1006,7 @@
 							{
 								"key": "Authorization",
 								"type": "text",
-								"value": "Token {{token}}"
+								"value": "Bearer {{token_access}}"
 							}
 						],
 						"body": {
@@ -905,7 +1043,7 @@
 							},
 							{
 								"key": "Authorization",
-								"value": "Token {{token}}",
+								"value": "Bearer {{token_access}}",
 								"type": "text"
 							}
 						],
@@ -945,7 +1083,7 @@
 							{
 								"key": "Authorization",
 								"type": "text",
-								"value": "Token {{token}}"
+								"value": "Bearer {{token_access}}"
 							}
 						],
 						"body": {
@@ -976,7 +1114,7 @@
 			"name": "MQTT",
 			"item": [
 				{
-					"name": "MQTT - Detection",
+					"name": "MQTT - Sensor",
 					"request": {
 						"method": "POST",
 						"header": [
@@ -989,12 +1127,12 @@
 							{
 								"key": "Authorization",
 								"type": "text",
-								"value": "Token {{token}}"
+								"value": "Bearer {{token_access}}"
 							}
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{   \n\t\"topic\": \"sec2sky/detection\",\n\t\"payload\" : {\n\t\t\"sensor\": 1,\n\t\t\"description\": \"mydescription\",\n\t\t\"thread_id\": 1,\n\t\t\"home_latitude\" : 43.2,\n\t\t\"home_longitude\" : 2.2,\n\t\t\"latitude\" : 43.2,\n\t\t\"altitude\" : 256,\n\t\t\"longitude\" : 2.1,\n\t\t\"rssi\" : 43.2,\n\t\t\"signal_type\" : \"MySignalType\"\n    }\n}             "
+							"raw": "{   \n\t\"topic\": \"sec2sky/register\",\n\t\"payload\" : {\n        \"name\": \"CMF023\",\n        \"description\": \"Development Dept. Sensor1\",\n        \"latitude\": \"43.20\",\n        \"longitude\": \"2.10\"\n    }\n}             "
 						},
 						"url": {
 							"raw": "http://localhost:8080/api/test/mqtt/",
@@ -1014,7 +1152,7 @@
 					"response": []
 				},
 				{
-					"name": "MQTT - Sensor",
+					"name": "MQTT - Detection",
 					"request": {
 						"method": "POST",
 						"header": [
@@ -1027,12 +1165,12 @@
 							{
 								"key": "Authorization",
 								"type": "text",
-								"value": "Token {{token}}"
+								"value": "Bearer {{token_access}}"
 							}
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{   \n\t\"topic\": \"sec2sky/register\",\n\t\"payload\" : {\n        \"name\": \"CMF023\",\n        \"description\": \"Development Dept. Sensor1\",\n        \"latitude\": \"43.20\",\n        \"longitude\": \"2.10\"\n    }\n}             "
+							"raw": "{   \n\t\"topic\": \"sec2sky/detection\",\n\t\"payload\" : {\n\t\t\"sensor\": 1,\n\t\t\"description\": \"mydescription\",\n\t\t\"thread_id\": 1,\n\t\t\"home_latitude\" : 43.2,\n\t\t\"home_longitude\" : 2.2,\n\t\t\"latitude\" : 43.2,\n\t\t\"altitude\" : 256,\n\t\t\"longitude\" : 2.1,\n\t\t\"rssi\" : 43.2,\n\t\t\"signal_type\" : \"MySignalType\"\n    }\n}             "
 						},
 						"url": {
 							"raw": "http://localhost:8080/api/test/mqtt/",
@@ -1065,12 +1203,88 @@
 							{
 								"key": "Authorization",
 								"type": "text",
-								"value": "Token {{token}}"
+								"value": "Bearer {{token_access}}"
 							}
 						],
 						"body": {
 							"mode": "raw",
 							"raw": "{   \n\t\"topic\": \"sec2sky/status\",\n\t\"payload\" : {\n\t\t\"sensor\" : 1,\n        \"code\": \"123\",\n        \"description\": \"sensor registration\"\n    }\n}             "
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/test/mqtt/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"test",
+								"mqtt",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "MQTT - Discovery",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "Bearer {{token_access}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{   \n\t\"topic\": \"dronetrap/CMF023/discovery\",\n\t\"payload\" : {\n        \"description\": \"Development Dept. Sensor1\",\n        \"latitude\": \"43.20\",\n        \"longitude\": \"2.10\"\n    }\n}             "
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/test/mqtt/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"test",
+								"mqtt",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "MQTT - Start Discovery",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "Bearer {{token_access}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{   \n\t\"topic\": \"sensor/CMF023/start_discovery\",\n\t\"payload\" : {\n        \"description\": \"Development Dept. Sensor1\",\n        \"latitude\": \"43.20\",\n        \"longitude\": \"2.10\"\n    }\n}             "
 						},
 						"url": {
 							"raw": "http://localhost:8080/api/test/mqtt/",

@@ -25,6 +25,14 @@ class TestCase(APITestCase):
         # Create Company
         self.company = Company.objects.create(name="MyCompany",description="MyDescription")
 
+    def set_jwt(self, username, password):
+        # Get JWT
+        url = reverse('api-token')
+        data = { 'username' : username, 'password': password }
+        response = self.client.post(url, data, format='json')
+        access_token = response.data['access']
+        self.client.credentials(HTTP_AUTHORIZATION='Bearer ' + access_token)
+
     def test_user_crud(self):
         """
         Company Creation
@@ -32,8 +40,7 @@ class TestCase(APITestCase):
         self.assertEqual(User.objects.count(), 2)
 
         # Get token header
-        token = Token.objects.get(user__username='admin')
-        self.client.credentials(HTTP_AUTHORIZATION='Token ' + token.key)
+        self.set_jwt(username='admin', password='admin')
 
         # Create User
         url = reverse('user-list')
@@ -59,10 +66,7 @@ class TestCase(APITestCase):
             'password': "user_test"
         }
         response = self.client.post(url, data, format='json')
-
-
         self.assertEqual(response.status_code, status.HTTP_200_OK)
-        self.assertEqual(response.data['token'], Token.objects.get(user__username='user_test').key)
 
         # Update User
         url = reverse('user-detail', args=[id])
@@ -85,7 +89,6 @@ class TestCase(APITestCase):
         }
         response = self.client.post(url, data, format='json')
         self.assertEqual(response.status_code, status.HTTP_200_OK)
-        self.assertEqual(response.data['token'], Token.objects.get(user__username='user_updated').key)
 
         # Delete User
         url = reverse('user-detail', args=[id])
@@ -100,8 +103,7 @@ class TestCase(APITestCase):
         """
 
         # Get token header
-        token = Token.objects.get(user__username='user')
-        self.client.credentials(HTTP_AUTHORIZATION='Token ' + token.key)
+        self.set_jwt(username='user', password='user')
 
         # Get list of companies
         url = reverse('user-list')
@@ -115,8 +117,7 @@ class TestCase(APITestCase):
         """
 
         # Get token header
-        token = Token.objects.get(user__username='user')
-        self.client.credentials(HTTP_AUTHORIZATION='Token ' + token.key)
+        self.set_jwt(username='user', password='user')
 
         # Get list of companies
         url = reverse('user-whoami')

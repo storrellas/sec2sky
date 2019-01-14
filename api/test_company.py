@@ -22,6 +22,14 @@ class TestCase(APITestCase):
         # Create user
         self.user = User.objects.create_user('user', password='user')
 
+    def set_jwt(self, username, password):
+        # Get JWT
+        url = reverse('api-token')
+        data = { 'username' : username, 'password': password }
+        response = self.client.post(url, data, format='json')
+        access_token = response.data['access']
+        self.client.credentials(HTTP_AUTHORIZATION='Bearer ' + access_token)
+
     def test_company_crud(self):
         """
         Company Creation
@@ -29,10 +37,8 @@ class TestCase(APITestCase):
 
         self.assertEqual(Company.objects.count(), 0)
 
-
-        # Get token header
-        token = Token.objects.get(user__username='admin')
-        self.client.credentials(HTTP_AUTHORIZATION='Token ' + token.key)
+        # Get JWT
+        self.set_jwt(username='admin', password='admin')
 
         # Create Company
         url = reverse('company-list')
@@ -76,9 +82,8 @@ class TestCase(APITestCase):
         Company Creation
         """
 
-        # Get token header
-        token = Token.objects.get(user__username='user')
-        self.client.credentials(HTTP_AUTHORIZATION='Token ' + token.key)
+        # Get JWT
+        self.set_jwt(username='user', password='user')
 
         # Get list of companies
         url = reverse('company-list')
