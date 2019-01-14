@@ -17,9 +17,6 @@ from rest_framework.decorators import action
 from rest_framework import mixins
 from rest_framework.exceptions import APIException
 from rest_framework import status
-
-
-
 from rest_framework_simplejwt.authentication import JWTAuthentication
 
 # MQTT
