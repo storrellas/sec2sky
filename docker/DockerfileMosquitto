@@ -4,7 +4,6 @@ MAINTAINER Sergi Torrellas
 # Add folder
 RUN apk add --no-cache --update python3 bash mosquitto
 ADD . /repo/
-ADD ./docker/localsettings.py /repo/sec2sky/
 
 # Configure Node
 #WORKDIR /repo/react-ui
