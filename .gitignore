@@ -4,3 +4,4 @@
 *localsettings.py
 db.sqlite3
 .env
+credentials.txt
