@@ -103,7 +103,7 @@ def on_message(client, userdata, msg):
 
             if sensor.swarm is not None:
                 logger.info("Sensor ASSIGNED. Notify Sensor sim")
-                topic = 'dronetrap/' + str(dronetrap_id) + '/manager/set'
+                topic = settings.MQTT['topic_manager_set'].replace('+', str(settings.MQTT['id']))
                 serializer = SensorSerializer(sensor)
 
                 client.publish(topic, json.dumps(serializer.data))
