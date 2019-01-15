@@ -1,7 +1,7 @@
 *__pycache__*
 *migrations*
 *venv*
-*localsettings.py
+sec2sky/localsettings.py
 db.sqlite3
 .env
 credentials.txt
