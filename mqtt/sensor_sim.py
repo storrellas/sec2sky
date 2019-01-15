@@ -48,6 +48,8 @@ def on_connect(client, userdata, flags, rc):
     client.subscribe(settings.MQTT['topic_start_discovery'])
     logger.info("Subscribe to topic "+ settings.MQTT['topic_manager_set'])
     client.subscribe(settings.MQTT['topic_manager_set'])
+    logger.info("Subscribe to topic "+ settings.MQTT['topic_manager_unset'])
+    client.subscribe(settings.MQTT['topic_manager_unset'])
 
 #
 # Name: on_message
@@ -79,6 +81,8 @@ def on_message(client, userdata, msg):
             if subcommand == "set":
                 logger.info("State manager/set received")
                 sensor_discovery.pop(data['name'])
+            elif subcommand == "unset":
+                logger.info("State manager/unset received")
         elif command == "state":
             logger.info("State received")
         elif command == "detection":

@@ -124,6 +124,27 @@ class SensorViewSet(mixins.ListModelMixin,
     serializer_class = serializers.SensorExtendedSerializer
     renderer_classes = (JSONRenderer, )
 
+    def update(self, request, *args, **kwargs):
+        response = super().update(request, *args, *kwargs)
+
+
+        sensor = self.get_object()
+        if sensor.swarm is None:
+            logger.info("Swarm is None")
+            print(settings.MQTT)
+
+            # MQTT unset message
+            topic = settings.MQTT['topic_manager_unset'].replace('+', str(settings.MQTT['id']))
+            serializer = serializers.SensorSerializer(sensor)
+            publish.single(topic, json.dumps(serializer.data), hostname=settings.MQTT['hostname'])
+        else:
+            logger.info("Swarm is NOT None")
+
+        return response
+
+
+
+
     @action(detail=True, methods=['get'])
     def detection(self, request, pk=None):
         queryset = Detection.objects.filter(sensor__pk=pk)

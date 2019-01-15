@@ -127,6 +127,7 @@ USE_L10N = True
 USE_TZ = True
 
 MQTT = {
+    'id' : 1,
     'hostname': 'localhost',
     # General topics
     'topic_dronetrap': 'dronetrap/#',
@@ -134,7 +135,8 @@ MQTT = {
     # Specific command topics
     'topic_discovery': 'dronetrap/+/discovery',
     'topic_start_discovery': 'sensor/+/start_discovery',
-    'topic_manager_set': 'dronetrap/+/manager/set'
+    'topic_manager_set': 'dronetrap/+/manager/set',
+    'topic_manager_unset': 'dronetrap/+/manager/unset'
 }
 
 # Static files (CSS, JavaScript, Images)
