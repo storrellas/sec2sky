@@ -28,7 +28,7 @@ services:
       context: ..
       dockerfile: docker_pro/DockerfileAPI
     ports:
-      - $PORT:8080
+      - $API_PORT:8080
     environment:
       - MOSQUITTO_HOST=sec2sky_mosquitto
   sec2sky_mosquitto:
@@ -43,7 +43,7 @@ services:
   sec2sky_db:
     image: mysql:5
     volumes:
-      - ./persistance:/var/lib/mysql
+      - $PERSISTANCE_PATH:/var/lib/mysql
     environment:
       MYSQL_DATABASE: sec2sky
       MYSQL_ROOT_PASSWORD: s3c2sky
@@ -51,3 +51,13 @@ services:
       MYSQL_PASSWORD: s3c2sky
     ports:
         - 3306:3306
+  phpmyadmin:
+      image: phpmyadmin/phpmyadmin
+      links:
+          - sec2sky_db:db
+      ports:
+          - $PHPMYADMIN_PORT:80
+      environment:
+          MYSQL_USER: tram
+          MYSQL_PASSWORD: tram2018
+          MYSQL_ROOT_PASSWORD: root
