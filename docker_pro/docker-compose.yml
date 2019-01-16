@@ -26,7 +26,7 @@ services:
       - sec2sky_db
     build:
       context: ..
-      dockerfile: docker_prod/DockerfileAPI
+      dockerfile: docker_pro/DockerfileAPI
     ports:
       - $PORT:8080
     environment:
@@ -37,11 +37,13 @@ services:
     tty: true
     build:
       context: ..
-      dockerfile: docker_prod/DockerfileMosquitto
+      dockerfile: docker_pro/DockerfileMosquitto
     environment:
       - TEST_VAR=8080
   sec2sky_db:
     image: mysql:5
+    volumes:
+      - ./docker_pro/persistance:/var/lib/mysql
     environment:
       MYSQL_DATABASE: sec2sky
       MYSQL_ROOT_PASSWORD: s3c2sky
