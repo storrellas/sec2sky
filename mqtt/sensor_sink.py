@@ -101,14 +101,14 @@ def on_message(client, userdata, msg):
                                                longitude=data['longitude'])
                 logger.info("Sensor created sucessfully")
 
-            if sensor.swarm is not None:
-                logger.info("Sensor ASSIGNED. Notify Sensor sim")
-                topic = settings.MQTT['topic_manager_set'].replace('+', str(settings.MQTT['id']))
-                serializer = SensorSerializer(sensor)
-
-                client.publish(topic, json.dumps(serializer.data))
-            else:
-                logger.info("Sensor unassigned")
+            # if sensor.swarm is not None:
+            #     logger.info("Sensor ASSIGNED. Notify Sensor sim")
+            #     topic = settings.MQTT['topic_manager_set'].replace('+', str(settings.MQTT['id']))
+            #     serializer = SensorSerializer(sensor)
+            #
+            #     client.publish(topic, json.dumps(serializer.data))
+            # else:
+            #     logger.info("Sensor unassigned")
 
         elif command == "state":
             logger.info("State received")

@@ -131,11 +131,14 @@ class SensorViewSet(mixins.ListModelMixin,
         sensor = self.get_object()
         if sensor.swarm is None:
             logger.info("Swarm is None. Notifying sensor for unset")
-
-            # MQTT unset message
             topic = settings.MQTT['topic_manager_unset'].replace('+', str(settings.MQTT['id']))
-            serializer = serializers.SensorSerializer(sensor)
-            publish.single(topic, json.dumps(serializer.data), hostname=settings.MQTT['hostname'])
+        else:
+            logger.info("Swarm is None. Notifying sensor for set")
+            topic = settings.MQTT['topic_manager_set'].replace('+', str(settings.MQTT['id']))
+
+        # MQTT  message
+        serializer = serializers.SensorSerializer(sensor)
+        publish.single(topic, json.dumps(serializer.data), hostname=settings.MQTT['hostname'])
 
         return response
 
