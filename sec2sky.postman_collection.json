@@ -39,12 +39,10 @@
 							"raw": "{\n\t\"username\": \"admin\",\n\t\"password\": \"admin123\"\n}"
 						},
 						"url": {
-							"raw": "http://localhost:8080/api/token/",
-							"protocol": "http",
+							"raw": "{{url}}/api/token/",
 							"host": [
-								"localhost"
+								"{{url}}"
 							],
-							"port": "8080",
 							"path": [
 								"api",
 								"token",
@@ -85,12 +83,10 @@
 							"raw": "{\n\t\"username\": \"admin\",\n\t\"password\": \"admin123\"\n}"
 						},
 						"url": {
-							"raw": "http://localhost:8080/api/token/",
-							"protocol": "http",
+							"raw": "{{url}}/api/token/",
 							"host": [
-								"localhost"
+								"{{url}}"
 							],
-							"port": "8080",
 							"path": [
 								"api",
 								"token",
@@ -131,12 +127,10 @@
 							"raw": "{\n\t\"username\": \"admin\",\n\t\"password\": \"admin123\"\n}"
 						},
 						"url": {
-							"raw": "http://localhost:8080/api/token/",
-							"protocol": "http",
+							"raw": "{{url}}/api/token/",
 							"host": [
-								"localhost"
+								"{{url}}"
 							],
-							"port": "8080",
 							"path": [
 								"api",
 								"token",
@@ -173,12 +167,10 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "http://localhost:8080/api/company/",
-							"protocol": "http",
+							"raw": "{{url}}/api/company/",
 							"host": [
-								"localhost"
+								"{{url}}"
 							],
-							"port": "8080",
 							"path": [
 								"api",
 								"company",
@@ -210,12 +202,10 @@
 							"raw": "{\n    \"name\": \"MyCompany\",\n    \"description\": \"MyCompanyDescription\"\n}"
 						},
 						"url": {
-							"raw": "http://localhost:8080/api/company/",
-							"protocol": "http",
+							"raw": "{{url}}/api/company/",
 							"host": [
-								"localhost"
+								"{{url}}"
 							],
-							"port": "8080",
 							"path": [
 								"api",
 								"company",
@@ -247,12 +237,10 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "http://localhost:8080/api/company/1/",
-							"protocol": "http",
+							"raw": "{{url}}/api/company/1/",
 							"host": [
-								"localhost"
+								"{{url}}"
 							],
-							"port": "8080",
 							"path": [
 								"api",
 								"company",
@@ -285,12 +273,10 @@
 							"raw": "{\n    \"id\": 1,\n    \"name\": \"CARMAKER_UPDATED\",\n    \"description\": \"CARMAKER DESCRIPTION UPDATED\"\n}"
 						},
 						"url": {
-							"raw": "http://localhost:8080/api/company/1/",
-							"protocol": "http",
+							"raw": "{{url}}/api/company/1/",
 							"host": [
-								"localhost"
+								"{{url}}"
 							],
-							"port": "8080",
 							"path": [
 								"api",
 								"company",
@@ -323,12 +309,10 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "http://localhost:8080/api/company/1/",
-							"protocol": "http",
+							"raw": "{{url}}/api/company/1/",
 							"host": [
-								"localhost"
+								"{{url}}"
 							],
-							"port": "8080",
 							"path": [
 								"api",
 								"company",
@@ -366,12 +350,10 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "http://localhost:8080/api/user/",
-							"protocol": "http",
+							"raw": "{{url}}/api/user/",
 							"host": [
-								"localhost"
+								"{{url}}"
 							],
-							"port": "8080",
 							"path": [
 								"api",
 								"user",
@@ -403,12 +385,10 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "http://localhost:8080/api/user/{{user_id }}/",
-							"protocol": "http",
+							"raw": "{{url}}/api/user/{{user_id }}/",
 							"host": [
-								"localhost"
+								"{{url}}"
 							],
-							"port": "8080",
 							"path": [
 								"api",
 								"user",
@@ -454,12 +434,10 @@
 							"raw": "{\n    \"username\": \"sergi\",\n    \"password\": \"sergi\",\n    \"role\": \"administrator\",\n    \"company\": 1\n}"
 						},
 						"url": {
-							"raw": "http://localhost:8080/api/user/",
-							"protocol": "http",
+							"raw": "{{url}}/api/user/",
 							"host": [
-								"localhost"
+								"{{url}}"
 							],
-							"port": "8080",
 							"path": [
 								"api",
 								"user",
@@ -491,12 +469,10 @@
 							"raw": "{\n    \"username\": \"sergi_updated\",\n    \"password\": \"sergi_updated\",\n    \"role\": \"administrator\",\n    \"company\": 1\n}"
 						},
 						"url": {
-							"raw": "http://localhost:8080/api/user/{{user_id}}/",
-							"protocol": "http",
+							"raw": "{{url}}/api/user/{{user_id}}/",
 							"host": [
-								"localhost"
+								"{{url}}"
 							],
-							"port": "8080",
 							"path": [
 								"api",
 								"user",
@@ -529,12 +505,10 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "http://localhost:8080/api/user/{{user_id}}/",
-							"protocol": "http",
+							"raw": "{{url}}/api/user/{{user_id}}/",
 							"host": [
-								"localhost"
+								"{{url}}"
 							],
-							"port": "8080",
 							"path": [
 								"api",
 								"user",
@@ -567,12 +541,10 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "http://localhost:8080/api/user/whoami/",
-							"protocol": "http",
+							"raw": "{{url}}/api/user/whoami/",
 							"host": [
-								"localhost"
+								"{{url}}"
 							],
-							"port": "8080",
 							"path": [
 								"api",
 								"user",
@@ -610,12 +582,10 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "http://localhost:8080/api/swarm/",
-							"protocol": "http",
+							"raw": "{{url}}/api/swarm/",
 							"host": [
-								"localhost"
+								"{{url}}"
 							],
-							"port": "8080",
 							"path": [
 								"api",
 								"swarm",
@@ -647,12 +617,10 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "http://localhost:8080/api/swarm/1/",
-							"protocol": "http",
+							"raw": "{{url}}/api/swarm/1/",
 							"host": [
-								"localhost"
+								"{{url}}"
 							],
-							"port": "8080",
 							"path": [
 								"api",
 								"swarm",
@@ -685,12 +653,10 @@
 							"raw": "{\n    \"name\": \"test group\",\n    \"description\": \"test group description\"\n}"
 						},
 						"url": {
-							"raw": "http://localhost:8080/api/swarm/",
-							"protocol": "http",
+							"raw": "{{url}}/api/swarm/",
 							"host": [
-								"localhost"
+								"{{url}}"
 							],
-							"port": "8080",
 							"path": [
 								"api",
 								"swarm",
@@ -722,12 +688,10 @@
 							"raw": "{\n    \"user_set\": [3, 4]\n}"
 						},
 						"url": {
-							"raw": "http://localhost:8080/api/swarm/2/user/",
-							"protocol": "http",
+							"raw": "{{url}}/api/swarm/2/user/",
 							"host": [
-								"localhost"
+								"{{url}}"
 							],
-							"port": "8080",
 							"path": [
 								"api",
 								"swarm",
@@ -761,12 +725,10 @@
 							"raw": "{\n    \"name\": \"test group\",\n    \"description\": \"test group description\",\n    \"sensor_list_detail\": [ 1, 2]\n}"
 						},
 						"url": {
-							"raw": "http://localhost:8080/api/sensorswarm/8/",
-							"protocol": "http",
+							"raw": "{{url}}/api/sensorswarm/8/",
 							"host": [
-								"localhost"
+								"{{url}}"
 							],
-							"port": "8080",
 							"path": [
 								"api",
 								"sensorswarm",
@@ -804,12 +766,10 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "http://localhost:8080/api/sensor/",
-							"protocol": "http",
+							"raw": "{{url}}/api/sensor/",
 							"host": [
-								"localhost"
+								"{{url}}"
 							],
-							"port": "8080",
 							"path": [
 								"api",
 								"sensor",
@@ -838,15 +798,13 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"name\": \"CMF023\",\n    \"description\": \"Development Dept. Sensor1\",\n    \"latitude\": \"43.20\",\n    \"longitude\": \"2.10\",\n    \"swarm\": null\n}"
+							"raw": "{\n    \"name\": \"CMF023\",\n    \"description\": \"Development Dept. Sensor1\",\n    \"latitude\": \"43.20\",\n    \"longitude\": \"2.10\",\n    \"swarm\": 2\n}"
 						},
 						"url": {
-							"raw": "http://localhost:8080/api/sensor/12/",
-							"protocol": "http",
+							"raw": "{{url}}/api/sensor/12/",
 							"host": [
-								"localhost"
+								"{{url}}"
 							],
-							"port": "8080",
 							"path": [
 								"api",
 								"sensor",
@@ -879,12 +837,10 @@
 							"raw": "{\n    \"name\": \"CMF023\",\n    \"description\": \"Development Dept. Sensor1\",\n    \"latitude\": \"43.20\",\n    \"longitude\": \"2.10\",\n    \"swarm\": null\n}"
 						},
 						"url": {
-							"raw": "http://localhost:8080/api/sensor/12/",
-							"protocol": "http",
+							"raw": "{{url}}/api/sensor/12/",
 							"host": [
-								"localhost"
+								"{{url}}"
 							],
-							"port": "8080",
 							"path": [
 								"api",
 								"sensor",
@@ -917,12 +873,10 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "http://localhost:8080/api/sensor/12/",
-							"protocol": "http",
+							"raw": "{{url}}/api/sensor/12/",
 							"host": [
-								"localhost"
+								"{{url}}"
 							],
-							"port": "8080",
 							"path": [
 								"api",
 								"sensor",
@@ -955,12 +909,10 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "http://localhost:8080/api/sensor/1/detection/",
-							"protocol": "http",
+							"raw": "{{url}}/api/sensor/1/detection/",
 							"host": [
-								"localhost"
+								"{{url}}"
 							],
-							"port": "8080",
 							"path": [
 								"api",
 								"sensor",
@@ -994,12 +946,10 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "http://localhost:8080/api/sensor/1/status/",
-							"protocol": "http",
+							"raw": "{{url}}/api/sensor/1/status/",
 							"host": [
-								"localhost"
+								"{{url}}"
 							],
-							"port": "8080",
 							"path": [
 								"api",
 								"sensor",
@@ -1038,12 +988,10 @@
 							"raw": "{   \n\t\"topic\": \"dronetrap/CMF023/discovery\",\n\t\"payload\" : {\n        \"description\": \"Development Dept. Sensor1\",\n        \"latitude\": \"43.20\",\n        \"longitude\": \"2.10\"\n    }\n}             "
 						},
 						"url": {
-							"raw": "http://localhost:8080/api/test/mqtt/",
-							"protocol": "http",
+							"raw": "{{url}}/api/test/mqtt/",
 							"host": [
-								"localhost"
+								"{{url}}"
 							],
-							"port": "8080",
 							"path": [
 								"api",
 								"test",
@@ -1076,12 +1024,10 @@
 							"raw": "{   \n\t\"topic\": \"sensor/CMF023/start_discovery\",\n\t\"payload\" : {\n        \"description\": \"Development Dept. Sensor1\",\n        \"latitude\": \"43.20\",\n        \"longitude\": \"2.10\"\n    }\n}             "
 						},
 						"url": {
-							"raw": "http://localhost:8080/api/test/mqtt/",
-							"protocol": "http",
+							"raw": "{{url}}/api/test/mqtt/",
 							"host": [
-								"localhost"
+								"{{url}}"
 							],
-							"port": "8080",
 							"path": [
 								"api",
 								"test",
@@ -1119,12 +1065,10 @@
 							"raw": "{   \n\t\"topic\": \"sec2sky/register\",\n\t\"payload\" : {\n        \"name\": \"CMF023\",\n        \"description\": \"Development Dept. Sensor1\",\n        \"latitude\": \"43.20\",\n        \"longitude\": \"2.10\"\n    }\n}             "
 						},
 						"url": {
-							"raw": "http://localhost:8080/api/test/mqtt/",
-							"protocol": "http",
+							"raw": "{{url}}/api/test/mqtt/",
 							"host": [
-								"localhost"
+								"{{url}}"
 							],
-							"port": "8080",
 							"path": [
 								"api",
 								"test",
@@ -1157,12 +1101,10 @@
 							"raw": "{   \n\t\"topic\": \"sec2sky/detection\",\n\t\"payload\" : {\n\t\t\"sensor\": 1,\n\t\t\"description\": \"mydescription\",\n\t\t\"thread_id\": 1,\n\t\t\"home_latitude\" : 43.2,\n\t\t\"home_longitude\" : 2.2,\n\t\t\"latitude\" : 43.2,\n\t\t\"altitude\" : 256,\n\t\t\"longitude\" : 2.1,\n\t\t\"rssi\" : 43.2,\n\t\t\"signal_type\" : \"MySignalType\"\n    }\n}             "
 						},
 						"url": {
-							"raw": "http://localhost:8080/api/test/mqtt/",
-							"protocol": "http",
+							"raw": "{{url}}/api/test/mqtt/",
 							"host": [
-								"localhost"
+								"{{url}}"
 							],
-							"port": "8080",
 							"path": [
 								"api",
 								"test",
@@ -1195,12 +1137,10 @@
 							"raw": "{   \n\t\"topic\": \"sec2sky/status\",\n\t\"payload\" : {\n\t\t\"sensor\" : 1,\n        \"code\": \"123\",\n        \"description\": \"sensor registration\"\n    }\n}             "
 						},
 						"url": {
-							"raw": "http://localhost:8080/api/test/mqtt/",
-							"protocol": "http",
+							"raw": "{{url}}/api/test/mqtt/",
 							"host": [
-								"localhost"
+								"{{url}}"
 							],
-							"port": "8080",
 							"path": [
 								"api",
 								"test",
