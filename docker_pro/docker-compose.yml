@@ -43,7 +43,7 @@ services:
   sec2sky_db:
     image: mysql:5
     volumes:
-      - ./docker_pro/persistance:/var/lib/mysql
+      - ./persistance:/var/lib/mysql
     environment:
       MYSQL_DATABASE: sec2sky
       MYSQL_ROOT_PASSWORD: s3c2sky

@@ -4,7 +4,7 @@ MAINTAINER Sergi Torrellas
 # Add folder
 RUN apk add --no-cache --update python3 bash build-base mosquitto mariadb-dev python3-dev
 ADD . /repo/
-ADD ./docker_prod/localsettings.py /repo/sec2sky/
+ADD ./docker_pro/localsettings.py /repo/sec2sky/
 
 # Configure Node
 #WORKDIR /repo/react-ui

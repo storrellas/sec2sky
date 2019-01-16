@@ -2,6 +2,7 @@
 *migrations*
 *venv*
 sec2sky/localsettings.py
+docker_pro/persistance/*
 db.sqlite3
 .env
 credentials.txt
