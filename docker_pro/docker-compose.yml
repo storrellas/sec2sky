@@ -57,7 +57,3 @@ services:
           - sec2sky_db:db
       ports:
           - $PHPMYADMIN_PORT:80
-      environment:
-          MYSQL_USER: tram
-          MYSQL_PASSWORD: tram2018
-          MYSQL_ROOT_PASSWORD: root
