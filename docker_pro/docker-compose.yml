@@ -52,8 +52,18 @@ services:
     ports:
         - 3306:3306
   phpmyadmin:
-      image: phpmyadmin/phpmyadmin
-      links:
-          - sec2sky_db:db
-      ports:
-          - $PHPMYADMIN_PORT:80
+    image: phpmyadmin/phpmyadmin
+    links:
+        - sec2sky_db:db
+    ports:
+        - $PHPMYADMIN_PORT:80
+  nginx:
+    image: nginx:1.15
+    links:
+        - sec2sky_api:sec2sky_api
+        - phpmyadmin:phpmyadmin
+    volumes:
+        - ./nginx.conf:/etc/nginx/nginx.conf
+        - ./proxy_params:/etc/nginx/proxy_params
+    ports:
+        - 8080:8080
