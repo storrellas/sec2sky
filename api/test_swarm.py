@@ -88,8 +88,7 @@ class TestCase(APITestCase):
         self.assertEqual(len(response.data), 1)
 
         # Set token header
-        token = Token.objects.get(user__username='admin')
-        self.client.credentials(HTTP_AUTHORIZATION='Token ' + token.key)
+        self.set_jwt(username='admin', password='admin')
 
         # Delete Swarm
         url = reverse('swarm-detail', args=[id])
@@ -114,6 +113,9 @@ class TestCase(APITestCase):
         response = self.client.get(url, {}, format='json')
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(len(response.data), 0)
+
+        # Get token header
+        self.set_jwt(username='admin', password='admin')
 
         # Add user to swarm
         data = {

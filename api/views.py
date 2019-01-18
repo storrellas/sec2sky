@@ -98,7 +98,7 @@ class SwarmViewSet(viewsets.ModelViewSet):
         else:
             return self.model.objects.filter(user_set=self.request.user)
 
-    @action(detail=True, methods=['post'], permission_classes=[IsAuthenticated])
+    @action(detail=True, methods=['post'], permission_classes=[IsAdminUser])
     def user(self, request, pk=None):
 
         # TODO: Check whether all users belong to same company
