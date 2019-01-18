@@ -79,8 +79,7 @@ class TestCase(APITestCase):
         self.assertEqual(len(response.data), 2)
 
         # Set token header
-        token = Token.objects.get(user__username='user')
-        self.client.credentials(HTTP_AUTHORIZATION='Token ' + token.key)
+        self.set_jwt(username='user', password='user')
 
         # Swarm List - user
         url = reverse('swarm-list')
