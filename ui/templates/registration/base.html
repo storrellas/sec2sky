@@ -1,0 +1,84 @@
+{% load i18n %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <link rel="icon" href="{% static 'img/favicon.jpg' %}">
+    <meta charset="utf-8">
+    <title>Dronetrap Login Page</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+    <!-- Bootstrap + FontAwesome -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+      crossorigin="anonymous">
+    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"
+      integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+
+    <!-- <link href="{% static "css/bootstrap.min.css" %}" rel="stylesheet"> -->
+    <link href="{% static 'css/login.css' %}" rel="stylesheet">
+    <style type="text/css">
+      body {
+        padding-top: 60px;
+        padding-bottom: 40px;
+      }
+    </style>
+  </head>
+
+  <body id="LoginForm">
+    <div class="container">
+
+      <div class="login-form">
+        <div class="main-div LoginForm">
+          <div class="panel">
+              <a class="s2s-logo">
+                  <img src="{% static 'img/logo.jpg' %}"></img>
+              </a>
+              <h2>DRONETRAP</h2>
+              <p></p>
+          </div>
+
+              <div class="form-group">
+                  <input type="text"  autofocus maxlength="254" required class="form-control" id="id_username" name="username">
+              </div>
+
+              <div class="form-group">
+                  <input type="password" class="form-control" required id="id_password" name="password">
+              </div>
+
+              <div class="buttons">
+                  <button type="submit" id="submit" class="btn btn-primary">{% trans 'Log in' %}</button>
+              </div>
+              {% if form.errors %}
+                  <div class="alert alert-danger alert-message">
+                      <p><strong>{% trans "ERROR " %}</strong> {% trans "Please enter a correct username and password. Note that both fields are case-sensitive." %}</p>
+                  </div>
+              {% endif %}
+          </div>
+      </div>
+
+    <footer>
+
+    </footer>
+    </div> <!-- /container -->
+
+    <!-- JQuery/Bootstrap/Popper-->
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+      crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+      crossorigin="anonymous"></script>
+
+
+    <script type="text/javascript">
+        // $(function(){
+        //     $(".alert-message").alert();
+        //     $('#mainForm').submit(function(){
+        //         $('#submit').button('loading');
+        //     })
+        // });
+        // document.forms[1].elements[2].focus();
+    </script>
+
+  </body>
+</html>

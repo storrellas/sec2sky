@@ -1,0 +1,49 @@
+{% extends 'registration/base.html' %}
+{% load i18n %}
+{% load static %}
+
+{% block container %}
+
+
+
+<div class="login-form">
+  <div class="main-div LoginForm">
+    <div class="panel">
+        <a class="s2s-logo">
+            <img src="{% static 'img/logo.jpg' %}"></img>
+        </a>
+        <h2>DRONETRAP</h2>
+        <p></p>
+    </div>
+
+        <div class="form-group">
+            <input type="text"  autofocus maxlength="254" required class="form-control" id="id_username" name="username">
+        </div>
+
+        <div class="form-group">
+            <input type="password" class="form-control" required id="id_password" name="password">
+        </div>
+
+        <div class="buttons">
+            <button type="submit" id="submit" class="btn btn-primary">{% trans 'Log in' %}</button>
+        </div>
+        {% if form.errors %}
+            <div class="alert alert-danger alert-message">
+                <p><strong>{% trans "ERROR " %}</strong> {% trans "Please enter a correct username and password. Note that both fields are case-sensitive." %}</p>
+            </div>
+        {% endif %}
+    <script type="text/javascript">
+        // $(function(){
+        //     $(".alert-message").alert();
+        //     $('#mainForm').submit(function(){
+        //         $('#submit').button('loading');
+        //     })
+        // });
+        // document.forms[1].elements[2].focus();
+    </script>
+    </div>
+</div>
+
+
+
+{% endblock %}

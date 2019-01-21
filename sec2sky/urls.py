@@ -24,5 +24,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('docs/', schema_view),
     path('api/', include('api.urls')),
+    path('ui/', include('ui.urls')),
 ]
 urlpatterns += staticfiles_urlpatterns()
