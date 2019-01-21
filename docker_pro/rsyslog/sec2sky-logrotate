@@ -1,0 +1,7 @@
+/var/log/sec2sky/sec2sky.log {
+  rotate 12
+  daily
+  compress
+  missingok
+  notifempty
+}
