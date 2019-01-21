@@ -3,5 +3,8 @@
 2. Test your configuration
 sudo logrotate /etc/logrotate.conf --debug
 
-3. Launch a daily cron
+3. Rotate should occur as rotation is launched daily
+
+# Optional - Force cron to launch it manually
+3.a Launch a daily cron
 14 * * * * /usr/sbin/logrotate /etc/logrotate.conf --state /home/sammy/logrotate-state
