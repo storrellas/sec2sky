@@ -1,4 +1,4 @@
-body#LoginForm{ 
+body#LoginForm{
   width: 100wh;
   height: 90vh;
   color: #fff;
@@ -71,3 +71,5 @@ body#LoginForm{
 }
 .back { text-align: left; margin-top:10px;}
 .back a {color: #444444; font-size: 13px;text-decoration: none;}
+
+.hide {display:'none'}
