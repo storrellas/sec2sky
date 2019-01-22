@@ -51,7 +51,7 @@
 
 
               <div class="buttons">
-                  <button id="login-btn" class="btn btn-primary">{% trans 'Log in' %}</button>
+                  <button class="btn btn-primary login-btn">{% trans 'Log in' %}</button>
               </div>
 
 
@@ -77,30 +77,32 @@
     <script type="text/javascript">
 
         function login(){
-
+          // Remove Errors
+          $(".wrong-credentials").addClass('d-none')
+          // Check for credentials
+          $.ajax({
+            type: "POST",
+            url: "/api/token/",
+            data: JSON.stringify({ username: $("#username").val(),
+                                   password: $("#password").val()}),
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function(data){
+              CookieMgr.set('jwt_token',data.access);
+              CookieMgr.set('jwt_refresh',data.refresh);
+              window.location = '/ui/console';
+            },
+            error: () => $(".wrong-credentials").removeClass('d-none'),
+            failure: () => $(".wrong-credentials").removeClass('d-none')
+          });
         }
 
+        
         $('document').ready(function(){
-
-          $('#login-btn').click(function(){
-            // Remove Errors
-            $(".wrong-credentials").addClass('d-none')
-            // Check for credentials
-            $.ajax({
-              type: "POST",
-              url: "/api/token/",
-              data: JSON.stringify({ username: $("#username").val(),
-                                     password: $("#password").val()}),
-              contentType: "application/json; charset=utf-8",
-              dataType: "json",
-              success: function(data){
-                CookieMgr.set('jwt_token',data.access);
-                CookieMgr.set('jwt_refresh',data.refresh);
-                window.location = '/ui/console';
-              },
-              error: () => $(".wrong-credentials").removeClass('d-none'),
-              failure: () => $(".wrong-credentials").removeClass('d-none')
-            });
+          $('.login-btn').click(() => login());
+          $('input').keypress(function(event){
+              var keycode = (event.keyCode ? event.keyCode : event.which);
+              if(keycode == '13') login();
           });
       });
 
