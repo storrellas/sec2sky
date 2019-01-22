@@ -40,6 +40,9 @@ class Sec2SkyTokenObtainPairView(TokenObtainPairView):
         if request.META['HTTP_X_FORWARDED_FOR'] is None:
             remote_addr = request.META['REMOTE_ADDR']
         username = request.data['username']
+        remote_addr = remote_addr.split(',')[-1]
+        remote_addr = remote_addr.strip()
+        logger.info("Token requested for '" + username + "' from '" + remote_addr + "'")
         session_user = SessionUser.objects.create(remote_addr=remote_addr,
                                                   username=username)
 
