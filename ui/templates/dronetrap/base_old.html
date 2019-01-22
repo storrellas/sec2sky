@@ -1,0 +1,144 @@
+
+{% load static %}
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <title>{% block title %}SEC2SKY{% endblock title %}</title>
+        {% block head_favicon %}
+            <link rel="icon" type="image/png"
+                  href="{% static "images/favicon.ico" %}">
+        {% endblock head_favicon %}
+        {% block head_meta %}
+            {% block head_meta_charset %}
+                <meta http-equiv="Content-Type"
+                      content="text/html; charset=utf-8" />
+            {% endblock head_meta_charset %}
+            {% block head_meta_contentlanguage %}
+                <meta http-equiv="Content-Language" value="es-ES" />
+            {% endblock head_meta_contentlanguage %}
+            {% block head_meta_viewport %}
+                <meta name="viewport"
+                      content="width=device-width, initial-scale=1.0">
+            {% endblock head_meta_viewport %}
+        {% endblock head_meta %}
+        {% block head_css %}
+            {% block head_css_site %}
+
+                <!-- Core CSS - Include with every page -->
+                <link href="{% static "css/bootstrap.min.css" %}" rel="stylesheet">
+                <link href="{% static "font-awesome/css/font-awesome.css" %}" rel="stylesheet">
+
+                <!-- Dronetrap CSS - Include with every page -->
+                <!-- <link href="{% static "css/AdminLTE.min.css" %}" rel="stylesheet"> -->
+                <link href="{% static "css/dronetrap.css" %}" rel="stylesheet">
+                {% endblock head_css_site %}
+            {% block head_css_section %}{% endblock head_css_section %}
+            {% block head_css_page %}{% endblock head_css_page %}
+        {% endblock head_css %}
+        <script src="{% static "js/jquery-3.2.1.js" %}"></script>
+        <script src="{% static "js/bootstrap.min.js" %}"></script>
+            <script src="{% static "js/dronetrap.js" %}"></script>
+</head>
+
+<body>
+
+    <div id="wrapper" class="bg-white">
+
+        <nav id="navbar1" class="navbar  bg-primary text-white" role="navigation" style="margin-bottom: 0; border-radius:0">
+            <div class="navbar-header">
+                <a class="navbar-brand2 brand" href="/"><img src="{% static "images/corporative/navbar_logo.png" %}"></a>
+            </div>
+            <!-- /.navbar-header -->
+
+              <a class="navbar-text navbar-infobox">
+                    <span id="alert-number" class="d-none circled">0</span>
+                  <span id="alert-label" class="label label-success">NO ALERTS</span>
+              </a>
+
+            <ul class="nav navbar-top-links navbar-right">
+                <li class="dropdown">
+                    <a href="/alerts">
+                        <i class="fa fa-bell fa-fw"></i> <strong>ALERTS</strong>
+                    </a>
+                </li>
+
+                <li >
+                    <a  href="/settings">
+                        <i class="fa fa-user fa-fw"></i>  <strong>SETTINGS</strong>
+                    </a>
+                </li>
+
+                <!-- /.dropdown -->
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                        <i class="fa fa-user fa-fw"></i>  <strong>{{ user.get_username }}</strong>
+                    </a>
+                    <ul class="dropdown-menu dropdown-user">
+                        <li><a href="#"><i class="fa fa-user fa-fw"></i> Profile</a>
+                        </li>
+                        <li><a href=" /config"><i class="fa fa-gear fa-fw"></i> Config general</a>
+                        </li>
+                        <li><a href="/config/devices"><i class="fa fa-gear fa-fw"></i> Config devices</a>
+                        </li>
+                        <li class="divider"></li>
+                        <li><a href="/accounts/logout"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+                        </li>
+                    </ul>
+                    <!-- /.dropdown-user -->
+                </li>
+                <!-- /.dropdown -->
+            </ul>
+            <!-- /.navbar-top-links -->
+        </nav>
+        <!-- /.navbar-static-top -->
+
+
+<!--END OF NAVIGATION BLOCK -->
+
+<!-- START OF PAGE CONTENT BLOCK -->
+
+        {% block content %}
+            OPS! error en integración de plantillas con Base...
+        {% endblock content %}
+    </div>
+    <!-- /#wrapper -->
+    <!-- END OF PAGE CONTENT BLOCK -->
+
+
+    {# Set of blocks that can be used to display JavaScript files #}
+    {% block footer_javascript %}
+        {% block footer_javascript_site %}
+    <!-- Core Scripts - Include with every page -->
+    <script src="{% static "js/plugins/metisMenu/jquery.metisMenu.js" %}"></script>
+
+    <!-- Viewer scripts -->
+
+    <!-- dRONETRAP Scripts - Include with every page -->
+
+    <script src="{% static "js/popup.js" %}"></script>
+    <!-- <script src="{% static "js/adminlte.min.js" %}"></script> -->
+    <script src="{% static "js/plugins/Chart.js" %}"></script>
+    <script var isoLang = 'es';></script>
+
+
+
+              <script>
+            $(document).ready(function() {
+                $('[id^=detail-]').hide();
+                $('.toggle').click(function() {
+                    $input = $( this );
+                    $target = $('#'+$input.attr('data-toggle'));
+                    $target.slideToggle();
+                    });
+                });
+            </script>
+            {% endblock footer_javascript_site %}
+        {% block footer_javascript_section %}{% endblock footer_javascript_section %}
+        {% block footer_javascript_page %}{% endblock footer_javascript_page %}
+    {% endblock footer_javascript %}
+
+</body>
+
+</html>
