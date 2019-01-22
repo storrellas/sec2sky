@@ -146,6 +146,27 @@
       crossorigin="anonymous"></script>
     <script src="{% static 'js/cookie_mgr.js' %}"></script>
 
+    <script type="text/javascript">
+      const cookie_mgr = new CookieMgr()
+      $(document).ready(function () {
+
+        // Check for credentials
+        const token_refresh = cookie_mgr.get('jwt_refresh');
+        $.ajax({
+          type: "POST",
+          url: "/api/token/refresh/",
+          data: JSON.stringify({ refresh: token_refresh}),
+          contentType: "application/json; charset=utf-8",
+          dataType: "json",
+          success: function(data){
+            console.log(data)
+          },
+          error: () => window.location = '/ui/',
+          failure: () => window.location = '/ui/'
+        })
+      });
+    </script>
+
     {% block footer_page %}
     {% endblock footer_page %}
 

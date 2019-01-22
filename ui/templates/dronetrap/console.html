@@ -43,6 +43,7 @@
 
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAXTqRt3ofrUr3avtW61II41MM71q77OEo" type="text/javascript"></script>
 <script type="text/javascript">
+
   function InitMap( _center,_zoom,_type){
     map = new google.maps.Map(document.getElementById('map_canvas'), {
       zoom: _zoom,
@@ -62,6 +63,7 @@
   }
 
   $(document).ready(function () {
+
 
     $('#map_trail').css({height: $(window).innerHeight()-$(".navbar").innerHeight()});
     $(window).resize(function(){
