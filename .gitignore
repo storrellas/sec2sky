@@ -7,3 +7,4 @@ db.sqlite3
 .env
 credentials.txt
 node_modules
+package-lock.json
