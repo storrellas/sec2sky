@@ -6,3 +6,4 @@ docker_pro/persistance/*
 db.sqlite3
 .env
 credentials.txt
+node_modules
