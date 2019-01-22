@@ -85,7 +85,7 @@
                       <li><a href="/config/devices"><i class="fa fa-gear fa-fw"></i> Config devices</a>
                       </li>
                       <li class="divider"></li>
-                      <li><a href="/accounts/logout"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+                      <li><a class='logout-btn' href="#"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
                       </li>
                   </ul>
               </li>
@@ -157,12 +157,18 @@
           data: JSON.stringify({ refresh: token_refresh}),
           contentType: "application/json; charset=utf-8",
           dataType: "json",
-          success: function(data){
-            console.log(data)
-          },
+          success: function(data){},
           error: () => window.location = '/ui/',
           failure: () => window.location = '/ui/'
         })
+
+
+        $('.logout-btn').click(function(){
+          CookieMgr.erase('jwt_token');
+          CookieMgr.erase('jwt_refresh');
+          window.location = '/ui/';
+        });
+
       });
     </script>
 
