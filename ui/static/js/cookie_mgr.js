@@ -23,7 +23,7 @@
 
 class CookieMgr{
 
-  set(name,value,days) {
+  static set(name,value,days) {
       var expires = "";
       if (days) {
           var date = new Date();
@@ -32,7 +32,7 @@ class CookieMgr{
       }
       document.cookie = name + "=" + (value || "")  + expires + "; path=/";
   }
-  get(name) {
+  static get(name) {
       var nameEQ = name + "=";
       var ca = document.cookie.split(';');
       for(var i=0;i < ca.length;i++) {
@@ -42,7 +42,7 @@ class CookieMgr{
       }
       return null;
   }
-  erase(name) {
+  static erase(name) {
       document.cookie = name+'=; Max-Age=-99999999;';
   }
 

@@ -75,7 +75,6 @@
     <script src="{% static 'js/cookie_mgr.js' %}"></script>
 
     <script type="text/javascript">
-        const cookie_mgr = new CookieMgr()
 
         function login(){
 
@@ -95,8 +94,8 @@
               contentType: "application/json; charset=utf-8",
               dataType: "json",
               success: function(data){
-                cookie_mgr.set('jwt_token',data.access);
-                cookie_mgr.set('jwt_refresh',data.refresh);
+                CookieMgr.set('jwt_token',data.access);
+                CookieMgr.set('jwt_refresh',data.refresh);
               },
               error: () => $(".wrong-credentials").removeClass('d-none'),
               failure: () => $(".wrong-credentials").removeClass('d-none')
