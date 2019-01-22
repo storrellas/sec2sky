@@ -18,6 +18,7 @@ from rest_framework import mixins
 from rest_framework.exceptions import APIException
 from rest_framework import status
 from rest_framework_simplejwt.authentication import JWTAuthentication
+from rest_framework_simplejwt.views import TokenObtainPairView
 
 # MQTT
 from paho.mqtt import publish
@@ -28,6 +29,17 @@ from .models import *
 from sec2sky import utils
 
 logger = utils.get_logger()
+
+class Sec2SkyTokenObtainPairView(TokenObtainPairView):
+    def post(self, request, format=None):
+        response = super().post(request, format)
+
+
+        print("Getting token")
+        print(request.META)
+
+        # Return generic response
+        return response
 
 class CompanyViewSet(viewsets.ModelViewSet):
     authentication_classes = (JWTAuthentication,)
