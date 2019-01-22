@@ -40,6 +40,21 @@ class User(AbstractUser):
         verbose_name = 'User'
         verbose_name_plural = 'Users'
 
+
+class SessionUser(models.Model):
+    remote_addr = models.CharField(max_length=20, null=True)
+    username = models.CharField(max_length=20, null=True)
+    success = models.BooleanField(default=False)
+    created_at = models.DateTimeField(auto_now_add=True)
+    user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
+
+    def __str__(self):
+        return self.username
+
+    class Meta:
+        verbose_name = 'SessionUser'
+        verbose_name_plural = 'SessionUsers'
+
 class Swarm(models.Model):
     name = models.CharField(max_length=500, null=True)
     description = models.CharField(max_length=500, null=True)

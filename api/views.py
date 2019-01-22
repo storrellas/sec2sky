@@ -4,6 +4,7 @@ import json
 # Django imports
 from django.shortcuts import render
 from django.conf import settings
+from django.core.exceptions import ObjectDoesNotExist
 
 # REST framework
 from rest_framework import viewsets
@@ -19,7 +20,7 @@ from rest_framework.exceptions import APIException
 from rest_framework import status
 from rest_framework_simplejwt.authentication import JWTAuthentication
 from rest_framework_simplejwt.views import TokenObtainPairView
-
+from rest_framework_simplejwt.exceptions import InvalidToken, TokenError
 # MQTT
 from paho.mqtt import publish
 
@@ -31,14 +32,32 @@ from sec2sky import utils
 logger = utils.get_logger()
 
 class Sec2SkyTokenObtainPairView(TokenObtainPairView):
+
     def post(self, request, format=None):
-        response = super().post(request, format)
 
+        # Generate session user
+        remote_addr = request.META['HTTP_X_FORWARDED_FOR']
+        if request.META['HTTP_X_FORWARDED_FOR'] is None:
+            remote_addr = request.META['REMOTE_ADDR']
+        username = request.data['username']
+        session_user = SessionUser.objects.create(remote_addr=remote_addr,
+                                                  username=username)
 
-        print("Getting token")
-        print(request.META)
+        # Store user if any
+        try:
+            user = User.objects.get(username=username)
+            session_user.user = user
+            session_user.save()
+        except ObjectDoesNotExist as e:
+            logger.error(username + ' does not exist')
 
-        # Return generic response
+        # Launch validation
+        try:
+            response = super().post(request, format)
+            session_user.success = True
+            session_user.save()
+        except InvalidToken as e:
+            raise InvalidToken(e)
         return response
 
 class CompanyViewSet(viewsets.ModelViewSet):
