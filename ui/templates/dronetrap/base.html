@@ -14,6 +14,14 @@
       integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
 
     <style type="text/css">
+      .sidebar a{
+        color: lightgray;
+      }
+      .sidebar a:hover{
+        color: white;
+      }
+
+    /*
       html, body, .container-fluid, .row {
           height: 100%;
       }
@@ -21,12 +29,7 @@
       .sidebar {
         background-color: #CCCCCC;
       }
-      .sidebar a{
-        color: lightgray;
-      }
-      .sidebar a:hover{
-        color: white;
-      }
+
       .navbar {
         height: 70px;
       }
@@ -42,6 +45,7 @@
           background-color: #CCCCCC;
         }
       }
+      /**/
     </style>
 
     {% block header_page %}
@@ -51,44 +55,46 @@
 
 <body>
 
-  <div>
-    <nav class="navbar navbar-expand-md navbar-dark bg-dark">
-        <div class="navbar-collapse collapse w-100 order-1 order-md-0 dual-collapse2">
-          <a class="brand" href="/"><img src="{% static 'img/logo_white.png' %}" height=50px></a>
-        </div>
-        <div class="mx-auto order-0">
-          <span class="d-none circled">0</span>
-          <span class="badge badge-success" style="padding: 1em">NO ALERTS</span>
-        </div>
-        <div class="navbar-collapse collapse w-100 order-3 dual-collapse2">
-            <ul class="navbar-nav ml-auto">
-                <li class="nav-item">
-                    <a class="nav-link" href="/setings/"><i class="fa fa-bell fa-fw"></i>  <strong>ALERTS</strong></a>
-                </li>
+  <nav class="navbar navbar-expand-md navbar-dark bg-dark navbar-fixed-top">
+      <div class="navbar-collapse collapse w-100 order-1 order-md-0 dual-collapse2">
+        <a class="brand" href="/"><img src="{% static 'img/logo_white.png' %}" height=50px></a>
+      </div>
+      <div class="mx-auto order-0">
+        <span class="d-none circled">0</span>
+        <span class="badge badge-success" style="padding: 1em">NO ALERTS</span>
+      </div>
+      <div class="navbar-collapse collapse w-100 order-3 dual-collapse2">
+          <ul class="navbar-nav ml-auto">
+              <li class="nav-item">
+                  <a class="nav-link" href="/setings/"><i class="fa fa-bell fa-fw"></i>  <strong>ALERTS</strong></a>
+              </li>
 
-                <li class="nav-item">
-                    <a class="nav-link" href="/setings/"><i class="fa fa-user fa-fw"></i>  <strong>SETTINGS</strong></a>
-                </li>
+              <li class="nav-item">
+                  <a class="nav-link" href="/setings/"><i class="fa fa-user fa-fw"></i>  <strong>SETTINGS</strong></a>
+              </li>
 
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">
-                        <i class="fa fa-user fa-fw"></i>  <strong>ACCOUNT</strong>
-                    </a>
-                    <ul class="dropdown-menu dropdown-user">
-                        <li><a href="#"><i class="fa fa-user fa-fw"></i> Profile</a>
-                        </li>
-                        <li><a href=" /config"><i class="fa fa-gear fa-fw"></i> Config general</a>
-                        </li>
-                        <li><a href="/config/devices"><i class="fa fa-gear fa-fw"></i> Config devices</a>
-                        </li>
-                        <li class="divider"></li>
-                        <li><a href="/accounts/logout"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
-                        </li>
-                    </ul>
-                </li>
-            </ul>
-        </div>
-    </nav>
+              <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">
+                      <i class="fa fa-user fa-fw"></i>  <strong>ACCOUNT</strong>
+                  </a>
+                  <ul class="dropdown-menu dropdown-user">
+                      <li><a href="#"><i class="fa fa-user fa-fw"></i> Profile</a>
+                      </li>
+                      <li><a href=" /config"><i class="fa fa-gear fa-fw"></i> Config general</a>
+                      </li>
+                      <li><a href="/config/devices"><i class="fa fa-gear fa-fw"></i> Config devices</a>
+                      </li>
+                      <li class="divider"></li>
+                      <li><a href="/accounts/logout"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+                      </li>
+                  </ul>
+              </li>
+          </ul>
+      </div>
+  </nav>
+
+
+
 
     <div class="container-fluid">
       <div class="row">
@@ -129,7 +135,6 @@
 
       </div>
 
-    </div>
   </div>
 
 

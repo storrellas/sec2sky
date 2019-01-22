@@ -27,9 +27,9 @@
                 <div id="el-len5" class="el-len">365,78&nbsp;km</div>
                 <div class="hide-button" title="Hide"><span class="glyphicon glyphicon-chevron-down"></span></div>
             </div>
-            <div id="map_details-but" >
+            <!-- <div id="map_details-but" >
                 <div class="hide-button" title="Show details"><span class="glyphicon glyphicon-chevron-up"></span>Show Details</div>
-            </div>
+            </div> -->
         </div>
     </div>
 
@@ -40,32 +40,6 @@
 {% endblock content %}
 
 {% block footer_page %}
-
-
-
-<script src="{% static 'js/map-tools.js' %}"></script>
-<script>
-$(function(){
-  $('#map_trail').css({height: $(window).innerHeight()-$(".navbar").innerHeight()});
-  $(window).resize(function(){
-    $('#map_trail').css({height: $(window).innerHeight()-$(".navbar").innerHeight()});
-  })
-})
-$(document).ready(function () {
-  initElevationProfile();
-  $(".hide-button").click(function (e) {
-    $('#map_details').toggle();
-    $('#map_details-but').toggle();
-    e.stopPropagation();
-  });
-  $("#map_details-but").on('click', function (e) {
-    $('#map_details').toggle();
-    $('#map_details-but').toggle();
-  });
-});
-</script>
-
-
 
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAXTqRt3ofrUr3avtW61II41MM71q77OEo" type="text/javascript"></script>
 <script type="text/javascript">
@@ -86,7 +60,16 @@ $(document).ready(function () {
     });
       bounds  = new google.maps.LatLngBounds();
   }
-  show_map({lat:41.490427,lng:2.262536},15);
+
+  $(document).ready(function () {
+
+    $('#map_trail').css({height: $(window).innerHeight()-$(".navbar").innerHeight()});
+    $(window).resize(function(){
+      $('#map_trail').css({height: $(window).innerHeight()-$(".navbar").innerHeight()});
+    })
+    show_map({lat:41.490427,lng:2.262536},15);
+
+  })
 </script>
 
 {% endblock footer_page %}
