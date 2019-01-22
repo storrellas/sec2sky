@@ -41,18 +41,7 @@
 
 {% block footer_page %}
 
-<!-- Core Scripts - Include with every page -->
-<script src="{% static 'js/plugins/metisMenu/jquery.metisMenu.js' %}"></script>
 
-<!-- Viewer scripts -->
-
-<!-- dRONETRAP Scripts - Include with every page -->
-
-<script src="/static/js/map-tools.js"></script>
-
-<script src="{% static 'js/dronetrap.js' %}"></script>
-<script src="{% static 'js/popup.js' %}"></script>
-<script src="{% static 'js/plugins/Chart.js' %}"></script>
 
 <script src="{% static 'js/map-tools.js' %}"></script>
 <script>
@@ -79,10 +68,6 @@ $(document).ready(function () {
 
 
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAXTqRt3ofrUr3avtW61II41MM71q77OEo" type="text/javascript"></script>
-<script>
-  show_map({lat:41.490427,lng:2.262536},15);
-</script>
-
 <script type="text/javascript">
   function InitMap( _center,_zoom,_type){
     map = new google.maps.Map(document.getElementById('map_canvas'), {
@@ -92,6 +77,16 @@ $(document).ready(function () {
       disableDefaultUI: true
     });
   }
+  function show_map( _center,_zoom,_type){
+    map = new google.maps.Map(document.getElementById('map_canvas'), {
+      zoom: _zoom,
+      center: _center,
+      mapTypeId: google.maps.MapTypeId.ROADMAP,
+      disableDefaultUI: true
+    });
+      bounds  = new google.maps.LatLngBounds();
+  }
+  show_map({lat:41.490427,lng:2.262536},15);
 </script>
 
 {% endblock footer_page %}
