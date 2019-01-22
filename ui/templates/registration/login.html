@@ -96,6 +96,7 @@
               success: function(data){
                 CookieMgr.set('jwt_token',data.access);
                 CookieMgr.set('jwt_refresh',data.refresh);
+                window.location = '/ui/console';
               },
               error: () => $(".wrong-credentials").removeClass('d-none'),
               failure: () => $(".wrong-credentials").removeClass('d-none')
