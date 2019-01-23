@@ -121,7 +121,6 @@ class Dashboard extends React.Component {
 
     // Retrieve
     console.log( sessionStorage.getItem("webserver") )
-    console.log()
     return (
       <Router>
       <div className={classes.root}>
@@ -194,15 +193,9 @@ class Dashboard extends React.Component {
                 <Link to="/chart/"><ListItemText primary="Charts" /></Link>
               </ListItem>
           </List>
-          {/*
-          <Divider />
-          <List>{secondaryListItems}</List>
-          */}
         </Drawer>
-
             <Route path="/" exact component={MapUnoceros} />
             <Route path="/chart/" component={Charts} />
-
       </div>
       </Router>
     );

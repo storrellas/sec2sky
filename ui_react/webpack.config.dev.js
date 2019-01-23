@@ -31,8 +31,8 @@ module.exports = {
     historyApiFallback: true,
     disableHostCheck: true,
     //hotOnly: true,
-    hot: false,
-    inline: false,
+    //hot: true,
+    //inline: false,
     host: '0.0.0.0',
     watchOptions: {
       poll: 1000
