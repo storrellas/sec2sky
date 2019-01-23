@@ -97,7 +97,7 @@ const styles = theme => ({
   },
 });
 
-class Dashboard extends React.Component {
+class Chart extends React.Component {
   state = {
     open: true,
   };
@@ -185,8 +185,8 @@ class Dashboard extends React.Component {
   }
 }
 
-Dashboard.propTypes = {
+Chart.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(Dashboard);
+export default withStyles(styles)(Chart);
