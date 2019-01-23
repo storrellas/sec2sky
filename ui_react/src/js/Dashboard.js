@@ -99,7 +99,7 @@ const styles = theme => ({
   media: {
     height: 0,
     paddingTop: '100%',
-    marginTop:'30'
+    marginTop:'100'
   }
 });
 
@@ -121,7 +121,7 @@ class Dashboard extends React.Component {
 
     // Retrieve
     console.log( sessionStorage.getItem("webserver") )
-
+    console.log()
     return (
       <Router>
       <div className={classes.root}>
@@ -176,7 +176,7 @@ class Dashboard extends React.Component {
 
           <CardMedia
             className={classes.media}
-            image="https://media.licdn.com/dms/image/C4E0BAQHo7aegLXztDQ/company-logo_200_200/0?e=2159024400&v=beta&t=VJen9iDR1C-NefZN3L_fJHVQrTvK4vlCpKRjiV-gSEw"
+            image="/img/logo_white.png"
             title="Sec2Sky"
           />
 

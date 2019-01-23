@@ -24,6 +24,7 @@ SECRET_KEY = 'no=qwb6@u5af#e$+hkg%dbq%!_(1)gd&@1f(9%+5fyz-ypzo5i'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
+# See http://whitenoise.evans.io/en/stable/django.html#using-whitenoise-in-development
 
 ALLOWED_HOSTS = ['*']
 
@@ -31,6 +32,7 @@ ALLOWED_HOSTS = ['*']
 # Application definition
 
 INSTALLED_APPS = [
+    'whitenoise.runserver_nostatic',  # When comenting out this line comment also DEBUG
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -43,8 +45,11 @@ INSTALLED_APPS = [
     'ui'
 ]
 
+
+
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     #'django.middleware.csrf.CsrfViewMiddleware',
@@ -144,10 +149,11 @@ MQTT = {
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
 
 STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(PROJECT_ROOT, "static")
 STATICFILES_DIRS = [
-    os.path.join(PROJECT_ROOT, "static")
-]
 
+]
+WHITENOISE_INDEX_FILE = True
 
 # Import localsettings if any
 try:

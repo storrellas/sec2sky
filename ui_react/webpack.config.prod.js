@@ -24,5 +24,9 @@ module.exports = {
     publicPath: "/dist/",
     filename: "bundle.js"
   },
+  watchOptions: {
+    poll: 1000,
+    ignored: /node_modules/,
+  },
   plugins: [new webpack.HotModuleReplacementPlugin()]
 };

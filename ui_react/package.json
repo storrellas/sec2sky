@@ -5,9 +5,9 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "ui-dev": "./node_modules/webpack-dev-server/bin/webpack-dev-server.js --mode development --config webpack.config.dev.js --watch",
-    "dev": "./node_modules/webpack/bin/webpack.js --mode production --config webpack.config.prod.js --watch",
-    "build": "./node_modules/webpack/bin/webpack.js --mode production --config webpack.config.prod.js"
+    "ui-dev": "webpack-dev-server --mode development --config webpack.config.dev.js --watch",
+    "dev": "webpack --mode production --config webpack.config.prod.js --watch --info-verbosity verbose",
+    "build": "webpack --mode production --config webpack.config.prod.js"
   },
   "author": "",
   "license": "ISC",
