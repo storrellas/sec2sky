@@ -2,22 +2,33 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { withStyles } from '@material-ui/core/styles';
+import CardMedia from '@material-ui/core/CardMedia';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Drawer from '@material-ui/core/Drawer';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import List from '@material-ui/core/List';
-import MapUnoceros from './MapUnoceros';
 import Typography from '@material-ui/core/Typography';
 import Divider from '@material-ui/core/Divider';
 import IconButton from '@material-ui/core/IconButton';
 import Badge from '@material-ui/core/Badge';
+import MapUnoceros from './MapUnoceros';
 import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 import { mainListItems, secondaryListItems } from './listItems';
-import SimpleLineChart from './SimpleLineChart';
-import SimpleTable from './SimpleTable';
+import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+
+import ListItem from '@material-ui/core/ListItem';
+import ListItemIcon from '@material-ui/core/ListItemIcon';
+import ListItemText from '@material-ui/core/ListItemText';
+import ListSubheader from '@material-ui/core/ListSubheader';
+import DashboardIcon from '@material-ui/icons/Dashboard';
+import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
+import PeopleIcon from '@material-ui/icons/People';
+import BarChartIcon from '@material-ui/icons/BarChart';
+import LayersIcon from '@material-ui/icons/Layers';
+import AssignmentIcon from '@material-ui/icons/Assignment';
 
 const drawerWidth = 240;
 
@@ -64,6 +75,7 @@ const styles = theme => ({
     position: 'relative',
     whiteSpace: 'nowrap',
     width: drawerWidth,
+    backgroundColor: '#C0C0C0',
     transition: theme.transitions.create('width', {
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.enteringScreen,
@@ -80,25 +92,17 @@ const styles = theme => ({
       width: theme.spacing.unit * 9,
     },
   },
-  appBarSpacer: theme.mixins.toolbar,
-  content: {
-    flexGrow: 1,
-    padding: theme.spacing.unit * 3,
-    height: '100vh',
-    overflow: 'auto',
-  },
-  chartContainer: {
-    marginLeft: -22,
-  },
-  tableContainer: {
-    height: 320,
-  },
   h5: {
     marginBottom: theme.spacing.unit * 2,
   },
+  media: {
+    height: 0,
+    paddingTop: '100%',
+    marginTop:'30'
+  }
 });
 
-class Dashboard extends React.Component {
+class DashboardMap extends React.Component {
   state = {
     open: true,
   };
@@ -114,8 +118,13 @@ class Dashboard extends React.Component {
   render() {
     const { classes } = this.props;
 
+    // Retrieve
+    console.log( sessionStorage.getItem("webserver") )
+
     return (
+      <Router>
       <div className={classes.root}>
+
         <CssBaseline />
         <AppBar
           position="absolute"
@@ -149,6 +158,7 @@ class Dashboard extends React.Component {
             </IconButton>
           </Toolbar>
         </AppBar>
+
         <Drawer
           variant="permanent"
           classes={{
@@ -162,20 +172,41 @@ class Dashboard extends React.Component {
             </IconButton>
           </div>
           <Divider />
-          <List>{mainListItems}</List>
+
+          <CardMedia
+            className={classes.media}
+            image="https://media.licdn.com/dms/image/C4E0BAQHo7aegLXztDQ/company-logo_200_200/0?e=2159024400&v=beta&t=VJen9iDR1C-NefZN3L_fJHVQrTvK4vlCpKRjiV-gSEw"
+            title="Sec2Sky"
+          />
+
+          <List>
+            <ListItem button>
+                <ListItemIcon>
+                  <LayersIcon />
+                </ListItemIcon>
+                <Link to="/"><ListItemText primary="Map" /></Link>
+              </ListItem>
+              <ListItem button>
+                <ListItemIcon>
+                  <BarChartIcon />
+                </ListItemIcon>
+                <Link to="/chart/"><ListItemText primary="Charts" /></Link>
+              </ListItem>
+          </List>
+          {/*
           <Divider />
           <List>{secondaryListItems}</List>
+          */}
         </Drawer>
-        <main className={classes.content}>
-          <MapUnoceros />
-        </main>
+            <MapUnoceros />
       </div>
+      </Router>
     );
   }
 }
 
-Dashboard.propTypes = {
+DashboardMap.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(Dashboard);
+export default withStyles(styles)(DashboardMap);
