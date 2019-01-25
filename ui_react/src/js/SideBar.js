@@ -7,7 +7,6 @@ import Drawer from '@material-ui/core/Drawer';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import List from '@material-ui/core/List';
-import MapUnoceros from './MapUnoceros';
 import NavBar from './NavBar';
 import Typography from '@material-ui/core/Typography';
 import Divider from '@material-ui/core/Divider';

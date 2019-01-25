@@ -10,8 +10,8 @@ ReactDOM.render((
   <BrowserRouter>
     <div>
       <Route path="/" exact component={Login} />
-      <Route path="/map/" exact component={Map} />
+      <Route path="/map/" component={Map} />
       <Route path="/chart/" component={Chart} />
     </div>
   </BrowserRouter>
-), document.getElementById('root')) 
+), document.getElementById('root'))
