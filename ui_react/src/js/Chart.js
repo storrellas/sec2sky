@@ -40,13 +40,9 @@ class Chart extends React.Component {
     open: true,
   };
 
-  handleDrawerOpen = () => {
-    this.setState({ open: true });
-  };
-
-  handleDrawerClose = () => {
-    this.setState({ open: false });
-  };
+  handleDrawer = (open) => {
+    this.setState({ open: open });
+  }
 
   render() {
     const { classes } = this.props;
@@ -54,8 +50,8 @@ class Chart extends React.Component {
     return (
       <div className={classes.root}>
         <CssBaseline />
-        <NavBar />
-        <SideBar />
+        <NavBar open={this.state.open} handleDrawer={this.handleDrawer.bind(this)}/>
+        <SideBar open={this.state.open} handleDrawer={this.handleDrawer.bind(this)}/>
         <main className={classes.content}>
           <div className={classes.appBarSpacer} />
           <Typography variant="h4" gutterBottom component="h2">

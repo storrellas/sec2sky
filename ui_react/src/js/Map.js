@@ -52,7 +52,8 @@ class Map extends React.Component {
         [-0.472757846041245, 51.3233379650232],
         [-0.463767846041345, 51.3233379650232],
         [-0.454777846041445, 51.3233379650232]
-      ]
+      ],
+      open: true
     };
   }
 
@@ -75,6 +76,9 @@ class Map extends React.Component {
     fileReader.readAsText(event.target.files[0])
   }
 
+  handleDrawer = (open) => {
+    this.setState({ open: open });
+  }
 
   render() {
     const { classes } = this.props;
@@ -95,8 +99,8 @@ class Map extends React.Component {
     return (
       <div className={classes.root}>
         <CssBaseline />
-        <NavBar />
-        <SideBar />
+        <NavBar open={this.state.open} handleDrawer={this.handleDrawer.bind(this)}/>
+        <SideBar open={this.state.open} handleDrawer={this.handleDrawer.bind(this)}/>
         <main className={classes.content}>
         <div className={classes.appBarSpacer} />
         <Typography variant="h4" gutterBottom component="h2">

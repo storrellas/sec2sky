@@ -61,17 +61,7 @@ const styles = theme => ({
 });
 
 class SideBar extends React.Component {
-  state = {
-    open: true,
-  };
-
-  handleDrawerOpen = () => {
-    this.setState({ open: true });
-  };
-
-  handleDrawerClose = () => {
-    this.setState({ open: false });
-  };
+  state = {};
 
   render() {
     const { classes } = this.props;
@@ -80,12 +70,12 @@ class SideBar extends React.Component {
       <Drawer
         variant="permanent"
         classes={{
-          paper: classNames(classes.drawerPaper, !this.state.open && classes.drawerPaperClose),
+          paper: classNames(classes.drawerPaper, !this.props.open && classes.drawerPaperClose),
         }}
         open={this.state.open}
       >
         <div className={classes.toolbarIcon}>
-          <IconButton onClick={this.handleDrawerClose}>
+          <IconButton onClick={() => this.props.handleDrawer(false)}>
             <ChevronLeftIcon />
           </IconButton>
         </div>
