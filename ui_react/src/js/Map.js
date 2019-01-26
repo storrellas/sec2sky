@@ -32,11 +32,17 @@ const styles = theme => ({
     overflow: 'auto',
   },
   mapContainer: {
-    height: 320,
-    width: 220,
+    display: 'flex',
+    // alignItems: 'center', // Center all elements
+    backgroundColor: 'blue',
   },
   input: {
-    display: 'none'
+    display: 'none',
+  },
+  button: {
+    backgroundColor: 'red',
+    alignSelf:'center',
+    flexGrow: 2,
   },
 });
 
@@ -53,7 +59,7 @@ class Map extends React.Component {
         [-0.463767846041345, 51.3233379650232],
         [-0.454777846041445, 51.3233379650232]
       ],
-      open: true
+      open: false
     };
   }
 
@@ -102,35 +108,35 @@ class Map extends React.Component {
         <NavBar open={this.state.open} handleDrawer={this.handleDrawer.bind(this)}/>
         <SideBar open={this.state.open} handleDrawer={this.handleDrawer.bind(this)}/>
         <main className={classes.content}>
-        <div className={classes.appBarSpacer} />
-        <Typography variant="h4" gutterBottom component="h2">
-          GPX Reader
-        </Typography>
-        <Mapbox
-          style="mapbox://styles/mapbox/streets-v9"
-          zoom={zoom}
-          center={route[0]}
-          containerStyle={{
-            height: "400px",
-            width: "800px"
-          }}>
-            <Layer type="line" layout={lineLayout} paint={linePaint}>
-            <Feature coordinates={route} />
-          </Layer>
-        </Mapbox>
+          <div className={classes.appBarSpacer} />
+          <Typography variant="h4" gutterBottom component="h2">
+            GPX Reader
+          </Typography>
+          <div className={classes.mapContainer}>
+            <Mapbox
+              style="mapbox://styles/mapbox/streets-v9"
+              zoom={zoom}
+              center={route[0]}
+              containerStyle={{
+                height: "400px",
+                width: "100%"
+              }}>
+                <Layer type="line" layout={lineLayout} paint={linePaint}>
+                <Feature coordinates={route} />
+              </Layer>
+            </Mapbox>
 
-        <input
-          className={classes.input}
-          id="contained-button-file"
-          multiple
-          type="file"
-          onChange={this.handleInputFile.bind(this)}
-        />
-        <label htmlFor="contained-button-file">
-          <Button variant="contained" component="span" className={classes.button}>
-            Upload
-          </Button>
-        </label>
+            <input
+              className={classes.input}
+              id="contained-button-file"
+              multiple
+              type="file"
+              onChange={this.handleInputFile.bind(this)}
+            />
+            <Button variant="contained" component="span" className={classes.button}>
+              Upload
+            </Button>
+          </div>
         </main>
       </div>
     );
