@@ -12,6 +12,8 @@ import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import { mainListItems, secondaryListItems } from './listItems';
+import { BrowserRouter, Route, Link } from "react-router-dom";
+
 
 const drawerWidth = 240;
 
@@ -72,13 +74,14 @@ class SideBar extends React.Component {
         classes={{
           paper: classNames(classes.drawerPaper, !this.props.open && classes.drawerPaperClose),
         }}
-        open={this.state.open}
-      >
+        open={this.state.open}>
         <div className={classes.toolbarIcon}>
           <IconButton onClick={() => this.props.handleDrawer(false)}>
             <ChevronLeftIcon />
           </IconButton>
         </div>
+        <Divider />
+        
         <Divider />
         <List>{mainListItems}</List>
         <Divider />
