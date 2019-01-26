@@ -35,6 +35,8 @@ const styles = theme => ({
     display: 'flex',
     // alignItems: 'center', // Center all elements
     backgroundColor: 'blue',
+    height: "75vh",
+    width: "100%",
   },
   input: {
     display: 'none',
@@ -118,7 +120,7 @@ class Map extends React.Component {
               zoom={zoom}
               center={route[0]}
               containerStyle={{
-                height: "400px",
+                height: "100%",
                 width: "100%"
               }}>
                 <Layer type="line" layout={lineLayout} paint={linePaint}>
