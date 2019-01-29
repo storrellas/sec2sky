@@ -163,9 +163,9 @@
                   <a class="nav-link" href="/setings/"><i class="fa fa-user fa-fw"></i>  <strong>SETTINGS</strong></a>
               </li>
 
-              <li class="nav-item dropdown">
+              <li class="nav-item dropdown account-item">
                   <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">
-                      <i class="fa fa-user fa-fw"></i>  <strong>ACCOUNT</strong>
+                      <i class="fa fa-user fa-fw"></i> <strong></strong>
                   </a>
                   <ul class="dropdown-menu dropdown-user">
                       <li><a class="dropdown-item" href="#"><i class="fa fa-user fa-fw"></i> Profile</a>
@@ -174,7 +174,7 @@
                       </li>
                       <li><a class="dropdown-item" href="/config/devices"><i class="fa fa-gear fa-fw"></i> Config devices</a>
                       </li>
-                      <li><a class="dropdown-item" class='logout-btn' href="#"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+                      <li><a class="dropdown-item logout-btn" href="#"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
                       </li>
                   </ul>
               </li>
@@ -243,9 +243,10 @@
       crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
       crossorigin="anonymous"></script>
-    <script src="{% static 'js/cookie_mgr.js' %}"></script>
+    <script src="{% static 'js/utils.js' %}"></script>
 
     <script type="text/javascript">
+
       $(document).ready(function () {
 
         // Check for credentials
@@ -253,7 +254,7 @@
         $.ajax({
           type: "POST",
           url: "/api/token/refresh/",
-          data: JSON.stringify({ refresh: token_refresh}),
+          data: JSON.stringify({ refresh: token_refresh }),
           contentType: "application/json; charset=utf-8",
           dataType: "json",
           success: function(data){},
@@ -272,6 +273,12 @@
             e.preventDefault();
             $("#wrapper").toggleClass("toggled");
         });
+
+        // Decode Token
+        const token_access = CookieMgr.get('jwt_token');
+        const jwt = JWTMgr.parse(token_access)
+        $('.account-item strong').text("hello! " + jwt.username.toUpperCase())
+        console.log("Role of user is " + jwt.role)
 
       });
     </script>

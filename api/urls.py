@@ -15,6 +15,7 @@ router.register(r'swarm', SwarmViewSet, basename='swarm')
 router.register(r'sensor', SensorViewSet, basename='sensor')
 router.register(r'user', UserViewSet, basename='user')
 
+
 urlpatterns = [
     url(r'^', include(router.urls)),
     url('^test/mqtt/$', MQTTTestAPIView.as_view()),

@@ -18,9 +18,13 @@ from rest_framework.decorators import action
 from rest_framework import mixins
 from rest_framework.exceptions import APIException
 from rest_framework import status
+
+# SimpleJWT
 from rest_framework_simplejwt.authentication import JWTAuthentication
 from rest_framework_simplejwt.views import TokenObtainPairView
 from rest_framework_simplejwt.exceptions import InvalidToken, TokenError
+from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
+
 # MQTT
 from paho.mqtt import publish
 
@@ -31,7 +35,21 @@ from sec2sky import utils
 
 logger = utils.get_logger()
 
+
+class Sec2SkyTokenObtainPairSerializer(TokenObtainPairSerializer):
+    @classmethod
+    def get_token(cls, user):
+        token = super(Sec2SkyTokenObtainPairSerializer, cls).get_token(user)
+
+        # Add custom claims
+        token['username'] = user.username
+        token['role'] = user.role
+
+        return token
+
 class Sec2SkyTokenObtainPairView(TokenObtainPairView):
+
+    serializer_class = Sec2SkyTokenObtainPairSerializer
 
     def post(self, request, format=None):
 
