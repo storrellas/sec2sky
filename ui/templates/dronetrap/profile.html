@@ -1,0 +1,79 @@
+{% extends 'dronetrap/base.html' %}
+{% load static %}
+
+{% block content %}
+
+We should include the profile in here
+
+<!-- <div class="row fullheight" >
+ <div class="col-lg-12">
+
+    <div id="primary">
+        <div id="map_actions" class="clearfix">
+        </div>
+        <div id="map_trail">
+            <div id="map_canvas" style="width: 100%; height: 100%; position: relative; overflow: hidden;" ></div>
+                <div id="map_details" style="display:none">
+                    <div id="elevation-chart">
+                    <div id="pos-marker"></div>
+                    <div id="pos-marker-current-alt"><span id="pm-alt">-</span></div>
+                    <div id="pos-marker-current-pos"><span id="pm-pos">-</span></div>
+                    <div class="map_svg-wrapper"></div>
+                    </div>
+                <div id="el-max">1.788&nbsp;m</div>
+                <div id="el-min">594&nbsp;m <input type="checkbox" id="autocenter" value="Autocenter"/></div>
+                <div id="el-len1" class="el-len">0</div>
+                <div id="el-len2" class="el-len">91</div>
+                <div id="el-len3" class="el-len">183</div>
+                <div id="el-len4" class="el-len hidden-xs">274</div>
+                <div id="el-len5" class="el-len">365,78&nbsp;km</div>
+                <div class="hide-button" title="Hide"><span class="glyphicon glyphicon-chevron-down"></span></div>
+            </div>
+            <!-- <div id="map_details-but" >
+                <div class="hide-button" title="Show details"><span class="glyphicon glyphicon-chevron-up"></span>Show Details</div>
+            </div> -->
+        </div>
+    </div>
+
+    </div>
+</div> -->
+
+
+{% endblock content %}
+
+{% block footer_page %}
+
+<!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAXTqRt3ofrUr3avtW61II41MM71q77OEo" type="text/javascript"></script>
+<script type="text/javascript">
+
+  function InitMap( _center,_zoom,_type){
+    map = new google.maps.Map(document.getElementById('map_canvas'), {
+      zoom: _zoom,
+      center: _center,
+      mapTypeId: google.maps.MapTypeId.ROADMAP,
+      disableDefaultUI: true
+    });
+  }
+  function show_map( _center,_zoom,_type){
+    map = new google.maps.Map(document.getElementById('map_canvas'), {
+      zoom: _zoom,
+      center: _center,
+      mapTypeId: google.maps.MapTypeId.ROADMAP,
+      disableDefaultUI: true
+    });
+      bounds  = new google.maps.LatLngBounds();
+  }
+
+  $(document).ready(function () {
+
+
+    $('#map_trail').css({height: $(window).innerHeight()-$(".navbar").innerHeight()});
+    $(window).resize(function(){
+      $('#map_trail').css({height: $(window).innerHeight()-$(".navbar").innerHeight()});
+    })
+    show_map({lat:41.490427,lng:2.262536},15);
+
+  })
+</script> -->
+
+{% endblock footer_page %}
