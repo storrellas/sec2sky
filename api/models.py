@@ -98,10 +98,25 @@ class Detection(models.Model):
 class Status(models.Model):
 
     sensor = models.ForeignKey(Sensor, on_delete=models.CASCADE, null=True)
-    code = models.CharField(max_length=20, null=True)
-    description = models.CharField(max_length=500, null=True)
+    latitude = models.DecimalField(max_digits=5, null=True, decimal_places=2)
+    longitude = models.DecimalField(max_digits=5, null=True, decimal_places=2)
+    orientation = models.DecimalField(max_digits=5, null=True, decimal_places=2)
+    wifi_status = models.CharField(max_length=20, null=True)
+    rf0_status = models.CharField(max_length=20, null=True)
+    rf1_status = models.CharField(max_length=20, null=True)
+    gps_status = models.CharField(max_length=20, null=True)
+    gps_sats = models.CharField(max_length=20, null=True)
+    cpu = models.CharField(max_length=20, null=True)
+    temp = models.CharField(max_length=20, null=True)
+    ram_total = models.IntegerField(default=0)
+    ram_used = models.IntegerField(default=0)
+    ram_free = models.IntegerField(default=0)
+    disk_total = models.IntegerField(default=0)
+    disk_used = models.IntegerField(default=0)
+    disk_free = models.IntegerField(default=0)
+    disk_percent = models.IntegerField(default=0)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return self.description
+        return self.sensor

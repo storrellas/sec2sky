@@ -1,5 +1,174 @@
 [
 {
+  "model": "api.company",
+  "pk": 1,
+  "fields": {
+    "name": "CARMAKER",
+    "description": "CARMAKER DESCRIPTION"
+  }
+},
+{
+  "model": "api.company",
+  "pk": 2,
+  "fields": {
+    "name": "NUCLEAR",
+    "description": "NUCLEAR DESCRIPTION"
+  }
+},
+{
+  "model": "api.user",
+  "pk": 1,
+  "fields": {
+    "password": "pbkdf2_sha256$120000$ZEm7Or7FhABG$uomfi7OpwAoDtsNTM7LlfjTPPFh4Qt6ChOk/o09SHl0=",
+    "last_login": null,
+    "is_superuser": true,
+    "username": "admin",
+    "first_name": "",
+    "last_name": "",
+    "email": "admin@mail.com",
+    "is_staff": true,
+    "is_active": true,
+    "date_joined": "2018-12-29T23:18:46.217Z",
+    "role": "administrator",
+    "company": null,
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "api.user",
+  "pk": 2,
+  "fields": {
+    "password": "pbkdf2_sha256$120000$prZOryxpjALB$e59l92bLBQsmxycBj72J8axHVlZz7pp3YGtSQ3rvnmI=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "admincarmaker",
+    "first_name": "",
+    "last_name": "",
+    "email": "",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2018-12-29T23:21:33.435Z",
+    "role": "administrator",
+    "company": 1,
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "api.user",
+  "pk": 3,
+  "fields": {
+    "password": "pbkdf2_sha256$120000$SUDq48tMGoNq$pDsbd227N3jeXteMKjjv4pCRTtBZvzpVCILUBWJ8ouo=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "admincentral1",
+    "first_name": "",
+    "last_name": "",
+    "email": "",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2018-12-29T23:21:41.291Z",
+    "role": "administrator",
+    "company": 2,
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "api.user",
+  "pk": 4,
+  "fields": {
+    "password": "pbkdf2_sha256$120000$hWvB2vwGRb8o$1S6TGg8K4LNv7JFW2p1jWpAFZ2plzYodeSpRiTi04r4=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "admincentral2",
+    "first_name": "",
+    "last_name": "",
+    "email": "",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2018-12-29T23:21:45.219Z",
+    "role": "administrator",
+    "company": 2,
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "api.user",
+  "pk": 5,
+  "fields": {
+    "password": "pbkdf2_sha256$120000$2rGiUMRDuxZI$aOaRAGiO3fqSCjfPBC1Vz8GTbFby+4hzMXWFg/4uboM=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "admincentral3",
+    "first_name": "",
+    "last_name": "",
+    "email": "",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2018-12-29T23:21:49.130Z",
+    "role": "administrator",
+    "company": 2,
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "api.user",
+  "pk": 6,
+  "fields": {
+    "password": "!vw5LDsf0i6jg3kE0pEZpLcD3OSr935t88iNgwKzU",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "adminnuclear",
+    "first_name": "",
+    "last_name": "",
+    "email": "admin123",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2018-12-29T23:53:53.850Z",
+    "role": "administrator",
+    "company": 2,
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "api.sessionuser",
+  "pk": 1,
+  "fields": {
+    "remote_addr": "",
+    "username": "admin",
+    "success": false,
+    "created_at": "2019-01-29T15:33:44.658Z",
+    "user": null
+  }
+},
+{
+  "model": "api.sessionuser",
+  "pk": 2,
+  "fields": {
+    "remote_addr": "",
+    "username": "admin",
+    "success": true,
+    "created_at": "2019-01-29T15:35:23.415Z",
+    "user": 1
+  }
+},
+{
+  "model": "api.sessionuser",
+  "pk": 3,
+  "fields": {
+    "remote_addr": "",
+    "username": "admin",
+    "success": true,
+    "created_at": "2019-01-29T15:41:08.717Z",
+    "user": 1
+  }
+},
+{
   "model": "api.swarm",
   "pk": 1,
   "fields": {
@@ -17,7 +186,8 @@
     "name": "SGRP_PLANT1",
     "description": "SGRP_PLANT1",
     "user_set": [
-      3, 6
+      3,
+      6
     ]
   }
 },
@@ -28,7 +198,8 @@
     "name": "SGRP_PLANT2",
     "description": "SGRP_PLANT2",
     "user_set": [
-      4, 6
+      4,
+      6
     ]
   }
 },
@@ -39,7 +210,8 @@
     "name": "SGRP_PLANT3",
     "description": "SGRP_PLANT3",
     "user_set": [
-      5, 6
+      5,
+      6
     ]
   }
 },
@@ -198,6 +370,20 @@
   }
 },
 {
+  "model": "api.sensor",
+  "pk": 12,
+  "fields": {
+    "swarm": null,
+    "device_id": "DTM181001",
+    "serial_num": "DTM181001",
+    "model": "NMD100",
+    "version": "1.2",
+    "available": true,
+    "energy": "plug",
+    "token": "1ed21f75-4c03-45d6-a27f-50ca4273cf4f"
+  }
+},
+{
   "model": "api.detection",
   "pk": 1,
   "fields": {
@@ -256,10 +442,25 @@
   "pk": 1,
   "fields": {
     "sensor": 1,
-    "code": "123",
-    "description": "sensor registration",
-    "created_at": "2018-12-30T00:13:25.626Z",
-    "updated_at": "2018-12-30T00:13:25.626Z"
+    "latitude": "41.49",
+    "longitude": "2.26",
+    "orientation": "0.00",
+    "wifi_status": "SCAN",
+    "rf0_status": "SCAN",
+    "rf1_status": "SCAN",
+    "gps_status": "FIX",
+    "gps_sats": "12",
+    "cpu": "59.1",
+    "temp": "64.107",
+    "ram_total": 2051756,
+    "ram_used": 1596700,
+    "ram_free": 364636,
+    "disk_total": 2051756,
+    "disk_used": 1596700,
+    "disk_free": 364636,
+    "disk_percent": 25,
+    "created_at": "2019-01-29T15:45:46.689Z",
+    "updated_at": "2019-01-29T15:45:46.689Z"
   }
 },
 {
@@ -267,21 +468,51 @@
   "pk": 2,
   "fields": {
     "sensor": 1,
-    "code": "456",
-    "description": "sensor ON",
-    "created_at": "2018-12-30T00:13:25.626Z",
-    "updated_at": "2018-12-30T00:13:25.626Z"
+    "latitude": "41.49",
+    "longitude": "2.26",
+    "orientation": "0.00",
+    "wifi_status": "SCAN",
+    "rf0_status": "SCAN",
+    "rf1_status": "SCAN",
+    "gps_status": "FIX",
+    "gps_sats": "12",
+    "cpu": "59.1",
+    "temp": "64.107",
+    "ram_total": 2051756,
+    "ram_used": 1596700,
+    "ram_free": 364636,
+    "disk_total": 2051756,
+    "disk_used": 1596700,
+    "disk_free": 364636,
+    "disk_percent": 25,
+    "created_at": "2019-01-29T15:45:46.689Z",
+    "updated_at": "2019-01-29T15:45:46.689Z"
   }
 },
 {
   "model": "api.status",
-  "pk": 2,
+  "pk": 3,
   "fields": {
     "sensor": 1,
-    "code": "456",
-    "description": "sensor OFF",
-    "created_at": "2018-12-30T00:13:25.626Z",
-    "updated_at": "2018-12-30T00:13:25.626Z"
+    "latitude": "41.49",
+    "longitude": "2.26",
+    "orientation": "0.00",
+    "wifi_status": "SCAN",
+    "rf0_status": "SCAN",
+    "rf1_status": "SCAN",
+    "gps_status": "FIX",
+    "gps_sats": "12",
+    "cpu": "59.1",
+    "temp": "64.107",
+    "ram_total": 2051756,
+    "ram_used": 1596700,
+    "ram_free": 364636,
+    "disk_total": 2051756,
+    "disk_used": 1596700,
+    "disk_free": 364636,
+    "disk_percent": 25,
+    "created_at": "2019-01-29T15:45:46.689Z",
+    "updated_at": "2019-01-29T15:45:46.689Z"
   }
 }
 ]

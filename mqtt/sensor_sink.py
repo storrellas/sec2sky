@@ -45,8 +45,8 @@ def on_connect(client, userdata, flags, rc):
     # logger.info("Subscribe to topic "+ settings.MQTT['topic_dronetrap'])
     # client.subscribe(settings.MQTT['topic_dronetrap'])
 
-    logger.info("Subscribe to topic "+ settings.MQTT['topic_discovery'])
-    client.subscribe(settings.MQTT['topic_discovery'])
+    logger.info("Subscribe to topic "+ settings.MQTT['topic_dronetrap'])
+    client.subscribe(settings.MQTT['topic_dronetrap'])
 
 #
 # Name: creates_model
@@ -79,40 +79,51 @@ def on_message(client, userdata, msg):
         data = JSONParser().parse(stream)
 
         # Parse topic
-        sensor_id = msg.topic.split("/")[1]
-        command = msg.topic.split("/")[2]
+        command = msg.topic.split("/")[1]
         if command == "discovery":
             logger.info("Discovery received")
-            sensor_id = msg.topic.split("/")[1]
+            sensor_id = data['deviceid']
             queryset = Sensor.objects.filter(device_id=sensor_id)
 
             # NOTE: This should be done with primary keys
             if queryset.exists():
                 sensor = queryset[0]
-                sensor.device_id = sensor_id
-                sensor.serial_num = data['serial_num']
-                sensor.model = data['model']
-                sensor.version = data['version']
-                sensor.available = data['available']
-                sensor.energy = data['energy']
-                sensor.token = str(uuid.uuid4())
-                sensor.save()
                 logger.info("Sensor updated successfully")
             else:
-                sensor = Sensor.objects.create(name=sensor_id,
-                                               description=data['description'],
-                                               latitude=data['latitude'],
-                                               longitude=data['longitude'])
+                sensor = Sensor()
                 logger.info("Sensor created sucessfully")
 
-            # if sensor.swarm is not None:
-            #     logger.info("Sensor ASSIGNED. Notify Sensor sim")
-            #     topic = settings.MQTT['topic_manager_set'].replace('+', str(settings.MQTT['id']))
-            #     serializer = SensorSerializer(sensor)
-            #
-            #     client.publish(topic, json.dumps(serializer.data))
-            # else:
-            #     logger.info("Sensor unassigned")
+            # Updating or generating data
+            sensor.device_id = data['deviceid']
+            sensor.serial_num = data['serialnum']
+            sensor.model = data['model']
+            sensor.version = data['version']
+            sensor.available = data['available']
+            sensor.energy = data['energy']
+            sensor.token = str(uuid.uuid4())
+            sensor.save()
+
+            data_status = data['status']
+            status = Status()
+            status.sensor = sensor
+            status.latitude = data_status['location']['latitude']
+            status.longitude = data_status['location']['longitude']
+            status.orientation = data_status['location']['orientation']
+            status.wifi_status = data_status['wifi_status']
+            status.rf0_status = data_status['rf0_status']
+            status.rf1_status = data_status['rf1_status']
+            status.gps_status = data_status['gps_status']
+            status.gps_sats = data_status['gps_sats']
+            status.cpu = data_status['CPU']
+            status.temp = data_status['temp']
+            status.ram_total = data_status['RAM']['total']
+            status.ram_used = data_status['RAM']['used']
+            status.ram_free = data_status['RAM']['free']
+            status.disk_total = data_status['DISK']['total']
+            status.disk_used = data_status['DISK']['user']
+            status.disk_free = data_status['DISK']['free']
+            status.disk_percent = data_status['DISK']['percent']
+            status.save()
 
         elif command == "state":
             logger.info("State received")
