@@ -18,7 +18,7 @@
           <div class="text-right"><img src="{% static 'img/account.png' %}" height=100px></div>
          <div class="text-right">Manage User and Setting Profile</div>
        </div>
-       <div class="col-sm-10">
+       <div class="col-sm-6">
          <h1>User Profile</h1>
          <form>
           <div class="form-group row">
@@ -34,9 +34,20 @@
             </div>
           </div>
           <div class="form-group row">
+            <label for="inputPassword" class="col-sm-2 col-form-label">Password</label>
+            <div class="col-sm-10">
+              <select class="form-control" id="exampleFormControlSelect1">
+                <option value="viewer">Viewer</option>
+                <option value="operator">Operator</option>
+                <option value="configurator">Configurator</option>
+                <option value="administrator">Administrator</option>
+                <option value="empowered">empowered</option>
+              </select>            </div>
+          </div>
+          <div class="form-group row">
             <label for="inputPassword" class="col-sm-2 col-form-label">Token</label>
             <div class="col-sm-10">
-              <input type="text" class="form-control" id="staticEmail" placeholder="Your Token Here">
+              <input type="text" class="form-control" id="staticEmail" placeholder="b5b0931e-de5b-408b-a12b-b93103d2bd1f" readonly>
             </div>
           </div>
           <div class="form-group">
