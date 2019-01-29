@@ -1,6 +1,7 @@
 import sys
 import os
 import io
+import uuid
 sys.path.append(os.path.dirname(os.path.abspath(__file__)) + '/../')
 
 import time
@@ -83,15 +84,18 @@ def on_message(client, userdata, msg):
         if command == "discovery":
             logger.info("Discovery received")
             sensor_id = msg.topic.split("/")[1]
-            queryset = Sensor.objects.filter(name=sensor_id)
+            queryset = Sensor.objects.filter(device_id=sensor_id)
 
             # NOTE: This should be done with primary keys
             if queryset.exists():
                 sensor = queryset[0]
-                sensor.name = sensor_id
-                sensor.description = data['description']
-                sensor.latitude = data['latitude']
-                sensor.longitude = data['longitude']
+                sensor.device_id = sensor_id
+                sensor.serial_num = data['serial_num']
+                sensor.model = data['model']
+                sensor.version = data['version']
+                sensor.available = data['available']
+                sensor.energy = data['energy']
+                sensor.token = str(uuid.uuid4())
                 sensor.save()
                 logger.info("Sensor updated successfully")
             else:

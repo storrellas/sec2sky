@@ -30,10 +30,8 @@ class TestCase(APITestCase):
         self.swarm.user_set.set([self.user])
 
         # Create Sensor
-        self.sensor = Sensor.objects.create(name='CMF001',
-                                            description='CMF001_description',
-                                            latitude = 2.3,
-                                            longitude = 2.3)
+        self.sensor = Sensor.objects.create(device_id='CMF001',
+                                            serial_num='CMF001_description')
 
         # Detection/Status
         self.detection = Detection.objects.create(sensor=self.sensor,
@@ -79,7 +77,7 @@ class TestCase(APITestCase):
 
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(len(response.data), 1)
-        self.assertEqual(response.data[0]['name'], 'CMF001')
+        self.assertEqual(response.data[0]['device_id'], 'CMF001')
         self.assertEqual(response.data[0]['n_detection'], 2)
         self.assertEqual(response.data[0]['n_status'], 1)
 
@@ -109,10 +107,8 @@ class TestCase(APITestCase):
         url = reverse('sensor-detail', args=[id])
         data = {
             "n_detection": 0,
-            "name": "CMF001",
-            "description": "Development Dept. Sensor1",
-            "latitude": "43.20",
-            "longitude": "2.10",
+            "device_id": "CMF001",
+            "serial_num": "Development Dept. Sensor1",
             "swarm": self.swarm.pk
         }
         response = self.client.put(url, data, format='json')

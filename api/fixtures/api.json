@@ -48,10 +48,13 @@
   "pk": 1,
   "fields": {
     "swarm": 1,
-    "name": "CMF001",
-    "description": "Development Dept. Sensor1",
-    "latitude": "43.20",
-    "longitude": "2.10"
+    "device_id": "CMF001",
+    "serial_num": "CMF001",
+    "model": "NMD100",
+    "version": "1.2",
+    "available": true,
+    "energy": "plug",
+    "token": "a7c0d656-0ffc-4c23-935c-bb2981e9de99"
   }
 },
 {
@@ -59,10 +62,13 @@
   "pk": 2,
   "fields": {
     "swarm": 1,
-    "name": "CMF002",
-    "description": "Assembly line  Sensor1",
-    "latitude": "43.20",
-    "longitude": "2.10"
+    "device_id": "CMF002",
+    "serial_num": "CMF002",
+    "model": "NMD100",
+    "version": "1.2",
+    "available": true,
+    "energy": "plug",
+    "token": "a7c0d656-0ffc-4c23-935c-bb2981e9de99"
   }
 },
 {
@@ -70,10 +76,13 @@
   "pk": 3,
   "fields": {
     "swarm": 1,
-    "name": "CMF003",
-    "description": "Assembly line  Sensor2",
-    "latitude": "43.20",
-    "longitude": "2.10"
+    "device_id": "CMF003",
+    "serial_num": "CMF003",
+    "model": "NMD100",
+    "version": "1.2",
+    "available": true,
+    "energy": "plug",
+    "token": "a7c0d656-0ffc-4c23-935c-bb2981e9de99"
   }
 },
 {
@@ -81,10 +90,13 @@
   "pk": 4,
   "fields": {
     "swarm": 1,
-    "name": "CMF004",
-    "description": "Mobile Sensor1 (Car)",
-    "latitude": "43.20",
-    "longitude": "2.10"
+    "device_id": "CMF004",
+    "serial_num": "CMF004",
+    "model": "NMD100",
+    "version": "1.2",
+    "available": true,
+    "energy": "plug",
+    "token": "a7c0d656-0ffc-4c23-935c-bb2981e9de99"
   }
 },
 {
@@ -92,10 +104,13 @@
   "pk": 5,
   "fields": {
     "swarm": 1,
-    "name": "CMF005",
-    "description": "Mobile Sensor2 (Mobile)",
-    "latitude": "43.20",
-    "longitude": "2.10"
+    "device_id": "CMF005",
+    "serial_num": "CMF005",
+    "model": "NMD100",
+    "version": "1.2",
+    "available": true,
+    "energy": "plug",
+    "token": "a7c0d656-0ffc-4c23-935c-bb2981e9de99"
   }
 },
 {
@@ -103,10 +118,13 @@
   "pk": 6,
   "fields": {
     "swarm": 2,
-    "name": "CMF006",
-    "description": "Plant 1 Sensor 1",
-    "latitude": "43.20",
-    "longitude": "2.10"
+    "device_id": "CMF006",
+    "serial_num": "CMF006",
+    "model": "NMD100",
+    "version": "1.2",
+    "available": true,
+    "energy": "plug",
+    "token": "a7c0d656-0ffc-4c23-935c-bb2981e9de99"
   }
 },
 {
@@ -114,10 +132,13 @@
   "pk": 7,
   "fields": {
     "swarm": 2,
-    "name": "CMF007",
-    "description": "Plant 1 Sensor 2",
-    "latitude": "43.20",
-    "longitude": "2.10"
+    "device_id": "CMF007",
+    "serial_num": "CMF007",
+    "model": "NMD100",
+    "version": "1.2",
+    "available": true,
+    "energy": "plug",
+    "token": "a7c0d656-0ffc-4c23-935c-bb2981e9de99"
   }
 },
 {
@@ -125,10 +146,13 @@
   "pk": 8,
   "fields": {
     "swarm": 3,
-    "name": "CMF008",
-    "description": "Plant 2 Sensor 1",
-    "latitude": "43.20",
-    "longitude": "2.10"
+    "device_id": "CMF008",
+    "serial_num": "CMF008",
+    "model": "NMD100",
+    "version": "1.2",
+    "available": true,
+    "energy": "plug",
+    "token": "a7c0d656-0ffc-4c23-935c-bb2981e9de99"
   }
 },
 {
@@ -136,10 +160,13 @@
   "pk": 9,
   "fields": {
     "swarm": 3,
-    "name": "CMF009",
-    "description": "Plant 2 Sensor 2",
-    "latitude": "43.20",
-    "longitude": "2.10"
+    "device_id": "CMF009",
+    "serial_num": "CMF009",
+    "model": "NMD100",
+    "version": "1.2",
+    "available": true,
+    "energy": "plug",
+    "token": "a7c0d656-0ffc-4c23-935c-bb2981e9de99"
   }
 },
 {
@@ -147,10 +174,13 @@
   "pk": 10,
   "fields": {
     "swarm": 4,
-    "name": "CMF010",
-    "description": "Plant 3 Sensor 1",
-    "latitude": "43.20",
-    "longitude": "2.10"
+    "device_id": "CMF010",
+    "serial_num": "CMF010",
+    "model": "NMD100",
+    "version": "1.2",
+    "available": true,
+    "energy": "plug",
+    "token": "a7c0d656-0ffc-4c23-935c-bb2981e9de99"
   }
 },
 {
@@ -158,10 +188,13 @@
   "pk": 11,
   "fields": {
     "swarm": 4,
-    "name": "CMF011",
-    "description": "Plant 3 Sensor 1",
-    "latitude": "43.20",
-    "longitude": "2.10"
+    "device_id": "CMF011",
+    "serial_num": "CMF011",
+    "model": "NMD100",
+    "version": "1.2",
+    "available": true,
+    "energy": "plug",
+    "token": "a7c0d656-0ffc-4c23-935c-bb2981e9de99"
   }
 },
 {

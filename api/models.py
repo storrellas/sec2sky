@@ -66,10 +66,13 @@ class Swarm(models.Model):
 
 class Sensor(models.Model):
     swarm = models.ForeignKey(Swarm, on_delete=models.SET_NULL, null=True)
-    name = models.CharField(max_length=500, null=True)
-    description = models.CharField(max_length=500, null=True)
-    latitude = models.DecimalField(max_digits=5, null=True, decimal_places=2)
-    longitude = models.DecimalField(max_digits=5, null=True, decimal_places=2)
+    device_id = models.CharField(max_length=100, null=True)
+    serial_num = models.CharField(max_length=100, null=True)
+    model = models.CharField(max_length=100, null=True)
+    version = models.CharField(max_length=100, null=True)
+    available = models.BooleanField(default=True)
+    energy = models.CharField(max_length=500, null=True)
+    token = models.CharField(max_length=500, null=True)
 
     def __str__(self):
         return self.name

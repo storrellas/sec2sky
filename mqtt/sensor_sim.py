@@ -80,7 +80,7 @@ def on_message(client, userdata, msg):
         elif command == "manager":
             if subcommand == "set":
                 logger.info("State manager/set received")
-                sensor_discovery.pop(data['name'])
+                sensor_discovery.pop(data['device_id'])
             elif subcommand == "unset":
                 logger.info("State manager/unset received")
         elif command == "state":
@@ -108,9 +108,9 @@ def alarm_handler(signum, frame):
     #print(sensor_discovery)
     if len(sensor_discovery) > 0:
         logger.info("Sending message sensor discoveries pending ...")
-        for sensor_id in sensor_discovery:
+        for device_id in sensor_discovery:
             topic = 'dronetrap/' + sensor_id + '/discovery'
-            client.publish(topic, json.dumps(sensor_discovery[sensor_id]))
+            client.publish(topic, json.dumps(sensor_discovery[device_id]))
 
     # Create signal for next alarm
     #signal.alarm(randint(1, 10))
