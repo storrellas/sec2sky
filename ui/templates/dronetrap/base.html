@@ -198,11 +198,6 @@
                       Main Menu
                   </a>
               </li>
-              <li class="sidebar-item" >
-                <a href="{% url 'ui-console' %}">
-                  <i class="fa fa-dashboard fa-fw"></i><span>Detections</span>
-                </a>
-              </li>
               <li class="sidebar-item">
                 <a href="{% url 'ui-company' %}">
                   <i class="fa fa-building fa-fw"></i><span>Company</span>
@@ -211,6 +206,11 @@
               <li class="sidebar-item">
                 <a href="{% url 'ui-user' %}">
                   <i class="fa fa-user fa-fw"></i><span>User</span>
+                </a>
+              </li>
+              <li class="sidebar-item" >
+                <a href="{% url 'ui-console' %}">
+                  <i class="fa fa-dashboard fa-fw"></i><span>Detections</span>
                 </a>
               </li>
               <!-- <li>
@@ -264,14 +264,17 @@
       $(document).ready(function () {
 
         // Check for credentials
-        const token_refresh = CookieMgr.get('jwt_refresh');
+        const jwt_refresh = CookieMgr.get('jwt_refresh');
         $.ajax({
           type: "POST",
           url: "/api/token/refresh/",
-          data: JSON.stringify({ refresh: token_refresh }),
+          data: JSON.stringify({ refresh: jwt_refresh }),
           contentType: "application/json; charset=utf-8",
           dataType: "json",
-          success: function(data){},
+          success: function(data){
+            // Update token
+            CookieMgr.set('jwt_token', data.access)
+          },
           error: () => window.location = '/ui/',
           failure: () => window.location = '/ui/'
         })
@@ -292,8 +295,6 @@
         const token_access = CookieMgr.get('jwt_token');
         const jwt = JWTMgr.parse(token_access)
         $('.account-item strong').text("hello! " + jwt.username.toUpperCase())
-        console.log("Role of user is " + jwt.role)
-
       });
     </script>
 
