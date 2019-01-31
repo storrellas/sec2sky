@@ -87,8 +87,14 @@ class CompanyViewSet(viewsets.ModelViewSet):
 
     model = Company
     queryset = Company.objects.all()
-    serializer_class = serializers.CompanySerializer
+    #serializer_class = serializers.CompanySerializer
     renderer_classes = (JSONRenderer, )
+
+    def get_serializer_class(self):
+        if self.action == 'list' or self.action == 'retrieve':
+            return serializers.CompanyExtendedSerializer
+        else:
+            return serializers.CompanySerializer
 
 class UserViewSet(viewsets.ModelViewSet):
     authentication_classes = (JWTAuthentication,)

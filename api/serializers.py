@@ -24,8 +24,6 @@ class UserExtendedSerializer(serializers.ModelSerializer):
         fields = ('id', 'username', 'role', 'company_detail', 'swarms')
 
 class UserSerializer(serializers.ModelSerializer):
-
-
     class Meta:
         model = User
         fields = ('id', 'username', 'password', 'role', 'company')
@@ -34,6 +32,11 @@ class UserSerializer(serializers.ModelSerializer):
         user = self.Meta.model.objects.create_user(**validated_data)
         return user
 
+class CompanyExtendedSerializer(serializers.ModelSerializer):
+    user_list_detail = UserSerializer(required=False, source='user_set', many=True)
+    class Meta:
+        model = Company
+        fields = ('id', 'name', 'description', 'user_list_detail')
 
 class SensorSerializer(serializers.ModelSerializer):
     class Meta:
