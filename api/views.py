@@ -184,9 +184,19 @@ class SensorViewSet(mixins.ListModelMixin,
         if sensor.swarm is None:
             logger.info("Swarm is None. Notifying sensor for unset")
             topic = settings.MQTT['topic_manager_unset'].replace('+', str(settings.MQTT['id']))
+            sensor.token = str(uuid.uuid4())
         else:
             logger.info("Swarm is None. Notifying sensor for set")
             topic = settings.MQTT['topic_manager_set'].replace('+', str(settings.MQTT['id']))
+            sensor.token = str(uuid.uuid4())
+        sensor.save()
+
+# {
+#   "server" : <server_id>, # Server ID
+#   "token": <group_api_token>, # Token to communicate with server
+#   "swarm": <group_name>, # SensorGroup Name
+#   "username": <user_name> # Username
+# }
 
         # MQTT  message
         serializer = serializers.SensorSerializer(sensor)
