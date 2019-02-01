@@ -32,6 +32,11 @@
 								"name": "Content-Type",
 								"type": "text",
 								"value": "application/json"
+							},
+							{
+								"key": "X-Forwarded-For",
+								"value": "192.168.1.0, 81.40.231.163",
+								"type": "text"
 							}
 						],
 						"body": {
@@ -134,6 +139,102 @@
 							"path": [
 								"api",
 								"token",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetJWTToken - Refresh",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "67ff0d83-d218-44db-8dc7-70cd8368eb4f",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token_access}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"refresh\" : \"{{token_refresh}}\"\n}"
+						},
+						"url": {
+							"raw": "{{url}}/api/token/refresh/",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"token",
+								"refresh",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetJWTToken - Verify",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "67ff0d83-d218-44db-8dc7-70cd8368eb4f",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "Bearer {{token_access}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"token\" : \"{{token_refresh}}\"\n}"
+						},
+						"url": {
+							"raw": "{{url}}/api/token/verify/",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"token",
+								"verify",
 								""
 							]
 						}
@@ -798,7 +899,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"name\": \"CMF023\",\n    \"description\": \"Development Dept. Sensor1\",\n    \"latitude\": \"43.20\",\n    \"longitude\": \"2.10\",\n    \"swarm\": 2\n}"
+							"raw": "{\n    \"swarm\": 2\n}"
 						},
 						"url": {
 							"raw": "{{url}}/api/sensor/12/",
@@ -834,7 +935,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"name\": \"CMF023\",\n    \"description\": \"Development Dept. Sensor1\",\n    \"latitude\": \"43.20\",\n    \"longitude\": \"2.10\",\n    \"swarm\": null\n}"
+							"raw": "{\n    \"swarm\": null\n}"
 						},
 						"url": {
 							"raw": "{{url}}/api/sensor/12/",
@@ -967,42 +1068,6 @@
 			"name": "MQTT",
 			"item": [
 				{
-					"name": "MQTT - Discovery",
-					"request": {
-						"method": "POST",
-						"header": [
-							{
-								"key": "Content-Type",
-								"name": "Content-Type",
-								"type": "text",
-								"value": "application/json"
-							},
-							{
-								"key": "Authorization",
-								"type": "text",
-								"value": "Bearer {{token_access}}"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{   \n\t\"topic\": \"dronetrap/CMF023/discovery\",\n\t\"payload\" : {\n        \"description\": \"Development Dept. Sensor1\",\n        \"latitude\": \"43.20\",\n        \"longitude\": \"2.10\"\n    }\n}             "
-						},
-						"url": {
-							"raw": "{{url}}/api/test/mqtt/",
-							"host": [
-								"{{url}}"
-							],
-							"path": [
-								"api",
-								"test",
-								"mqtt",
-								""
-							]
-						}
-					},
-					"response": []
-				},
-				{
 					"name": "MQTT - Start Discovery",
 					"request": {
 						"method": "POST",
@@ -1021,7 +1086,43 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{   \n\t\"topic\": \"sensor/CMF023/start_discovery\",\n\t\"payload\" : {\n        \"description\": \"Development Dept. Sensor1\",\n        \"latitude\": \"43.20\",\n        \"longitude\": \"2.10\"\n    }\n}             "
+							"raw": "{   \n\t\"topic\": \"dronetrap/start_discovery\",\n\t\"payload\" : {\n\t    \"deviceid\" : \"DTM181001\",\n\t    \"serialnum\" : \"DTM181001\",\n\t    \"model\" : \"NMD100\",\n\t    \"version\" : \"1.2\",\n\t    \"available\" : true,\n\t    \"energy\" : \"plug\",\n\t    \"time\" : \"2019-01-05 10:47:55\",\n\t    \"status\" : {\n\t      \"location\" : {\n\t        \"latitude\" : \"41.490427\",\n\t        \"longitude\" : \"2.262536\",\n\t        \"orientation\" : \"0\"\n\t      },\n\t      \"wifi_status\" : \"SCAN\",\n\t      \"rf0_status\" : \"SCAN\",\n\t      \"rf1_status\" : \"SCAN\",\n\t      \"gps_status\": \"FIX\",\n\t      \"gps_sats\" : 12,\n\t      \"CPU\" : \"59.1\",\n\t      \"temp\" : \"64.107\",\n\t      \"RAM\" : {\n\t        \"total\": 2051756,\n\t        \"used\": 1596700,\n\t        \"free\": 364636\n\t      },\n\t      \"DISK\" : {\n\t        \"total\": 2051756,\n\t        \"user\": 1596700,\n\t        \"free\": 364636,\n\t        \"percent\": 25\n\t      }\n\t    }\n\t}\n}         "
+						},
+						"url": {
+							"raw": "{{url}}/api/test/mqtt/",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"test",
+								"mqtt",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "MQTT - Discovery",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "Bearer {{token_access}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{   \n\t\"topic\": \"dronetrap/discovery\",\n\t\"payload\" : {\n\t    \"deviceid\" : \"DTM181001\",\n\t    \"serialnum\" : \"DTM181001\",\n\t    \"model\" : \"NMD100\",\n\t    \"version\" : \"1.2\",\n\t    \"available\" : true,\n\t    \"energy\" : \"plug\",\n\t    \"time\" : \"2019-01-05 10:47:55\",\n\t    \"status\" : {\n\t      \"location\" : {\n\t        \"latitude\" : \"41.490427\",\n\t        \"longitude\" : \"2.262536\",\n\t        \"orientation\" : \"0\"\n\t      },\n\t      \"wifi_status\" : \"SCAN\",\n\t      \"rf0_status\" : \"SCAN\",\n\t      \"rf1_status\" : \"SCAN\",\n\t      \"gps_status\": \"FIX\",\n\t      \"gps_sats\" : 12,\n\t      \"CPU\" : \"59.1\",\n\t      \"temp\" : \"64.107\",\n\t      \"RAM\" : {\n\t        \"total\": 2051756,\n\t        \"used\": 1596700,\n\t        \"free\": 364636\n\t      },\n\t      \"DISK\" : {\n\t        \"total\": 2051756,\n\t        \"user\": 1596700,\n\t        \"free\": 364636,\n\t        \"percent\": 25\n\t      }\n\t    }\n\t}\n}      "
 						},
 						"url": {
 							"raw": "{{url}}/api/test/mqtt/",
