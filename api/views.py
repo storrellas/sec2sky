@@ -1,5 +1,6 @@
 # Python imports
 import json
+import uuid
 
 # Django imports
 from django.shortcuts import render
@@ -197,16 +198,18 @@ class SensorViewSet(mixins.ListModelMixin,
             sensor.token = str(uuid.uuid4())
         sensor.save()
 
-# {
-#   "server" : <server_id>, # Server ID
-#   "token": <group_api_token>, # Token to communicate with server
-#   "swarm": <group_name>, # SensorGroup Name
-#   "username": <user_name> # Username
-# }
+        # Generate payload
+        payload = {
+          "server" : settings.MQTT['id'], # Server ID
+          "token": sensor.token, # Token to communicate with server
+          "swarm": sensor.swarm.name if sensor.swarm else None, # SensorGroup Name
+          "username": request.user.username # Username
+        }
 
         # MQTT  message
-        serializer = serializers.SensorSerializer(sensor)
-        publish.single(topic, json.dumps(serializer.data), hostname=settings.MQTT['hostname'])
+        #serializer = serializers.SensorSerializer(sensor)
+        #publish.single(topic, json.dumps(serializer.data), hostname=settings.MQTT['hostname'])
+        publish.single(topic, json.dumps(payload), hostname=settings.MQTT['hostname'])
 
         return response
 

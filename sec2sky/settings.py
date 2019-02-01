@@ -141,8 +141,8 @@ MQTT = {
     # Specific command topics
     'topic_discovery': 'dronetrap/+/discovery',
     'topic_start_discovery': 'sensor/+/start_discovery',
-    'topic_manager_set': 'dronetrap/+/manager/set',
-    'topic_manager_unset': 'dronetrap/+/manager/unset'
+    'topic_manager_set': 'dronetrap/+/set',
+    'topic_manager_unset': 'dronetrap/+/unset'
 }
 
 # Static files (CSS, JavaScript, Images)
