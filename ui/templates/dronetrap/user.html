@@ -58,9 +58,9 @@
             </div>
           </div>
           <div class="form-group row">
-            <label for="company-select" class="col-sm-2 col-form-label">Company</label>
+            <label for="select-company" class="col-sm-2 col-form-label">Company</label>
             <div class="col-sm-10">
-              <select class="custom-select company-select">
+              <select class="custom-select" id="select-company">
                 <option selected>NONE</option>
               </select>
             </div>
@@ -107,7 +107,7 @@
       let template_local = template;
       template_local = template_local.replace(/__id__/g, item.id)
       template_local = template_local.replace(/__name__/g, item.name)
-      $(".company-select").append(template_local)
+      $("#select-company").append(template_local)
     }
   }
 
@@ -116,7 +116,7 @@
             `<th scope="row">__id__</th>` +
             `<td>__username__</td>` +
             `<td>__role__</td>` +
-            `<td>__company__</td>` +
+            `<td data-companyid="__companyid__">__company__</td>` +
             `<td class="text-right">` +
               `<button type="button" data-toggle="modal" data-target="#edit" data-uid="__id__" class="update btn btn-warning btn-sm"><i class="fa fa-pencil-ruler fa-fw"></i></button>` +
               `<button type="button" data-toggle="modal" data-target="#delete" data-uid="__id__" class="delete btn btn-danger btn-sm"><i class="fa fa-times fa-fw"></i></button>` +
@@ -130,7 +130,9 @@
       table_template_local = table_template_local.replace(/__username__/g, item.username)
       table_template_local = table_template_local.replace(/__role__/g, item.role)
       const company_name = item.company_detail?item.company_detail.name:"None"
+      const company_id = item.company_detail?item.company_detail.id:"None"
       table_template_local = table_template_local.replace(/__company__/g, company_name)
+      table_template_local = table_template_local.replace(/__companyid__/g, company_id)
       $(".table-user tbody").append(table_template_local)
     }
   }
@@ -151,9 +153,10 @@
       const item_list = row.children()
       const item_username = item_list[1]
       const item_password = item_list[2]
-      //const item_company = item_list[2]
+      const item_company = item_list[3]
       $('#input-username').val($(item_username).text())
       $('#input-password').val($(item_password).text())
+      $('#select-company').val($(item_company).data('companyid'))
     })
   }
 
