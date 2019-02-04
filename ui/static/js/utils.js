@@ -52,4 +52,27 @@ class APIMgr{
       failure: () => window.location = '/ui/'
     })
   }
+
+  static delete_model(url) {
+    // Retreive companies
+    const jwt_token = CookieMgr.get('jwt_token');
+    $.ajax({
+      type: "DELETE",
+      url: url,
+      headers: {
+        "Authorization": ("Bearer " + jwt_token),
+      },
+      contentType: "application/json; charset=utf-8",
+      dataType: "json",
+      success: function(data){
+        location.reload();
+      },
+      error: () => window.location = '/ui/',
+      failure: () => window.location = '/ui/'
+    })
+  }
+
+
+
+
 }

@@ -40,7 +40,7 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header bg-secondary">
-        <h4 class="modal-title">Update Data</h4>
+        <h4 class="modal-title">Update</h4>
         <button type="button" class="close close-button" data-dismiss="modal"><i class="fa fa-times fa-fw"></i></button>
       </div>
       <div class="modal-body">
@@ -172,6 +172,10 @@
         fillSelect(data)
     })
 
+    // Delete User
+    $('.btn-delete').click( () => {
+      APIMgr.delete_model("/api/user/" + id)
+    });
 
 
   });

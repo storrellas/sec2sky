@@ -35,7 +35,7 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header bg-secondary">
-        <h4 class="modal-title">Update Data</h4>
+        <h4 class="modal-title">Update</h4>
         <button type="button" class="close close-button" data-dismiss="modal"><i class="fa fa-times fa-fw"></i></button>
       </div>
       <div class="modal-body">
@@ -66,7 +66,7 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header bg-secondary">
-        <h4 class="modal-title">Delete Data</h4>
+        <h4 class="modal-title">Delete</h4>
         <button type="button" class="close close-button" data-dismiss="modal"><i class="fa fa-times fa-fw"></i></button>
       </div>
       <div class="modal-body">
@@ -145,25 +145,9 @@
           bindEvents()
       })
 
-
-
+      // Delete Company
       $('.btn-delete').click( () => {
-        // Retreive companies
-        const jwt_token = CookieMgr.get('jwt_token');
-        $.ajax({
-          type: "DELETE",
-          url: ("/api/company/" + id),
-          headers: {
-            "Authorization": ("Bearer " + jwt_token),
-          },
-          contentType: "application/json; charset=utf-8",
-          dataType: "json",
-          success: function(data){
-            location.reload();
-          },
-          error: () => window.location = '/ui/',
-          failure: () => window.location = '/ui/'
-        })
+        APIMgr.delete_model("/api/company/" + id)
       });
 
     });
