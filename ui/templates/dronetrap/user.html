@@ -84,24 +84,24 @@
     console.log(data)
 
     const table_template = `<tr>` +
-            `<th scope="row">$$id$$</th>` +
-            `<td>$$username$$</td>` +
-            `<td>$$role$$</td>` +
-            `<td>$$company$$</td>` +
+            `<th scope="row">__id__</th>` +
+            `<td>__username__</td>` +
+            `<td>__role__</td>` +
+            `<td>__company__</td>` +
             `<td class="text-right">` +
-              `<button type="button" data-toggle="modal" data-target="#edit" data-uid="2" class="delete btn btn-warning btn-sm"><i class="fa fa-pencil-ruler fa-fw"></i></button>` +
-              `<button type="button" data-toggle="modal" data-target="#delete" data-uid="1" class="delete btn btn-danger btn-sm"><i class="fa fa-times fa-fw"></i></button>` +
+              `<button type="button" data-toggle="modal" data-target="#edit" data-uid="__id__" class="delete btn btn-warning btn-sm"><i class="fa fa-pencil-ruler fa-fw"></i></button>` +
+              `<button type="button" data-toggle="modal" data-target="#delete" data-uid="__id__" class="delete btn btn-danger btn-sm"><i class="fa fa-times fa-fw"></i></button>` +
             `</td>` +
           `</tr>`;
 
     for (item of data) {
 
       let table_template_local = table_template;
-      table_template_local = table_template_local.replace('$$id$$', item.id)
-      table_template_local = table_template_local.replace('$$username$$', item.username)
-      table_template_local = table_template_local.replace('$$role$$', item.role)
+      table_template_local = table_template_local.replace(/__id__/g, item.id)
+      table_template_local = table_template_local.replace(/__username__/g, item.username)
+      table_template_local = table_template_local.replace(/__role__/g, item.role)
       const company_name = item.company_detail?item.company_detail.name:"None"
-      table_template_local = table_template_local.replace('$$company$$', company_name)
+      table_template_local = table_template_local.replace(/__company__/g, company_name)
       $(".table-user tbody").append(table_template_local)
     }
   }

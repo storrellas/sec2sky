@@ -82,23 +82,16 @@
 
     function fillTable(data){
       const table_template = `<tr>` +
-        `<th scope="row">$$id$$</th>` +
-        `<td>$$name$$</td>` +
-        `<td>$$description$$</td>` +
-        `<td>$$sensor_list$$</td>` +
+        `<th scope="row">__id__</th>` +
+        `<td>__name__</td>` +
+        `<td>__description__</td>` +
+        `<td>__sensor_list__</td>` +
         `<td class="text-right">` +
-          `<button type="button" data-toggle="modal" data-target="#edit" data-uid="2" class="delete btn btn-warning btn-sm"><i class="fa fa-pencil-ruler fa-fw"></i></button>` +
-          `<button type="button" data-toggle="modal" data-target="#delete" data-uid="1" class="delete btn btn-danger btn-sm"><i class="fa fa-times fa-fw"></i></button>` +
+          `<button type="button" data-toggle="modal" data-target="#edit" data-uid="__id__" class="delete btn btn-warning btn-sm"><i class="fa fa-pencil-ruler fa-fw"></i></button>` +
+          `<button type="button" data-toggle="modal" data-target="#delete" data-uid="__id__" class="delete btn btn-danger btn-sm"><i class="fa fa-times fa-fw"></i></button>` +
         `</td>` +
       `</tr>`;
 
-      // for (item of data) {
-      //   let table_template_local = table_template;
-      //   table_template_local = table_template_local.replace('$$id$$', item.id)
-      //   table_template_local = table_template_local.replace('$$name$$', item.name)
-      //   table_template_local = table_template_local.replace('$$description$$', item.description)
-      //   $(".table-company tbody").append(table_template_local)
-      // }
 
       for (item of data) {
         let table_template_local = table_template;
@@ -109,10 +102,10 @@
           sensor_list = sensor_list + user.device_id + ", "
         sensor_list = sensor_list.slice(0, -1);
 
-        table_template_local = table_template_local.replace('$$id$$', item.id)
-        table_template_local = table_template_local.replace('$$name$$', item.name)
-        table_template_local = table_template_local.replace('$$description$$', item.description)
-        table_template_local = table_template_local.replace('$$sensor_list$$', sensor_list)
+        table_template_local = table_template_local.replace(/__id__/g, item.id)
+        table_template_local = table_template_local.replace(/__name__/g, item.name)
+        table_template_local = table_template_local.replace(/__description__/g, item.description)
+        table_template_local = table_template_local.replace(/__sensor_list__/g, sensor_list)
         $(".table-swarm tbody").append(table_template_local)
       }
 

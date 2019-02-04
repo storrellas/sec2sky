@@ -76,13 +76,13 @@
 
     function fillTable(data){
       const table_template = `<tr>` +
-        `<th scope="row">$$id$$</th>` +
-        `<td>$$name$$</td>` +
-        `<td>$$description$$</td>` +
-        `<td>$$username_list$$</td>` +
+        `<th scope="row">__id__</th>` +
+        `<td>__name__</td>` +
+        `<td>__description__</td>` +
+        `<td>__usernameList__</td>` +
         `<td class="text-right">` +
-          `<button type="button" data-toggle="modal" data-target="#edit" data-uid="2" class="delete btn btn-warning btn-sm"><i class="fa fa-pencil-ruler fa-fw"></i></button>` +
-          `<button type="button" data-toggle="modal" data-target="#delete" data-uid="1" class="delete btn btn-danger btn-sm"><i class="fa fa-times fa-fw"></i></button>` +
+          `<button type="button" data-toggle="modal" data-target="#edit" data-uid="__id__" class="delete btn btn-warning btn-sm"><i class="fa fa-pencil-ruler fa-fw"></i></button>` +
+          `<button type="button" data-toggle="modal" data-target="#delete" data-uid="__id__" class="delete btn btn-danger btn-sm"><i class="fa fa-times fa-fw"></i></button>` +
         `</td>` +
       `</tr>`;
 
@@ -95,10 +95,10 @@
           username_list = username_list + user.username + ", "
         username_list = username_list.slice(0, -1);
 
-        table_template_local = table_template_local.replace('$$id$$', item.id)
-        table_template_local = table_template_local.replace('$$name$$', item.name)
-        table_template_local = table_template_local.replace('$$description$$', item.description)
-        table_template_local = table_template_local.replace('$$username_list$$', username_list)
+        table_template_local = table_template_local.replace(/__id__/g, item.id)
+        table_template_local = table_template_local.replace(/__name__/g, item.name)
+        table_template_local = table_template_local.replace(/__description__/g, item.description)
+        table_template_local = table_template_local.replace(/__usernameList__/g, username_list)
         $(".table-company tbody").append(table_template_local)
       }
     }
