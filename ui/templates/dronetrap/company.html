@@ -55,7 +55,7 @@
          </form>
       </div>
       <div class="modal-footer">
-        <button type="button" id="up" class="btn btn-warning" data-dismiss="modal">Update</button>
+        <button type="button" id="up" class="btn btn-info" data-dismiss="modal">Save</button>
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
       </div>
     </div>
@@ -73,7 +73,7 @@
         <strong>Are you sure you want to delete this data?</strong>
       </div>
       <div class="modal-footer">
-        <button type="button" id="del" class="btn btn-danger" data-dismiss="modal">Delete</button>
+        <button type="button" class="btn btn-danger btn-delete" data-dismiss="modal">Delete</button>
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
       </div>
     </div>
@@ -140,24 +140,31 @@
     $(document).ready(function () {
 
       // Retreive companies
-      const jwt_token = CookieMgr.get('jwt_token');
-      $.ajax({
-        type: "GET",
-        url: "/api/company/",
-        headers: {
-          "Authorization": ("Bearer " + jwt_token),
-        },
-        contentType: "application/json; charset=utf-8",
-        dataType: "json",
-        success: function(data){
+      APIMgr.get_model("/api/company/", function(data){
           fillTable(data)
           bindEvents()
-        },
-        error: () => alert("General Error"),
-        failure: () => alert("General Error")
       })
 
 
+
+      $('.btn-delete').click( () => {
+        // Retreive companies
+        const jwt_token = CookieMgr.get('jwt_token');
+        $.ajax({
+          type: "DELETE",
+          url: ("/api/company/" + id),
+          headers: {
+            "Authorization": ("Bearer " + jwt_token),
+          },
+          contentType: "application/json; charset=utf-8",
+          dataType: "json",
+          success: function(data){
+            location.reload();
+          },
+          error: () => window.location = '/ui/',
+          failure: () => window.location = '/ui/'
+        })
+      });
 
     });
   </script>

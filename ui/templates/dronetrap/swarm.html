@@ -78,7 +78,7 @@
         </form>
       </div>
       <div class="modal-footer">
-        <button type="button" id="up" class="btn btn-warning" data-dismiss="modal">Update</button>
+        <button type="button" id="up" class="btn btn-info" data-dismiss="modal">Save</button>
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
       </div>
     </div>
@@ -207,40 +207,20 @@
       // Retreive companies
       const jwt_token = CookieMgr.get('jwt_token');
       $.when(
-        // Get Company Details
-        $.ajax({
-          type: "GET",
-          url: "/api/company/",
-          headers: {
-            "Authorization": ("Bearer " + jwt_token),
-          },
-          contentType: "application/json; charset=utf-8",
-          dataType: "json",
-          success: function(data){
-            fillSelect(data)
-          },
-          error: () => alert("General Error"),
-          failure: () => alert("General Error")
+
+        // Get Company
+        APIMgr.get_model("/api/company/", function(data){
+          fillSelect(data)
         })
 
       ).done( () =>{
 
-        // Get Swarm details
-        $.ajax({
-          type: "GET",
-          url: "/api/swarm/",
-          headers: {
-            "Authorization": ("Bearer " + jwt_token),
-          },
-          contentType: "application/json; charset=utf-8",
-          dataType: "json",
-          success: function(data){
-            fillTable(data)
-            bindEvents()
-          },
-          error: () => alert("General Error"),
-          failure: () => alert("General Error")
+        // Get Swarm
+        APIMgr.get_model("/api/swarm/", function(data){
+          fillTable(data)
+          bindEvents()
         })
+
       })
 
 
