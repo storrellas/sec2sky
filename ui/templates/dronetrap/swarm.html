@@ -38,16 +38,48 @@
 </div>
 
 <div id="edit" class="modal fade" role="dialog">
-  <div class="modal-dialog">
+  <div class="modal-dialog" style="max-width: 80%;">
     <div class="modal-content">
       <div class="modal-header">
         <h4 class="modal-title">Update Data</h4>
         <button type="button" class="close" data-dismiss="modal">×</button>
       </div>
       <div class="modal-body">
-           <input id="fn" type="text" class="form-control" name="fname" placeholder="First Name">
-           <input id="ln" type="text" class="form-control" name="fname" placeholder="Last Name">
-           <input id="mn" type="text" class="form-control" name="fname" placeholder="Middle Name">
+        <form>
+          <div class="form-group row">
+            <label for="input-name" class="col-sm-2 col-form-label">Name</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control-plaintext" id="input-name" value="Name">
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="input-description" class="col-sm-2 col-form-label">Description</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control" id="input-description" placeholder="Description">
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="company-select" class="col-sm-2 col-form-label">Company</label>
+            <div class="col-sm-10">
+              <select class="custom-select company-select">
+                <option selected>NONE</option>
+                <option value="1">Carmaker</option>
+                <option value="2">Nuclear</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="user-select" class="col-sm-2 col-form-label">UserSet</label>
+            <div class="col-sm-10">
+              <select class="custom-select user-select" multiple>
+                <option selected>NONE</option>
+                <option value="1">user1</option>
+                <option value="2">user2</option>
+                <option value="3">user3</option>
+              </select>
+            </div>
+          </div>
+        </form>
       </div>
       <div class="modal-footer">
         <button type="button" id="up" class="btn btn-warning" data-dismiss="modal">Update</button>
