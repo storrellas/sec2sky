@@ -239,6 +239,14 @@ class SensorViewSet(mixins.ListModelMixin,
 #         sensor = self.kwargs['sensor']
 #         return Detection.objects.filter(sensor__pk=sensor)
 
+class RolesView(APIView):
+    authentication_classes = (JWTAuthentication,)
+    permission_classes = (IsAuthenticated,)
+
+    def get(self, request, format=None):
+        response = dict((y, x) for x, y in User.ROLE_CHOICES)
+        return Response(response)
+
 
 class MQTTTestAPIView(APIView):
     authentication_classes = (JWTAuthentication,)
