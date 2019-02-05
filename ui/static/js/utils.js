@@ -34,8 +34,7 @@ class JWTMgr{
 }
 
 class APIMgr{
-  static get_model(url, callback) {
-    // Retreive companies
+  static get_model_list(url, callback) {
     const jwt_token = CookieMgr.get('jwt_token');
     $.ajax({
       type: "GET",
@@ -53,17 +52,17 @@ class APIMgr{
     })
   }
 
-  static delete_model(url) {
-    // Retreive companies
+  static request_model(url, verb, body){
     const jwt_token = CookieMgr.get('jwt_token');
     $.ajax({
-      type: "DELETE",
+      type: verb,
       url: url,
       headers: {
         "Authorization": ("Bearer " + jwt_token),
       },
       contentType: "application/json; charset=utf-8",
       dataType: "json",
+      data: JSON.stringify(body),
       success: function(data){
         location.reload();
       },
@@ -72,7 +71,16 @@ class APIMgr{
     })
   }
 
+  static delete_model(url) {
+    this.request_model(url, "DELETE")
+  }
 
+  static create_model(url, body) {
+    this.request_model(url, "POST", body)
+  }
 
+  static update_model(url, id, body) {
+    this.request_model(url + id + "/", "PUT", body)
+  }
 
 }

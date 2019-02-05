@@ -108,6 +108,7 @@
 
 {% block footer_page %}
   <script type="text/javascript">
+    let id = -1; // Stores the id to which the action is targeted
     const company_dict = {}
     const user_dict = {}
 
@@ -207,13 +208,13 @@
 
       new Promise(function(resolve, reject) {
         // Get Company
-        APIMgr.get_model("/api/company/", function(data){
+        APIMgr.get_model_list("/api/company/", function(data){
           fillSelect(data)
           resolve()
         })
       }).then( function(){
         // Get Swarm
-        APIMgr.get_model("/api/swarm/", function(data){
+        APIMgr.get_model_list("/api/swarm/", function(data){
           fillTable(data)
           bindEvents()
         })
