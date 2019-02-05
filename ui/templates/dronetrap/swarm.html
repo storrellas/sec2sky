@@ -78,7 +78,7 @@
         </form>
       </div>
       <div class="modal-footer">
-        <button type="button" id="up" class="btn btn-info" data-dismiss="modal">Save</button>
+        <button type="button" id="up" class="btn btn-info btn-save" data-dismiss="modal">Save</button>
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
       </div>
     </div>
@@ -220,11 +220,27 @@
         })
       })
 
-
       // Delete Swarm
       $('.btn-delete').click( () => {
         APIMgr.delete_model("/api/swarm/" + id)
       });
+
+      // Save Company
+      $('.btn-save').click( () => {
+
+        const body = {
+          name: $("#input-name").val(),
+          description: $("#input-description").val()
+        }
+
+        if( id < 0 ){
+          APIMgr.create_model("/api/swarm/", body)
+        }else{
+          APIMgr.update_model("/api/swarm/", id, body)
+        }
+
+      });
+
 
     });
   </script>
