@@ -16,7 +16,7 @@
  <div class="offset-lg-1 col-lg-10">
 
    <div class="text-right">
-     <button type="button" data-toggle="modal" data-target="#edit" data-uid="-2" class="btn create btn-info"><i class="fa fa-plus"></i> Add New</button>
+     <button type="button" data-toggle="modal" data-target="#edit" data-uid="-1" class="btn create btn-info"><i class="fa fa-plus"></i> Add New</button>
    </div>
 
    <table class="table table-striped table-hover mt-2 table-sec2sky text-center table-user">
@@ -75,7 +75,7 @@
         </form>
       </div>
       <div class="modal-footer">
-        <button type="button" id="up" class="btn btn-info" data-dismiss="modal">Save</button>
+        <button type="button" id="up" class="btn btn-info btn-save" data-dismiss="modal">Save</button>
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
       </div>
     </div>
@@ -170,10 +170,11 @@
       const row = $(this).closest('tr')
       const item_list = row.children()
       const item_username = item_list[1]
-      const item_password = item_list[2]
+      const item_role = item_list[2]
       const item_company = item_list[3]
       $('#input-username').val($(item_username).text())
-      $('#input-password').val($(item_password).text())
+      $('#input-password').val('')
+      $('#select-role').val($(item_role).text())
       $('#select-company').val($(item_company).data('companyid'))
     })
   }
@@ -200,6 +201,23 @@
       APIMgr.delete_model("/api/user/" + id)
     });
 
+    // Save Company
+    $('.btn-save').click( () => {
+
+      const body = {
+        username: $("#input-username").val(),
+        password: $("#input-password").val(),
+        role: $("#select-role").val(),
+        company: $("#select-company").val()
+      }
+
+      if( id < 0 ){
+        APIMgr.create_model("/api/user/", body)
+      }else{
+        APIMgr.update_model("/api/user/", id, body)
+      }
+
+    });
 
   });
 </script>
