@@ -84,7 +84,7 @@ class APIMgr{
     this.request_model(url, "POST", body, callback)
   }
 
-  static update_model(url, id, body) {
+  static update_model(url, id, body, callback) {
     this.request_model(url + id + "/", "PUT", body, callback)
   }
 
