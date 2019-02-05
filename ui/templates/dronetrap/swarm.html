@@ -63,15 +63,15 @@
             <label for="select-company" class="col-sm-2 col-form-label">Company</label>
             <div class="col-sm-10">
               <select class="custom-select" id="select-company">
-                <option selected>NONE</option>
+                <option val="" selected>NONE</option>
               </select>
             </div>
           </div>
           <div class="form-group row">
-            <label for="user-select" class="col-sm-2 col-form-label">UserSet</label>
+            <label for="select-user" class="col-sm-2 col-form-label">UserSet</label>
             <div class="col-sm-10">
-              <select class="custom-select user-select" multiple>
-                <option selected>NONE</option>
+              <select class="custom-select select-user" multiple>
+                <option val="" selected>NONE</option>
               </select>
             </div>
           </div>
@@ -192,13 +192,13 @@
       $('#select-company').change( function(){
         const template = `<option value="__id__">__name__</option>`;
 
-        $(".user-select").find('option').not(':first').remove();
+        $(".select-user").find('option').not(':first').remove();
         const user_list = company_dict[$(this).val()]
         for (item of user_list) {
           let template_local = template
           template_local = template_local.replace(/__id__/g, item.id)
           template_local = template_local.replace(/__name__/g, item.username)
-          $(".user-select").append(template_local)
+          $(".select-user").append(template_local)
         }
 
       })
@@ -228,16 +228,48 @@
       // Save Company
       $('.btn-save').click( () => {
 
-        const body = {
-          name: $("#input-name").val(),
-          description: $("#input-description").val()
-        }
+        new Promise(function(resolve, reject) {
+          const body = {
+            name: $("#input-name").val(),
+            description: $("#input-description").val()
+          }
 
-        if( id < 0 ){
-          APIMgr.create_model("/api/swarm/", body)
-        }else{
-          APIMgr.update_model("/api/swarm/", id, body)
-        }
+          if( id < 0 ){
+            APIMgr.create_model("/api/swarm/", body, function(data){
+              id = data.id
+              resolve()
+            })
+          }else{
+            APIMgr.update_model("/api/swarm/", id, body, function(data){
+              resolve()
+            })
+          }
+        }).then( function(){
+          const select_user_array = $('.select-user').val()
+          const body = {
+            user_set: [3,4]
+          }
+
+          const jwt_token = CookieMgr.get('jwt_token');
+          $.ajax({
+            type: "POST",
+            url: ("/api/swarm/" + id + "/user/"),
+            headers: {
+              "Authorization": ("Bearer " + jwt_token),
+            },
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            data: JSON.stringify(body),
+            success: function(data){
+                location.reload();
+            },
+            // error: () => window.location = '/ui/',
+            // failure: () => window.location = '/ui/'
+          })
+
+        })
+
+
 
       });
 

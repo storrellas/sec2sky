@@ -52,7 +52,7 @@ class APIMgr{
     })
   }
 
-  static request_model(url, verb, body){
+  static request_model(url, verb, body, callback){
     const jwt_token = CookieMgr.get('jwt_token');
     $.ajax({
       type: verb,
@@ -64,23 +64,28 @@ class APIMgr{
       dataType: "json",
       data: JSON.stringify(body),
       success: function(data){
-        location.reload();
+        if(callback){
+          callback(data)
+        }else{
+          location.reload();
+        }
+
       },
       error: () => window.location = '/ui/',
       failure: () => window.location = '/ui/'
     })
   }
 
-  static delete_model(url) {
-    this.request_model(url, "DELETE")
+  static delete_model(url, callback) {
+    this.request_model(url, "DELETE", callback)
   }
 
-  static create_model(url, body) {
-    this.request_model(url, "POST", body)
+  static create_model(url, body, callback) {
+    this.request_model(url, "POST", body, callback)
   }
 
   static update_model(url, id, body) {
-    this.request_model(url + id + "/", "PUT", body)
+    this.request_model(url + id + "/", "PUT", body, callback)
   }
 
 }
