@@ -17,11 +17,11 @@
     <thead class="bg-secondary text-light">
       <tr>
         <!-- <th scope="col" style="width:5%">ID</th> -->
-        <th scope="col" style="width:15%">DeviceID</th>
-        <th scope="col" style="width:20%">SerialNum</th>
-        <th scope="col" style="width:20%">Model</th>
-        <th scope="col" style="width:20%">Swarm</th>
-        <th scope="col" class="text-right" style="width:20%">Actions</th>
+        <th scope="col" style="width:10%">DeviceID</th>
+        <th scope="col" style="width:15%">SerialNum</th>
+        <th scope="col" style="width:15%">Model</th>
+        <th scope="col" style="width:30%">Swarm</th>
+        <th scope="col" class="text-right" style="width:10%">Actions</th>
       </tr>
     </thead>
     <tbody>
@@ -62,10 +62,11 @@
           <th scope="row">${item.device_id}</th> \
           <td>${item.serial_num}</td>  \
           <td>${item.model}</td>  \
-          <td>${select_item}</td> \
+          <td><div style="display:flex">
+            ${select_item}<button type="button" data-toggle="modal" data-target="#edit" data-uid="${item.id}" class="update btn btn-info btn-sm"><i class="fa fa-save fa-fw"></i></button>
+          </div></td> \
           <td class="text-right">  \
-            <button type="button" data-toggle="modal" data-target="#edit" data-uid="__id__" class="update btn btn-info btn-sm"><i class="fa fa-save fa-fw"></i></button> \
-            <button type="button" data-toggle="modal" data-target="#delete" data-uid="__id__" class="delete btn btn-success btn-sm"><i class="fa fa-info-circle fa-fw"></i></button> \
+            <a class="btn btn-success btn-sm" href="{% url 'ui-sensor' %}/${item.id}/" role="button"><i class="fa fa-info-circle fa-fw"></i></a> \
           </td>  \
         </tr>`;
         $(".table-sensor tbody").append(table_template)
