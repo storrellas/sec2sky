@@ -88,31 +88,27 @@
     let id = -1; // Stores the id to which the action is targeted
 
     function fillTable(data){
-      const table_template = `<tr>` +
-        `<td scope="row">__id__</td>` +
-        `<td>__name__</td>` +
-        `<td>__description__</td>` +
-        `<td>__usernameList__</td>` +
-        `<td class="text-right">` +
-          `<button type="button" data-toggle="modal" data-target="#edit" data-uid="__id__" class="update btn btn-warning btn-sm"><i class="fa fa-pencil-ruler fa-fw"></i></button>` +
-          `<button type="button" data-toggle="modal" data-target="#delete" data-uid="__id__" class="delete btn btn-danger btn-sm"><i class="fa fa-times fa-fw"></i></button>` +
-        `</td>` +
-      `</tr>`;
 
       for (item of data) {
-        let table_template_local = table_template;
-
         // Create String of username
         let username_list = ""
-        for (user of item.user_list_detail)
+        for ( var user of item.user_list_detail)
           username_list = username_list + user.username + ", "
         username_list = username_list.slice(0, -1);
 
-        table_template_local = table_template_local.replace(/__id__/g, item.id)
-        table_template_local = table_template_local.replace(/__name__/g, item.name)
-        table_template_local = table_template_local.replace(/__description__/g, item.description)
-        table_template_local = table_template_local.replace(/__usernameList__/g, username_list)
-        $(".table-company tbody").append(table_template_local)
+        const table_template = `<tr>` +
+          `<td scope="row">${item.id}</td>` +
+          `<td>${item.name}</td>` +
+          `<td>${item.description}</td>` +
+          `<td>${username_list}</td>` +
+          `<td class="text-right">` +
+            `<button type="button" data-toggle="modal" data-target="#edit" data-uid="__id__" class="update btn btn-warning btn-sm"><i class="fa fa-pencil-ruler fa-fw"></i></button>` +
+            `<button type="button" data-toggle="modal" data-target="#delete" data-uid="__id__" class="delete btn btn-danger btn-sm"><i class="fa fa-times fa-fw"></i></button>` +
+          `</td>` +
+        `</tr>`;
+        $(".table-company tbody").append(table_template)
+
+
       }
     }
 
