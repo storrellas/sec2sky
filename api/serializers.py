@@ -64,6 +64,7 @@ class DetectionSerializer(serializers.ModelSerializer):
 class SensorExtendedSerializer(serializers.ModelSerializer):
     n_detection = serializers.SerializerMethodField()
     n_status = serializers.SerializerMethodField()
+    swarm = SwarmSerializer()
 
     def get_n_detection(self, obj):
         return Detection.objects.filter(sensor=obj).count()

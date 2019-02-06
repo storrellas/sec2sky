@@ -1,0 +1,100 @@
+{% extends 'dronetrap/base.html' %}
+{% load static %}
+
+{% block header_page %}
+
+{% endblock header_page %}
+{% block content %}
+
+<div class="row fullheight" >
+ <div class="offset-lg-1 col-lg-10">
+
+   <div class="text-right">
+     <button type="button" data-toggle="modal" data-target="#edit" data-uid="-1" class="btn create btn-info" disabled><i class="fa fa-plus"></i> Add New</button>
+   </div>
+
+   <table class="table table-striped table-hover mt-2 table-sec2sky text-center table-sensor">
+    <thead class="bg-secondary text-light">
+      <tr>
+        <!-- <th scope="col" style="width:5%">ID</th> -->
+        <th scope="col" style="width:15%">DeviceID</th>
+        <th scope="col" style="width:20%">SerialNum</th>
+        <th scope="col" style="width:20%">Model</th>
+        <th scope="col" style="width:20%">Swarm</th>
+        <th scope="col" class="text-right" style="width:20%">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+    </tbody>
+    </table>
+
+  </div>
+</div>
+
+
+
+{% endblock content %}
+
+{% block footer_page %}
+  <script type="text/javascript">
+
+
+    let swarm_list = []
+    function fillSelect(sensor){
+
+      let options = `<option value="">NONE</option>`
+      for (var item of swarm_list) {
+        let selected = ""
+        if(sensor.swarm && sensor.swarm.id == item.id)
+          selected = "selected"
+        const template = `<option ${selected} value="${item.id}">${item.name}</option>`;
+        options = options + template
+      }
+      const select_template = `<select class="custom-select select-swarm">` + options + `</select>`;
+      return select_template
+    }
+
+
+    function fillTable(data){
+      for (var item of data) {
+
+        const select_item = fillSelect(item)
+        const table_template = `<tr> \
+          <th scope="row">${item.device_id}</th> \
+          <td>${item.serial_num}</td>  \
+          <td>${item.model}</td>  \
+          <td>${select_item}</td> \
+          <td class="text-right">  \
+            <button type="button" data-toggle="modal" data-target="#edit" data-uid="__id__" class="update btn btn-info btn-sm"><i class="fa fa-save fa-fw"></i></button> \
+            <button type="button" data-toggle="modal" data-target="#delete" data-uid="__id__" class="delete btn btn-success btn-sm"><i class="fa fa-info-circle fa-fw"></i></button> \
+          </td>  \
+        </tr>`;
+        $(".table-sensor tbody").append(table_template)
+      }
+    }
+
+    function bindEvents(){
+
+    }
+
+    $(document).ready(function () {
+
+      new Promise(function(resolve, reject) {
+        // Get Swarm
+        APIMgr.get_model_list("/api/swarm/", function(data){
+          swarm_list = data
+          resolve()
+        })
+      }).then( function(){
+        // Get Sensor
+        APIMgr.get_model_list("/api/sensor/", function(data){
+          fillTable(data)
+          bindEvents()
+        })
+      })
+
+
+    });
+
+  </script>
+{% endblock footer_page %}
