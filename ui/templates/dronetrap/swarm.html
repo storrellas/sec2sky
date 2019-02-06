@@ -113,12 +113,9 @@
     const user_dict = {}
 
     function fillSelect(data){
-      const template = `<option value="__id__">__name__</option>`;
       for (item of data) {
-        let template_local = template;
-        template_local = template_local.replace(/__id__/g, item.id)
-        template_local = template_local.replace(/__name__/g, item.name)
-        $("#select-company").append(template_local)
+        const template = `<option value="${item.id}">${item.name}</option>`;
+        $("#select-company").append(template)
 
         // Store data in internal variables
         company_dict[item.id] = item.user_list_detail
@@ -129,55 +126,44 @@
     }
 
     function fillTable(data){
-      const table_template = `<tr>` +
-        `<th scope="row">__id__</th>` +
-        `<td>__name__</td>` +
-        `<td>__description__</td>` +
-        `<td data-companyid="__companyid__" data-userlist="__user_list_id__">__user_list__</td>` +
-        `<td>__sensor_list__</td>` +
-        `<td class="text-right">` +
-          `<button type="button" data-toggle="modal" data-target="#edit" data-uid="__id__" class="update btn btn-warning btn-sm"><i class="fa fa-pencil-ruler fa-fw"></i></button>` +
-          `<button type="button" data-toggle="modal" data-target="#delete" data-uid="__id__" class="delete btn btn-danger btn-sm"><i class="fa fa-times fa-fw"></i></button>` +
-        `</td>` +
-      `</tr>`;
 
       for (item of data) {
-        let table_template_local = table_template;
 
         // Create String of username
         let sensor_list = ""
         for (user of item.sensor_list_detail)
           sensor_list = sensor_list + user.device_id + ", "
         sensor_list = sensor_list.slice(0, -1);
-
-        table_template_local = table_template_local.replace(/__id__/g, item.id)
-        table_template_local = table_template_local.replace(/__name__/g, item.name)
-        table_template_local = table_template_local.replace(/__description__/g, item.description)
         let user_list = ""
         for (user of item.user_set){
           user_list = user_list + user_dict[user].username + ", "
         }
 
-        table_template_local = table_template_local.replace(/__user_list__/g, user_list)
-        table_template_local = table_template_local.replace(/__user_list_id__/g, item.user_set)
-        table_template_local = table_template_local.replace(/__companyid__/g, user_dict[user].company)
-        table_template_local = table_template_local.replace(/__sensor_list__/g, sensor_list)
-        $(".table-swarm tbody").append(table_template_local)
+
+        const table_template = `<tr>` +
+          `<th scope="row">${item.id}</th>` +
+          `<td>${item.name}</td>` +
+          `<td>${item.description}</td>` +
+          `<td data-companyid="${user_dict[user].company}" data-userlist="${item.user_set}">${user_list}</td>` +
+          `<td>${sensor_list}</td>` +
+          `<td class="text-right">` +
+            `<button type="button" data-toggle="modal" data-target="#edit" data-uid="${item.id}" class="update btn btn-warning btn-sm"><i class="fa fa-pencil-ruler fa-fw"></i></button>` +
+            `<button type="button" data-toggle="modal" data-target="#delete" data-uid="${item.id}" class="delete btn btn-danger btn-sm"><i class="fa fa-times fa-fw"></i></button>` +
+          `</td>` +
+        `</tr>`;
+        $(".table-swarm tbody").append(table_template)
+
       }
 
     }
 
     function userSetConfiguration(companyid){
-      const template = `<option value="__id__">__name__</option>`;
-
       //$(".select-user").find('option').not(':first').remove();
       $(".select-user").find('option').remove();
       const user_list = company_dict[companyid]
-      for (item of user_list) {
-        let template_local = template
-        template_local = template_local.replace(/__id__/g, item.id)
-        template_local = template_local.replace(/__name__/g, item.username)
-        $(".select-user").append(template_local)
+      for (const item of user_list) {
+        const template = `<option value="${item.id}">${item.username}</option>`;
+        $(".select-user").append(template)
       }
 
     }
