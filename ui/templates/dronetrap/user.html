@@ -109,49 +109,36 @@
   let id = -1; // Stores the id to which the action is targeted
 
   function fillSelectCompany(data){
-    const template = `<option value="__id__">__name__</option>`;
-    for (item of data) {
-
-      let template_local = template;
-      template_local = template_local.replace(/__id__/g, item.id)
-      template_local = template_local.replace(/__name__/g, item.name)
-      $("#select-company").append(template_local)
+    for (const item of data) {
+      const template = `<option value="${item.id}">${item.name}</option>`;
+      $("#select-company").append(template)
     }
   }
 
   function fillSelectRoles(data){
-    const template = `<option value="__id__">__name__</option>`;
     for (const role of Object.keys(data)) {
-      let template_local = template;
-      template_local = template_local.replace(/__id__/g, role)
-      template_local = template_local.replace(/__name__/g, data[role])
-      $("#select-role").append(template_local)
+      const template = `<option value="${role}">${data[role]}</option>`;
+      $("#select-role").append(template)
     }
   }
 
   function fillTable(data){
-    const table_template = `<tr>` +
-            `<th scope="row">__id__</th>` +
-            `<td>__username__</td>` +
-            `<td>__role__</td>` +
-            `<td data-companyid="__companyid__">__company__</td>` +
-            `<td class="text-right">` +
-              `<button type="button" data-toggle="modal" data-target="#edit" data-uid="__id__" class="update btn btn-warning btn-sm"><i class="fa fa-pencil-ruler fa-fw"></i></button>` +
-              `<button type="button" data-toggle="modal" data-target="#delete" data-uid="__id__" class="delete btn btn-danger btn-sm"><i class="fa fa-times fa-fw"></i></button>` +
-            `</td>` +
-          `</tr>`;
 
-    for (item of data) {
+    for (var item of data) {
 
-      let table_template_local = table_template;
-      table_template_local = table_template_local.replace(/__id__/g, item.id)
-      table_template_local = table_template_local.replace(/__username__/g, item.username)
-      table_template_local = table_template_local.replace(/__role__/g, item.role)
       const company_name = item.company_detail?item.company_detail.name:"None"
       const company_id = item.company_detail?item.company_detail.id:"None"
-      table_template_local = table_template_local.replace(/__company__/g, company_name)
-      table_template_local = table_template_local.replace(/__companyid__/g, company_id)
-      $(".table-user tbody").append(table_template_local)
+      const table_template = `<tr>` +
+              `<th scope="row">${item.id}</th>` +
+              `<td>${item.username}</td>` +
+              `<td>${item.role}</td>` +
+              `<td data-companyid="${company_id}">${company_name}</td>` +
+              `<td class="text-right">` +
+                `<button type="button" data-toggle="modal" data-target="#edit" data-uid="${item.id}" class="update btn btn-warning btn-sm"><i class="fa fa-pencil-ruler fa-fw"></i></button>` +
+                `<button type="button" data-toggle="modal" data-target="#delete" data-uid="${item.id}" class="delete btn btn-danger btn-sm"><i class="fa fa-times fa-fw"></i></button>` +
+              `</td>` +
+            `</tr>`;
+      $(".table-user tbody").append(table_template)
     }
   }
 
