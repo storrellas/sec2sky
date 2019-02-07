@@ -31,6 +31,24 @@
   </div>
 </div>
 
+<div id="confirm" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header bg-secondary">
+        <h4 class="modal-title">Confirm</h4>
+        <button type="button" class="close close-button" data-dismiss="modal"><i class="fa fa-times fa-fw"></i></button>
+      </div>
+      <div class="modal-body">
+        <strong>Are you sure you want to assign <span id="sensor-selected"></span> to <span id="swarm-selected"></span>?</strong>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-info btn-save" data-dismiss="modal">Save</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+      </div>
+    </div>
+  </div>
+</div>
 
 
 {% endblock content %}
@@ -38,7 +56,8 @@
 {% block footer_page %}
   <script type="text/javascript">
 
-
+    let id = -1
+    let swarm_id = -1
     let swarm_list = []
     function fillSelect(sensor){
 
@@ -63,7 +82,8 @@
           <td>${item.serial_num}</td>  \
           <td>${item.model}</td>  \
           <td><div style="display:flex">
-            ${select_item}<button type="button" data-toggle="modal" data-target="#edit" data-uid="${item.id}" class="update btn btn-info btn-sm"><i class="fa fa-save fa-fw"></i></button>
+            ${select_item}
+            <button type="button" data-toggle="modal" data-target="#confirm" data-uid="${item.id}" class="confirm btn btn-warning btn-sm"><i class="fa fa-save fa-fw"></i></button>
           </div></td> \
           <td class="text-right">  \
             <a class="btn btn-success btn-sm" href="{% url 'ui-sensor' %}/${item.id}/" role="button"><i class="fa fa-info-circle fa-fw"></i></a> \
@@ -73,8 +93,18 @@
       }
     }
 
-    function bindEvents(){
 
+    function bindEvents(){
+      $('.confirm').unbind()
+      $('.confirm').click(function(){
+        const select = $(this).prev()
+        id = $(this).data("uid");
+        swarm_id = select.val()
+        const sensor_name = $(this).closest('tr').children(':first').html()
+        const swarm_name = select.children("option:selected").text()
+        $('#sensor-selected').text(sensor_name)
+        $('#swarm-selected').text(swarm_name)
+      })
     }
 
     $(document).ready(function () {
@@ -92,6 +122,14 @@
           bindEvents()
         })
       })
+
+      // Save Company
+      $('.btn-save').click( () => {
+        const body = {
+          swarm: swarm_id
+        }
+        APIMgr.update_model("/api/sensor/", id, body)
+      });
 
 
     });
