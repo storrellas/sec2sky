@@ -6,6 +6,7 @@ import uuid
 from django.shortcuts import render
 from django.conf import settings
 from django.core.exceptions import ObjectDoesNotExist
+from django.core.paginator import Paginator
 
 # REST framework
 from rest_framework import viewsets
@@ -182,6 +183,7 @@ class SensorViewSet(mixins.ListModelMixin,
     queryset = Sensor.objects.all()
     serializer_class = serializers.SensorExtendedSerializer
     renderer_classes = (JSONRenderer, )
+    page_size = 10
 
     def get_serializer_class(self):
         if self.action == 'list' or self.action == 'retrieve':
@@ -225,13 +227,19 @@ class SensorViewSet(mixins.ListModelMixin,
     @action(detail=True, methods=['get'])
     def detection(self, request, pk=None):
         queryset = Detection.objects.filter(sensor__pk=pk)
-        serializer = serializers.DetectionSerializer(queryset, many=True)
+
+        # Return only first page
+        paginator = Paginator(queryset, self.page_size)
+        serializer = serializers.DetectionSerializer(paginator.page(1), many=True)
         return Response(serializer.data)
 
     @action(detail=True, methods=['get'])
     def status(self, request, pk=None):
         queryset = Status.objects.filter(sensor__pk=pk)
-        serializer = serializers.StatusSerializer(queryset, many=True)
+
+        # Return only first page
+        paginator = Paginator(queryset, self.page_size)
+        serializer = serializers.StatusSerializer(paginator.page(1), many=True)
         return Response(serializer.data)
 
 

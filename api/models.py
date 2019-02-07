@@ -92,6 +92,9 @@ class Detection(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
+    class Meta:
+        ordering = ('-created_at', )
+
     def __str__(self):
         return self.description
 
@@ -117,6 +120,9 @@ class Status(models.Model):
     disk_percent = models.IntegerField(default=0)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        ordering = ('-created_at', )
 
     def __str__(self):
         return self.sensor
