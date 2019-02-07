@@ -66,51 +66,73 @@
      </div>
 
 
-     <div class="row mt-5">
-
-       <div class="offset-lg-1 col-lg-10">
-         <h3>Sensor Status</h3>
-         <table class="table table-striped table-hover mt-2 table-sec2sky text-center table-status">
-          <thead class="bg-secondary text-light">
-            <tr>
-              <th scope="col" style="width:15%">Timestamp</th>
-              <th scope="col" style="width:15%">Coordinates</th>
-              <th scope="col" style="width:15%">[Wifi/RF0/RF1]</th>
-              <th scope="col" style="width:15%">GPS</th>
-              <th scope="col" style="width:15%">CPU</th>
-              <th scope="col" style="width:15%">RAM</th>
-              <th scope="col" style="width:15%">DISK</th>
-            </tr>
-          </thead>
-          <tbody>
-          </tbody>
-          </table>
-
-        </div>
-     </div>
-
 
      <div class="row mt-5">
 
        <div class="offset-lg-1 col-lg-10">
-         <h3>Sensor Detection</h3>
-         <table class="table table-striped table-hover mt-2 table-sec2sky text-center table-detection">
-          <thead class="bg-secondary text-light">
-            <tr>
-              <th scope="col" style="width:15%">Timestamp</th>
-              <th scope="col" style="width:15%">Description</th>
-              <th scope="col" style="width:15%">Thread</th>
-              <th scope="col" style="width:15%">Home</th>
-              <th scope="col" style="width:15%">Coordinates</th>
-              <th scope="col" style="width:15%">RSSI/SignalType</th>
-            </tr>
-          </thead>
-          <tbody>
-          </tbody>
-          </table>
 
-        </div>
-     </div>
+         <div class="accordion" id="accordionExample">
+           <div class="card">
+             <div class="card-header" id="headingOne">
+               <h5 class="mb-0">
+                 <button class="btn btn-light" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                   <h3>Sensor Status</h3>
+                 </button>
+               </h5>
+             </div>
+
+             <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
+               <div class="card-body">
+                 <table class="table table-striped table-hover mt-2 table-sec2sky text-center table-status">
+                  <thead class="bg-secondary text-light">
+                    <tr>
+                      <th scope="col" style="width:15%">Timestamp</th>
+                      <th scope="col" style="width:15%">Coordinates</th>
+                      <th scope="col" style="width:15%">[Wifi/RF0/RF1]</th>
+                      <th scope="col" style="width:15%">GPS</th>
+                      <th scope="col" style="width:15%">CPU</th>
+                      <th scope="col" style="width:15%">RAM</th>
+                      <th scope="col" style="width:15%">DISK</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                  </tbody>
+                  </table>
+               </div>
+             </div>
+           </div>
+           <div class="card">
+             <div class="card-header" id="headingTwo">
+               <h5 class="mb-0">
+                 <button class="btn btn-light collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                   <h3>Sensor Detection</h3>
+                 </button>
+               </h5>
+             </div>
+             <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
+               <div class="card-body">
+                 <table class="table table-striped table-hover mt-2 table-sec2sky text-center table-detection">
+                  <thead class="bg-secondary text-light">
+                    <tr>
+                      <th scope="col" style="width:15%">Timestamp</th>
+                      <th scope="col" style="width:15%">Description</th>
+                      <th scope="col" style="width:15%">Thread</th>
+                      <th scope="col" style="width:15%">Home</th>
+                      <th scope="col" style="width:15%">Coordinates</th>
+                      <th scope="col" style="width:15%">RSSI/SignalType</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                  </tbody>
+                  </table>
+               </div>
+             </div>
+           </div>
+         </div>
+
+
+      </div>
+    </div>
 
   </div>
 </div>
