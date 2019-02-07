@@ -58,8 +58,7 @@
 
     let id = -1
     let swarm_id = -1
-    let swarm_list = []
-    function fillSelect(sensor){
+    function fillSelect(sensor, swarm_list){
 
       let options = `<option value="">NONE</option>`
       for (var item of swarm_list) {
@@ -74,9 +73,9 @@
     }
 
 
-    function fillTable(data){
+    function fillTable(data, swarm_list){
       for (var item of data) {
-        const select_item = fillSelect(item)
+        const select_item = fillSelect(item, swarm_list)
         const table_template = `<tr> \
           <th scope="row">${item.device_id}</th> \
           <td>${item.serial_num}</td>  \
@@ -109,6 +108,7 @@
 
     $(document).ready(function () {
 
+      let swarm_list = []
       new Promise(function(resolve, reject) {
         // Get Swarm
         APIMgr.get_model_list("/api/swarm/", function(data){
@@ -118,7 +118,7 @@
       }).then( function(){
         // Get Sensor
         APIMgr.get_model_list("/api/sensor/", function(data){
-          fillTable(data)
+          fillTable(data, swarm_list)
           bindEvents()
         })
       })

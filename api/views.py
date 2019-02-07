@@ -183,6 +183,12 @@ class SensorViewSet(mixins.ListModelMixin,
     serializer_class = serializers.SensorExtendedSerializer
     renderer_classes = (JSONRenderer, )
 
+    def get_serializer_class(self):
+        if self.action == 'list' or self.action == 'retrieve':
+            return serializers.SensorExtendedSerializer
+        else:
+            return serializers.SensorSerializer
+
     def update(self, request, *args, **kwargs):
         response = super().update(request, *args, *kwargs)
 
