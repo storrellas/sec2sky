@@ -71,13 +71,17 @@ class APIMgr{
         }
 
       },
-      // error: () => window.location = '/ui/',
-      // failure: () => window.location = '/ui/'
+      error: () => window.location = '/ui/',
+      failure: () => window.location = '/ui/'
     })
   }
 
+  static get_model(url, id, callback) {
+    this.request_model(url + id + "/", "GET", undefined, callback)
+  }
+
   static delete_model(url, callback) {
-    this.request_model(url, "DELETE", callback)
+    this.request_model(url, "DELETE", undefined, callback)
   }
 
   static create_model(url, body, callback) {
@@ -88,4 +92,16 @@ class APIMgr{
     this.request_model(url + id + "/", "PUT", body, callback)
   }
 
+}
+
+class URLMgr{
+  static get_query_variable(variable){
+     const query = window.location.search.substring(1);
+     const url_param_list = query.split("&");
+     for (let url_param of url_param_list) {
+       const [key, value] = url_param.split("=");
+       if(key == variable){return value;}
+     }
+     return(false);
+  }
 }

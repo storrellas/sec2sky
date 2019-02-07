@@ -85,7 +85,7 @@
             <button type="button" data-toggle="modal" data-target="#confirm" data-uid="${item.id}" class="confirm btn btn-warning btn-sm"><i class="fa fa-save fa-fw"></i></button>
           </div></td> \
           <td class="text-right">  \
-            <a class="btn btn-success btn-sm" href="{% url 'ui-sensor' %}/${item.id}/" role="button"><i class="fa fa-info-circle fa-fw"></i></a> \
+            <a class="btn btn-success btn-sm" href="{% url 'ui-sensor-detail' %}?id=${item.id}" role="button"><i class="fa fa-info-circle fa-fw"></i></a> \
           </td>  \
         </tr>`;
         $(".table-sensor tbody").append(table_template)

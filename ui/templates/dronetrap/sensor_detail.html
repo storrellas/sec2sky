@@ -2,22 +2,114 @@
 {% load static %}
 
 {% block header_page %}
+  <style type="text/css">
+    .border-right {
+        border-right: 3px solid #212529!important;
+    }
+  </style>
+
+
 
 {% endblock header_page %}
+
 {% block content %}
+{% verbatim %}
 
-Sensor detail
+<div class="row fullheight" >
+ <div class="col-lg-12">
+     <div class="row">
+       <div class="col-sm-2 border-right">
+          <div class="text-right"><i class="fa fa-broadcast-tower fa-5x"></i></div>
+         <div class="text-right">Sensor Information and Details</div>
+       </div>
+       <div id="sensor-detail" class="col-sm-6 invisible">
+         <h1>Sensor Details</h1>
+         <form>
+           <!-- <div class="form-group row text-muted">
+             <div class="offset-sm-2 col-sm-2 text-center">
+               <i class="fas fa-spinner fa-spin fa-3x"></i>
+             </div>
+             <div class="col-sm-6 text-center">
+               <span><h2>Loading ...</h2><span/>
+             </div>
+           </div> -->
 
+          <div class="form-group row">
+            <label for="device-id" class="col-sm-2 col-form-label">DeviceID</label>
+            <div class="col-sm-10">
+              <input type="text" readonly class="form-control" id="device-id" value="">
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="device-id" class="col-sm-2 col-form-label">SerialNum</label>
+            <div class="col-sm-10">
+              <input type="text" readonly class="form-control" id="serial-num" value="">
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="device-id" class="col-sm-2 col-form-label">Model</label>
+            <div class="col-sm-10">
+              <input type="text" readonly class="form-control" id="model" value="">
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="device-id" class="col-sm-2 col-form-label">Energy</label>
+            <div class="col-sm-10">
+              <input type="text" readonly class="form-control" id="energy" value="">
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="device-id" class="col-sm-2 col-form-label">Version</label>
+            <div class="col-sm-10">
+              <input type="text" readonly class="form-control" id="version" value="">
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="device-id" class="col-sm-2 col-form-label">Available</label>
+            <div class="col-sm-10">
+              <input type="text" readonly class="form-control" id="available" value="">
+            </div>
+          </div>
+        </form>
+       </div>
+     </div>
+  </div>
+</div>
 
-
+{% endverbatim %}
 {% endblock content %}
 
 {% block footer_page %}
+<!-- development version, includes helpful console warnings -->
+<!-- production version, optimized for size and speed -->
+<!-- <script src="https://cdn.jsdelivr.net/npm/vue"></script> -->
+<script src="https://cdn.jsdelivr.net/npm/gasparesganga-jquery-loading-overlay@2.1.6/dist/loadingoverlay.min.js"></script>
+
   <script type="text/javascript">
 
     $(document).ready(function () {
-      console.log("ñlfdjsñfadsj")
-    });
 
+      // Retreive companies
+      const id = URLMgr.get_query_variable('id')
+      APIMgr.get_model("/api/sensor/", id, function(data){
+        $('#device-id').val(data.device_id)
+        $('#serial-num').val(data.serial_num)
+        $('#model').val(data.model)
+        $('#energy').val(data.energy)
+        $('#version').val(data.version)
+        $('#available').val(data.available)
+        $('#token').val(data.token)
+
+        // Hide Loading
+        setTimeout(function(){
+          $("#sensor-detail").LoadingOverlay("hide");
+          $("#sensor-detail").removeClass("invisible");
+        }, 500);
+      })
+
+      // Show loading overlay
+      $("#sensor-detail").LoadingOverlay("show");
+
+    });
   </script>
 {% endblock footer_page %}
