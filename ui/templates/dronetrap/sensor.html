@@ -58,6 +58,7 @@
 
     let id = -1
     let swarm_id = -1
+    let disabled_by_role = ""
     function fillSelect(sensor, swarm_list){
 
       let options = `<option value="">NONE</option>`
@@ -68,7 +69,7 @@
         const template = `<option ${selected} value="${item.id}">${item.name}</option>`;
         options = options + template
       }
-      const select_template = `<select class="custom-select select-swarm">` + options + `</select>`;
+      const select_template = `<select ${disabled_by_role} class="custom-select select-swarm">` + options + `</select>`;
       return select_template
     }
 
@@ -82,7 +83,7 @@
           <td>${item.model}</td>  \
           <td><div style="display:flex">
             ${select_item}
-            <button type="button" data-toggle="modal" data-target="#confirm" data-uid="${item.id}" class="confirm btn btn-warning btn-sm"><i class="fa fa-save fa-fw"></i></button>
+            <button ${disabled_by_role} type="button" data-toggle="modal" data-target="#confirm" data-uid="${item.id}" class="confirm btn btn-warning btn-sm"><i class="fa fa-save fa-fw"></i></button>
           </div></td> \
           <td class="text-right">  \
             <a class="btn btn-success btn-sm" href="{% url 'ui-sensor-detail' %}?id=${item.id}" role="button"><i class="fa fa-info-circle fa-fw"></i></a> \
@@ -107,6 +108,14 @@
     }
 
     $(document).ready(function () {
+
+      const token_access = CookieMgr.get('jwt_token');
+      const jwt = JWTMgr.parse(token_access)
+      if(jwt.role == "administrator"){
+
+      }else{
+        disabled_by_role = "disabled"
+      }
 
       let swarm_list = []
       new Promise(function(resolve, reject) {

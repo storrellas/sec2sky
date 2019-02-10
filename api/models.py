@@ -75,7 +75,7 @@ class Sensor(models.Model):
     token = models.CharField(max_length=500, null=True)
 
     def __str__(self):
-        return self.name
+        return self.serial_num
 
 class Detection(models.Model):
 

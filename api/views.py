@@ -200,6 +200,14 @@ class SensorViewSet(mixins.ListModelMixin,
     renderer_classes = (JSONRenderer, )
     page_size = 10
 
+    def get_queryset(self):
+        if self.request.user.is_superuser:
+            return self.model.objects.all()
+        else:
+            swarm_queryset = Swarm.objects.filter(user_set__in=[self.request.user.id])
+            swarm_id_list = swarm_queryset.values_list('id', flat=True)
+            return self.model.objects.filter(swarm__in=swarm_id_list)
+
     def get_serializer_class(self):
         if self.action == 'list' or self.action == 'retrieve':
             return serializers.SensorExtendedSerializer
