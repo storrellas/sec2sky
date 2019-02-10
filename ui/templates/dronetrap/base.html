@@ -175,13 +175,15 @@
                       <i class="fa fa-user fa-fw"></i> <strong></strong>
                   </a>
                   <ul class="dropdown-menu dropdown-user">
-                      <li><a class="dropdown-item" href="{% url 'ui-profile' %}"><i class="fa fa-user fa-fw"></i> Profile</a>
+                      <li>
+                        <a class="dropdown-item" href="{% url 'ui-profile' %}">
+                          <i class="fa fa-user fa-fw"></i> Profile
+                        </a>
                       </li>
-                      <li><a class="dropdown-item" href=" /config"><i class="fa fa-gear fa-fw"></i> Config general</a>
-                      </li>
-                      <li><a class="dropdown-item" href="/config/devices"><i class="fa fa-gear fa-fw"></i> Config devices</a>
-                      </li>
-                      <li><a class="dropdown-item logout-btn" href="#"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+                      <li>
+                        <a class="dropdown-item logout-btn" href="#">
+                          <i class="fa fa-sign-out fa-fw"></i> Logout
+                        </a>
                       </li>
                   </ul>
               </li>
@@ -227,40 +229,17 @@
                   <i class="fa fa-tachometer-alt fa-fw"></i><span>Detections</span>
                 </a>
               </li>
-
-
-              <!-- <li>
-                  <a href="#">Shortcuts</a>
-              </li>
-              <li>
-                  <a href="#">Overview</a>
-              </li>
-              <li>
-                  <a href="#">Events</a>
-              </li>
-              <li>
-                  <a href="#">About</a>
-              </li>
-              <li>
-                  <a href="#">Services</a>
-              </li>
-              <li>
-                  <a href="#">Contact</a>
-              </li> -->
           </ul>
       </div>
-      <!-- /#sidebar-wrapper -->
 
-      <!-- Page Content -->
       <div id="page-content-wrapper">
           {% block content %}
               OPS! error en integración de plantillas con Base...
           {% endblock content %}
       </div>
-      <!-- /#page-content-wrapper -->
 
   </div>
-  <!-- /#wrapper -->
+
 
 
   <!-- JQuery/Bootstrap/Popper-->
