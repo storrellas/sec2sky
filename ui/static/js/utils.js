@@ -47,8 +47,8 @@ class APIMgr{
       success: function(data){
         callback(data)
       },
-      error: () => window.location = '/ui/',
-      failure: () => window.location = '/ui/'
+      // error: () => window.location = '/ui/',
+      // failure: () => window.location = '/ui/'
     })
   }
 
@@ -71,8 +71,8 @@ class APIMgr{
         }
 
       },
-      error: () => window.location = '/ui/',
-      failure: () => window.location = '/ui/'
+      // error: () => window.location = '/ui/',
+      // failure: () => window.location = '/ui/'
     })
   }
 

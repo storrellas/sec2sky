@@ -13,6 +13,7 @@ from rest_framework import viewsets
 from rest_framework.renderers import JSONRenderer
 from rest_framework.authentication import SessionAuthentication, BasicAuthentication, TokenAuthentication
 from rest_framework.permissions import IsAuthenticated, IsAdminUser
+from rest_framework.permissions import SAFE_METHODS
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.generics import ListAPIView
@@ -37,6 +38,15 @@ from sec2sky import utils
 
 logger = utils.get_logger()
 
+
+class IsAdminUserOrReadOnly(IsAdminUser):
+
+    def has_permission(self, request, view):
+        is_admin = super(
+            IsAdminUserOrReadOnly,
+            self).has_permission(request, view)
+        # Python3: is_admin = super().has_permission(request, view)
+        return request.method in SAFE_METHODS or is_admin
 
 class Sec2SkyTokenObtainPairSerializer(TokenObtainPairSerializer):
     @classmethod
@@ -98,6 +108,11 @@ class CompanyViewSet(viewsets.ModelViewSet):
         else:
             return serializers.CompanySerializer
 
+    @action(detail=False, methods=['get'], permission_classes=[IsAuthenticated])
+    def whoami(self, request, pk=None):
+        serializer = serializers.CompanyExtendedSerializer(request.user.company)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+
 class UserViewSet(viewsets.ModelViewSet):
     authentication_classes = (JWTAuthentication,)
     permission_classes = (IsAdminUser,)
@@ -144,7 +159,7 @@ class UserViewSet(viewsets.ModelViewSet):
 
 class SwarmViewSet(viewsets.ModelViewSet):
     authentication_classes = (JWTAuthentication,)
-    permission_classes = (IsAuthenticated,)
+    permission_classes = (IsAdminUserOrReadOnly,)
 
     model = Swarm
     queryset = Swarm.objects.all()
@@ -190,6 +205,7 @@ class SensorViewSet(mixins.ListModelMixin,
             return serializers.SensorExtendedSerializer
         else:
             return serializers.SensorSerializer
+
 
     def update(self, request, *args, **kwargs):
         response = super().update(request, *args, *kwargs)

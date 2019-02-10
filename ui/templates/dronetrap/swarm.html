@@ -112,6 +112,12 @@
     const company_dict = {}
     const user_dict = {}
 
+    function update_user_dict(company_id, user_list_detail){
+      for (const user of user_list_detail) {
+          user_dict[user.id] = {'username': user.username, 'company': company_id}
+      }
+    }
+
     function fillSelect(data){
       for (item of data) {
         const template = `<option value="${item.id}">${item.name}</option>`;
@@ -119,9 +125,7 @@
 
         // Store data in internal variables
         company_dict[item.id] = item.user_list_detail
-        for (user of item.user_list_detail) {
-            user_dict[user.id] = {'username': user.username, 'company': item.id}
-        }
+        update_user_dict(item.id, item.user_list_detail)
       }
     }
 
@@ -200,11 +204,23 @@
     $(document).ready(function () {
 
       new Promise(function(resolve, reject) {
-        // Get Company
-        APIMgr.get_model_list("/api/company/", function(data){
-          fillSelect(data)
-          resolve()
-        })
+        const token_access = CookieMgr.get('jwt_token');
+        const jwt = JWTMgr.parse(token_access)
+        if(jwt.role == "administrator"){
+          // Get Company
+          APIMgr.get_model_list("/api/company/", function(data){
+            fillSelect(data)
+            resolve()
+          })
+        }else{
+          // Get Company
+          APIMgr.get_model_list("/api/company/whoami/", function(data){
+            update_user_dict(data.id, data.user_list_detail)
+            resolve()
+          })
+        }
+
+
       }).then( function(){
         // Get Swarm
         APIMgr.get_model_list("/api/swarm/", function(data){
