@@ -139,8 +139,8 @@ MQTT = {
     'topic_dronetrap': 'dronetrap/#',
     'topic_sensor': 'sensor/#',
     # Specific command topics
-    'topic_discovery': 'dronetrap/+/discovery',
-    'topic_start_discovery': 'sensor/+/start_discovery',
+    'topic_discovery': 'dronetrap/discovery',
+    'topic_start_discovery': 'dronetrap/0/start_discovery',
     'topic_manager_set': 'dronetrap/+/set',
     'topic_manager_unset': 'dronetrap/+/unset'
 }

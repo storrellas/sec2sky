@@ -2,6 +2,7 @@ import sys
 import os
 import io
 import uuid
+import traceback
 sys.path.append(os.path.dirname(os.path.abspath(__file__)) + '/../')
 
 import time
@@ -45,8 +46,9 @@ def on_connect(client, userdata, flags, rc):
     # logger.info("Subscribe to topic "+ settings.MQTT['topic_dronetrap'])
     # client.subscribe(settings.MQTT['topic_dronetrap'])
 
-    logger.info("Subscribe to topic "+ settings.MQTT['topic_dronetrap'])
-    client.subscribe(settings.MQTT['topic_dronetrap'])
+    logger.info("Subscribe to topic "+ settings.MQTT['topic_discovery'])
+    client.subscribe(settings.MQTT['topic_discovery'])
+
 
 #
 # Name: creates_model
@@ -64,6 +66,19 @@ def create_model(serializer, data):
         logger.info("Object creation successful!")
     else:
         logger.error("Object creation failed. Wrong input data")
+
+
+def to_float(str):
+    try:
+        return float(str)
+    except ValueError:
+        return None
+
+def to_int(str):
+    try:
+        return int(str)
+    except ValueError:
+        return None
 
 #
 # Name: on_message
@@ -93,36 +108,37 @@ def on_message(client, userdata, msg):
                 sensor = Sensor()
                 logger.info("Sensor created sucessfully")
 
+            data_field = data['data']
+
             # Updating or generating data
             sensor.device_id = data['deviceid']
             sensor.serial_num = data['serialnum']
-            sensor.model = data['model']
-            sensor.version = data['version']
-            sensor.available = data['available']
-            sensor.energy = data['energy']
+            sensor.model = data_field['model']
+            sensor.version = data_field['version']
+            sensor.available = data_field['available']
+            sensor.energy = data_field['energy']
             sensor.token = str(uuid.uuid4())
             sensor.save()
 
-            data_status = data['status']
             status = Status()
             status.sensor = sensor
-            status.latitude = data_status['location']['latitude']
-            status.longitude = data_status['location']['longitude']
-            status.orientation = data_status['location']['orientation']
-            status.wifi_status = data_status['wifi_status']
-            status.rf0_status = data_status['rf0_status']
-            status.rf1_status = data_status['rf1_status']
-            status.gps_status = data_status['gps_status']
-            status.gps_sats = data_status['gps_sats']
-            status.cpu = data_status['CPU']
-            status.temp = data_status['temp']
-            status.ram_total = data_status['RAM']['total']
-            status.ram_used = data_status['RAM']['used']
-            status.ram_free = data_status['RAM']['free']
-            status.disk_total = data_status['DISK']['total']
-            status.disk_used = data_status['DISK']['user']
-            status.disk_free = data_status['DISK']['free']
-            status.disk_percent = data_status['DISK']['percent']
+            status.latitude = to_float(data_field['location']['latitude'])
+            status.longitude = to_float(data_field['location']['longitude'])
+            status.orientation = to_float(data_field['location']['orientation'])
+            status.wifi_status = data_field['wifi_status']
+            status.rf0_status = data_field['rf0_status']
+            status.rf1_status = data_field['rf1_status']
+            status.gps_status = data_field['gps_status']
+            status.gps_sats = data_field['gps_sats']
+            status.cpu = data_field['CPU']
+            status.temp = data_field['temp']
+            status.ram_total = to_int(data_field['RAM']['total'])
+            status.ram_used = to_int(data_field['RAM']['used'])
+            status.ram_free = to_int(data_field['RAM']['free'])
+            status.disk_total = data_field['DISK']['total']
+            status.disk_used = data_field['DISK']['used']
+            status.disk_free = data_field['DISK']['free']
+            status.disk_percent = data_field['DISK']['percent']
             status.save()
 
         elif command == "state":
@@ -134,6 +150,8 @@ def on_message(client, userdata, msg):
 
     except Exception as e:
         logger.error('Exception: '+ str(e))
+        traceback.print_exc()
+
 
 
 

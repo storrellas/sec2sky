@@ -1,6 +1,7 @@
 import sys
 import os
 import io
+import traceback
 sys.path.append(os.path.dirname(os.path.abspath(__file__)) + '/../')
 
 import time
@@ -41,8 +42,8 @@ def on_connect(client, userdata, flags, rc):
     logger.info("Connected with result code "+str(rc))
 
     # Subscribe to topic list
-    #logger.info("Subscribe to topic "+ settings.MQTT['topic_sensor'])
-    #client.subscribe(settings.MQTT['topic_sensor'])
+    # logger.info("Subscribe to topic "+ settings.MQTT['topic_dronetrap'])
+    # client.subscribe(settings.MQTT['topic_dronetrap'])
 
     logger.info("Subscribe to topic "+ settings.MQTT['topic_start_discovery'])
     client.subscribe(settings.MQTT['topic_start_discovery'])
@@ -50,6 +51,7 @@ def on_connect(client, userdata, flags, rc):
     client.subscribe(settings.MQTT['topic_manager_set'])
     logger.info("Subscribe to topic "+ settings.MQTT['topic_manager_unset'])
     client.subscribe(settings.MQTT['topic_manager_unset'])
+
 
 #
 # Name: on_message
@@ -65,24 +67,27 @@ def on_message(client, userdata, msg):
         data = JSONParser().parse(stream)
 
         # Parse topic
-        sensor_id = msg.topic.split("/")[1]
+        # sensor_id = msg.topic.split("/")[1]
+        # command = msg.topic.split("/")[2]
+        # if len(msg.topic.split("/")) > 3:
+        #     subcommand =  msg.topic.split("/")[3]
+        deviceid = msg.topic.split("/")[1]
         command = msg.topic.split("/")[2]
-        if len(msg.topic.split("/")) > 3:
-            subcommand =  msg.topic.split("/")[3]
 
         # Treat topic
         if command == "start_discovery":
             logger.info("Start Discovery received")
-            sensor_id = msg.topic.split("/")[1]
 
             # Store new sensor to perform discovery
-            sensor_discovery[sensor_id] = data
-        elif command == "manager":
-            if subcommand == "set":
-                logger.info("State manager/set received")
-                sensor_discovery.pop(data['device_id'])
-            elif subcommand == "unset":
-                logger.info("State manager/unset received")
+            deviceid = data['deviceid']
+            if deviceid in sensor_discovery.keys():
+                sensor_discovery[deviceid] = data
+
+        elif command == "set":
+            logger.info("State manager/set received")
+            sensor_discovery.pop(deviceid)
+        elif command == "unset":
+            logger.info("State manager/unset received")
         elif command == "state":
             logger.info("State received")
         elif command == "detection":
@@ -92,24 +97,20 @@ def on_message(client, userdata, msg):
 
     except Exception as e:
         logger.error('Exception: '+ str(e))
+        traceback.print_exc()
 
 #
 # Name: alarm_handler
 # Description: Handler when alarm is raised
 #
 def alarm_handler(signum, frame):
-    #logger.info('Signal handler called with signal' + str(signum) )
-
-    #message = {'id': 1, 'sender': 'sergi'}
+    #logger.info('Signal handler called with signal ' + str(signum) )
 
     # MQTT publish message
-    # logger.info("Sending message '" + json.dumps(message) + "' ...")
-    # client.publish(settings.MQTT['topic'], json.dumps(message))
-    #print(sensor_discovery)
     if len(sensor_discovery) > 0:
         logger.info("Sending message sensor discoveries pending ...")
         for device_id in sensor_discovery:
-            topic = 'dronetrap/' + sensor_id + '/discovery'
+            topic = 'dronetrap/discovery'
             client.publish(topic, json.dumps(sensor_discovery[device_id]))
 
     # Create signal for next alarm

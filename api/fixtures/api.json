@@ -422,10 +422,10 @@
     "ram_total": 2051756,
     "ram_used": 1596700,
     "ram_free": 364636,
-    "disk_total": 2051756,
-    "disk_used": 1596700,
-    "disk_free": 364636,
-    "disk_percent": 25,
+    "disk_total": "15G",
+    "disk_used": "3.4G",
+    "disk_free": "11G",
+    "disk_percent": "25%",
     "created_at": "2019-01-29T10:45:46.689Z",
     "updated_at": "2019-01-29T10:45:46.689Z"
   }
@@ -448,10 +448,10 @@
     "ram_total": 2051756,
     "ram_used": 1596700,
     "ram_free": 364636,
-    "disk_total": 2051756,
-    "disk_used": 1596700,
-    "disk_free": 364636,
-    "disk_percent": 25,
+    "disk_total": "15G",
+    "disk_used": "3.4G",
+    "disk_free": "11G",
+    "disk_percent": "25%",
     "created_at": "2019-01-29T12:45:46.689Z",
     "updated_at": "2019-01-29T12:45:46.689Z"
   }
@@ -474,10 +474,10 @@
     "ram_total": 2051756,
     "ram_used": 1596700,
     "ram_free": 364636,
-    "disk_total": 2051756,
-    "disk_used": 1596700,
-    "disk_free": 364636,
-    "disk_percent": 25,
+    "disk_total": "15G",
+    "disk_used": "3.4G",
+    "disk_free": "11G",
+    "disk_percent": "25%",
     "created_at": "2019-01-29T9:45:46.689Z",
     "updated_at": "2019-01-29T9:45:46.689Z"
   }
@@ -500,10 +500,10 @@
     "ram_total": 2051756,
     "ram_used": 1596700,
     "ram_free": 364636,
-    "disk_total": 2051756,
-    "disk_used": 1596700,
-    "disk_free": 364636,
-    "disk_percent": 25,
+    "disk_total": "15G",
+    "disk_used": "3.4G",
+    "disk_free": "11G",
+    "disk_percent": "25%",
     "created_at": "2019-01-29T9:45:46.689Z",
     "updated_at": "2019-01-29T9:45:46.689Z"
   }
@@ -526,10 +526,10 @@
     "ram_total": 2051756,
     "ram_used": 1596700,
     "ram_free": 364636,
-    "disk_total": 2051756,
-    "disk_used": 1596700,
-    "disk_free": 364636,
-    "disk_percent": 25,
+    "disk_total": "15G",
+    "disk_used": "3.4G",
+    "disk_free": "11G",
+    "disk_percent": "25%",
     "created_at": "2019-01-29T9:45:46.689Z",
     "updated_at": "2019-01-29T9:45:46.689Z"
   }
@@ -552,10 +552,10 @@
     "ram_total": 2051756,
     "ram_used": 1596700,
     "ram_free": 364636,
-    "disk_total": 2051756,
-    "disk_used": 1596700,
-    "disk_free": 364636,
-    "disk_percent": 25,
+    "disk_total": "15G",
+    "disk_used": "3.4G",
+    "disk_free": "11G",
+    "disk_percent": "25%",
     "created_at": "2019-01-29T9:45:46.689Z",
     "updated_at": "2019-01-29T9:45:46.689Z"
   }
@@ -578,10 +578,10 @@
     "ram_total": 2051756,
     "ram_used": 1596700,
     "ram_free": 364636,
-    "disk_total": 2051756,
-    "disk_used": 1596700,
-    "disk_free": 364636,
-    "disk_percent": 25,
+    "disk_total": "15G",
+    "disk_used": "3.4G",
+    "disk_free": "11G",
+    "disk_percent": "25%",
     "created_at": "2019-01-29T9:45:46.689Z",
     "updated_at": "2019-01-29T9:45:46.689Z"
   }
@@ -604,10 +604,10 @@
     "ram_total": 2051756,
     "ram_used": 1596700,
     "ram_free": 364636,
-    "disk_total": 2051756,
-    "disk_used": 1596700,
-    "disk_free": 364636,
-    "disk_percent": 25,
+    "disk_total": "15G",
+    "disk_used": "3.4G",
+    "disk_free": "11G",
+    "disk_percent": "25%",
     "created_at": "2019-01-29T9:45:46.689Z",
     "updated_at": "2019-01-29T9:45:46.689Z"
   }
@@ -630,10 +630,10 @@
     "ram_total": 2051756,
     "ram_used": 1596700,
     "ram_free": 364636,
-    "disk_total": 2051756,
-    "disk_used": 1596700,
-    "disk_free": 364636,
-    "disk_percent": 25,
+    "disk_total": "15G",
+    "disk_used": "3.4G",
+    "disk_free": "11G",
+    "disk_percent": "25%",
     "created_at": "2019-01-29T9:45:46.689Z",
     "updated_at": "2019-01-29T9:45:46.689Z"
   }
@@ -656,10 +656,10 @@
     "ram_total": 2051756,
     "ram_used": 1596700,
     "ram_free": 364636,
-    "disk_total": 2051756,
-    "disk_used": 1596700,
-    "disk_free": 364636,
-    "disk_percent": 25,
+    "disk_total": "15G",
+    "disk_used": "3.4G",
+    "disk_free": "11G",
+    "disk_percent": "25%",
     "created_at": "2019-01-29T9:45:46.689Z",
     "updated_at": "2019-01-29T9:45:46.689Z"
   }
@@ -682,10 +682,10 @@
     "ram_total": 2051756,
     "ram_used": 1596700,
     "ram_free": 364636,
-    "disk_total": 2051756,
-    "disk_used": 1596700,
-    "disk_free": 364636,
-    "disk_percent": 25,
+    "disk_total": "15G",
+    "disk_used": "3.4G",
+    "disk_free": "11G",
+    "disk_percent": "25%",
     "created_at": "2019-01-29T9:45:46.689Z",
     "updated_at": "2019-01-29T9:45:46.689Z"
   }

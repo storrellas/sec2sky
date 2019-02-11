@@ -222,11 +222,11 @@ class SensorViewSet(mixins.ListModelMixin,
         sensor = self.get_object()
         if sensor.swarm is None:
             logger.info("Swarm is None. Notifying sensor for unset")
-            topic = settings.MQTT['topic_manager_unset'].replace('+', str(settings.MQTT['id']))
+            topic = settings.MQTT['topic_manager_unset'].replace('+', str(sensor.device_id))
             sensor.token = str(uuid.uuid4())
         else:
             logger.info("Swarm is None. Notifying sensor for set")
-            topic = settings.MQTT['topic_manager_set'].replace('+', str(settings.MQTT['id']))
+            topic = settings.MQTT['topic_manager_set'].replace('+', str(sensor.device_id))
             sensor.token = str(uuid.uuid4())
         sensor.save()
 
