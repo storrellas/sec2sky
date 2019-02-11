@@ -6,34 +6,13 @@
 <div class="row fullheight" >
  <div class="col-lg-12">
 
-    <div id="primary">
-        <div id="map_actions" class="clearfix">
-        </div>
-        <div id="map_trail">
-            <div id="map_canvas" style="width: 100%; height: 100%; position: relative; overflow: hidden;" ></div>
-                <div id="map_details" style="display:none">
-                    <div id="elevation-chart">
-                    <div id="pos-marker"></div>
-                    <div id="pos-marker-current-alt"><span id="pm-alt">-</span></div>
-                    <div id="pos-marker-current-pos"><span id="pm-pos">-</span></div>
-                    <div class="map_svg-wrapper"></div>
-                    </div>
-                <div id="el-max">1.788&nbsp;m</div>
-                <div id="el-min">594&nbsp;m <input type="checkbox" id="autocenter" value="Autocenter"/></div>
-                <div id="el-len1" class="el-len">0</div>
-                <div id="el-len2" class="el-len">91</div>
-                <div id="el-len3" class="el-len">183</div>
-                <div id="el-len4" class="el-len hidden-xs">274</div>
-                <div id="el-len5" class="el-len">365,78&nbsp;km</div>
-                <div class="hide-button" title="Hide"><span class="glyphicon glyphicon-chevron-down"></span></div>
-            </div>
-            <!-- <div id="map_details-but" >
-                <div class="hide-button" title="Show details"><span class="glyphicon glyphicon-chevron-up"></span>Show Details</div>
-            </div> -->
-        </div>
-    </div>
+   <div class="row">
+     <div class="col-sm-12">
+       <div id="map_canvas" style="width: 100%; height: 80vh; position: relative; overflow: hidden;" ></div>
+     </div>
+   </div>
 
-    </div>
+ </div>
 </div>
 
 
@@ -41,37 +20,55 @@
 
 {% block footer_page %}
 
+<!-- GMaps -->
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAXTqRt3ofrUr3avtW61II41MM71q77OEo" type="text/javascript"></script>
+
+
 <script type="text/javascript">
 
-  function InitMap( _center,_zoom,_type){
-    map = new google.maps.Map(document.getElementById('map_canvas'), {
-      zoom: _zoom,
-      center: _center,
-      mapTypeId: google.maps.MapTypeId.ROADMAP,
-      disableDefaultUI: true
+  let map;
+  function configure_gmaps(data){
+
+    // Set marker
+    const latitude = parseFloat(data.last_status.latitude)
+    const longitude = parseFloat(data.last_status.longitude)
+    const center = {lat: latitude, lng: longitude}
+    var marker = new google.maps.Marker({
+      position: center,
+      map: map,
+      title: 'Hello World!'
     });
-  }
-  function show_map( _center,_zoom,_type){
-    map = new google.maps.Map(document.getElementById('map_canvas'), {
-      zoom: _zoom,
-      center: _center,
-      mapTypeId: google.maps.MapTypeId.ROADMAP,
-      disableDefaultUI: true
+
+    // Label Configuration
+    var contentString = `<div><strong>DeviceID:</strong> ${data.device_id}</div>` +
+    `<div><strong>Serial Num:</strong> ${data.serial_num}</div>` +
+    `<div><strong>Model:</strong> ${data.model}</div>`;
+    var infowindow = new google.maps.InfoWindow({
+      content: contentString
     });
-      bounds  = new google.maps.LatLngBounds();
+    marker.addListener('click', function() {
+      infowindow.open(map, marker);
+    });
   }
 
   $(document).ready(function () {
 
-
-    $('#map_trail').css({height: $(window).innerHeight()-$(".navbar").innerHeight()});
-    $(window).resize(function(){
-      $('#map_trail').css({height: $(window).innerHeight()-$(".navbar").innerHeight()});
+    // Retreive Sensor Detail
+    const id = URLMgr.get_query_variable('id')
+    APIMgr.get_model_list("/api/sensor/", function(data){
+      for (const sensor of data)
+        configure_gmaps(sensor)
     })
-    show_map({lat:41.490427,lng:2.262536},15);
 
-  })
+    const center = {lat: 41.490427, lng:2.262536}
+    map = new google.maps.Map(document.getElementById('map_canvas'), {
+      zoom: 13,
+      center: center,
+      mapTypeId: google.maps.MapTypeId.ROADMAP
+    });
+
+  });
+
 </script>
 
 {% endblock footer_page %}
