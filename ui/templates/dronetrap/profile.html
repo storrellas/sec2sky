@@ -45,6 +45,10 @@
               <button type="button" class="btn btn-info btn-save w-100">Save</button>
             </div>
           </div>
+
+          <div class="alert alert-success d-none text-center">
+            <strong>Success!</strong> User updated successfully
+          </div>
         </form>
        </div>
      </div>
@@ -58,6 +62,7 @@
 
 <script type="text/javascript">
 
+  let id = -1
   function fillSelectRoles(data){
     for (const role of Object.keys(data)) {
       const template = `<option value="${role}">${data[role]}</option>`;
@@ -75,9 +80,8 @@
         resolve()
       })
     }).then( function(){
-      // Retrieve user
       APIMgr.get_model_list("/api/user/whoami/", function(data){
-        console.log(data)
+        id = data.id
         $('#input-username').val(data.username)
         $('#select-role').val(data.role)
       })
@@ -86,20 +90,18 @@
     // Save Company
     $('.btn-save').click( () => {
 
+      $('.alert-success').addClass('d-none')
+
       const body = {
         username: $("#input-username").val(),
         password: $("#input-password").val(),
-        role: $("#select-role").val(),
-        company: $("#select-company").val()
+        role: $("#select-role").val()
       }
 
-      console.log("Save profile")
-
-      // if( id < 0 ){
-      //   APIMgr.create_model("/api/user/", body)
-      // }else{
-      //   APIMgr.update_model("/api/user/", id, body)
-      // }
+      // Updated
+      APIMgr.update_model("/api/user/", id, body, function(){
+        $('.alert-success').removeClass('d-none')
+      })
 
     });
 
