@@ -82,8 +82,8 @@ class Detection(models.Model):
     sensor = models.ForeignKey(Sensor, on_delete=models.CASCADE, null=True)
     description = models.CharField(max_length=500, null=True)
     thread_id = models.IntegerField(null=True)
-    home_latitude = models.DecimalField(max_digits=5, null=True, decimal_places=2)
-    home_longitude = models.DecimalField(max_digits=5, null=True, decimal_places=2)
+    home_latitude = models.DecimalField(max_digits=20, null=True, decimal_places=10)
+    home_longitude = models.DecimalField(max_digits=20, null=True, decimal_places=10)
     latitude = models.DecimalField(max_digits=5, null=True, decimal_places=2)
     altitude = models.DecimalField(max_digits=5, null=True, decimal_places=2)
     longitude = models.DecimalField(max_digits=5, null=True, decimal_places=2)
@@ -101,9 +101,9 @@ class Detection(models.Model):
 class Status(models.Model):
 
     sensor = models.ForeignKey(Sensor, on_delete=models.CASCADE, null=True)
-    latitude = models.DecimalField(max_digits=5, null=True, decimal_places=2)
-    longitude = models.DecimalField(max_digits=5, null=True, decimal_places=2)
-    orientation = models.DecimalField(max_digits=5, null=True, decimal_places=2)
+    latitude = models.DecimalField(max_digits=20, null=True, decimal_places=10)
+    longitude = models.DecimalField(max_digits=20, null=True, decimal_places=10)
+    orientation = models.DecimalField(max_digits=20, null=True, decimal_places=10)
     wifi_status = models.CharField(max_length=20, null=True)
     rf0_status = models.CharField(max_length=20, null=True)
     rf1_status = models.CharField(max_length=20, null=True)

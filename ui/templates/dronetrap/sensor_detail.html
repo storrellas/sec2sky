@@ -155,18 +155,10 @@
 
     let map;
     function configure_gmaps(data){
-      console.log(data)
-/*
-      map.setCenter(marker.getPosition())
-      var contentString = `<div>DeviceID: </div>` +
-      `<div>latitude: </div>` +
-      `<div>longitude: </div>` + ;
-      var infowindow = new google.maps.InfoWindow({
-        content: contentString
-      });
-/**/
-      const latitude = parseInt(data.latitude)
-      const longitude = parseInt(data.longitude)
+
+      // Set marker
+      const latitude = parseFloat(data.last_status.latitude)
+      const longitude = parseFloat(data.last_status.longitude)
       const center = {lat: latitude, lng: longitude}
       var marker = new google.maps.Marker({
         position: center,
@@ -174,10 +166,18 @@
         title: 'Hello World!'
       });
       map.setCenter(marker.getPosition())
-      // marker.addListener('click', function() {
-      //   infowindow.open(map, marker);
-      // });
-/**/
+
+      // Label Configuration
+      var contentString = `<div><strong>DeviceID:</strong> ${data.device_id}</div>` +
+      `<div><strong>Serial Num:</strong> ${data.serial_num}</div>` +
+      `<div><strong>Model:</strong> ${data.model}</div>`;
+      var infowindow = new google.maps.InfoWindow({
+        content: contentString
+      });
+      marker.addListener('click', function() {
+        infowindow.open(map, marker);
+      });
+
 
     }
 
@@ -200,6 +200,9 @@
           $("#sensor-detail").removeClass("invisible");
         }, 500);
 
+        // Configure marker on map
+        configure_gmaps(data)
+
       })
       // Show loading overlay
       $("#sensor-detail").LoadingOverlay("show");
@@ -218,9 +221,6 @@
           `</tr>`;
           $(".table-status tbody").append(table_template)
         }
-
-        // Configure marker on map
-        configure_gmaps(data[0])
       })
 
       APIMgr.request_model(`/api/sensor/${id}/detection/`, "GET", undefined, function(data){
@@ -241,8 +241,7 @@
       map = new google.maps.Map(document.getElementById('map_canvas'), {
         zoom: 15,
         center: center,
-        mapTypeId: google.maps.MapTypeId.ROADMAP,
-        disableDefaultUI: true
+        mapTypeId: google.maps.MapTypeId.ROADMAP
       });
 
     });

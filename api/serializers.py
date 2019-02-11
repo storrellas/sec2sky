@@ -61,22 +61,6 @@ class DetectionSerializer(serializers.ModelSerializer):
     def create(self, validated_data):
         return self.Meta.model(**validated_data)
 
-class SensorExtendedSerializer(serializers.ModelSerializer):
-    n_detection = serializers.SerializerMethodField()
-    n_status = serializers.SerializerMethodField()
-    swarm = SwarmSerializer()
-
-    def get_n_detection(self, obj):
-        return Detection.objects.filter(sensor=obj).count()
-
-    def get_n_status(self, obj):
-        #return "Foo id: %i" % obj.pk
-        return Status.objects.filter(sensor=obj).count()
-
-    class Meta:
-        model = Sensor
-        fields = '__all__'
-
 class StatusSerializer(serializers.ModelSerializer):
     class Meta:
         model = Status
@@ -84,3 +68,27 @@ class StatusSerializer(serializers.ModelSerializer):
 
     def create(self, validated_data):
         return self.Meta.model(**validated_data)
+
+class SensorExtendedSerializer(serializers.ModelSerializer):
+    n_detection = serializers.SerializerMethodField()
+    n_status = serializers.SerializerMethodField()
+    swarm = SwarmSerializer()
+    last_status = serializers.SerializerMethodField()
+
+    def get_n_detection(self, obj):
+        return Detection.objects.filter(sensor=obj).count()
+
+    def get_n_status(self, obj):
+        return Status.objects.filter(sensor=obj).count()
+
+    def get_last_status(self, obj):
+        status = Status.objects.filter(sensor=obj).first()
+        if status is None:
+            return {}
+        else:
+            serializer = StatusSerializer(status)
+            return serializer.data
+
+    class Meta:
+        model = Sensor
+        fields = '__all__'
