@@ -80,8 +80,8 @@ class APIMgr{
     this.request_model(url + id + "/", "GET", undefined, callback)
   }
 
-  static delete_model(url, callback) {
-    this.request_model(url, "DELETE", undefined, callback)
+  static delete_model(url, id, callback) {
+    this.request_model(url + id + "/", "DELETE", undefined, callback)
   }
 
   static create_model(url, body, callback) {

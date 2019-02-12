@@ -102,8 +102,8 @@
           `<td>${item.description}</td>` +
           `<td>${username_list}</td>` +
           `<td class="text-right">` +
-            `<button type="button" data-toggle="modal" data-target="#edit" data-uid="__id__" class="update btn btn-warning btn-sm"><i class="fa fa-pencil-ruler fa-fw"></i></button>` +
-            `<button type="button" data-toggle="modal" data-target="#delete" data-uid="__id__" class="delete btn btn-danger btn-sm"><i class="fa fa-times fa-fw"></i></button>` +
+            `<button type="button" data-toggle="modal" data-target="#edit" data-uid="${item.id}" class="update btn btn-warning btn-sm"><i class="fa fa-pencil-ruler fa-fw"></i></button>` +
+            `<button type="button" data-toggle="modal" data-target="#delete" data-uid="${item.id}" class="delete btn btn-danger btn-sm"><i class="fa fa-times fa-fw"></i></button>` +
           `</td>` +
         `</tr>`;
         $(".table-company tbody").append(table_template)
@@ -141,7 +141,7 @@
 
       // Delete Company
       $('.btn-delete').click( () => {
-        APIMgr.delete_model("/api/company/" + id)
+        APIMgr.delete_model("/api/company/", id)
       });
 
       // Save Company

@@ -213,7 +213,7 @@
             resolve()
           })
         }else{
-          
+
           // Get Company
           APIMgr.get_model_list("/api/company/whoami/", function(data){
             update_user_dict(data.id, data.user_list_detail)
@@ -232,7 +232,7 @@
 
       // Delete Swarm
       $('.btn-delete').click( () => {
-        APIMgr.delete_model("/api/swarm/" + id)
+        APIMgr.delete_model("/api/swarm/", id)
       });
 
       // Save Company
