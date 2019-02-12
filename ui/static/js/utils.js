@@ -45,14 +45,14 @@ class APIMgr{
       contentType: "application/json; charset=utf-8",
       dataType: "json",
       success: function(data){
-        callback(data)
+        callback(data, true)
       },
       error: () => window.location = '/ui/',
       failure: () => window.location = '/ui/'
     })
   }
 
-  static request_model(url, verb, body, callback){
+  static request_model(url, verb, body, callback, callback_error){
     const jwt_token = CookieMgr.get('jwt_token');
     $.ajax({
       type: verb,
@@ -65,13 +65,18 @@ class APIMgr{
       data: JSON.stringify(body),
       success: function(data){
         if(callback){
-          callback(data)
+          callback(data, true)
         }else{
           location.reload();
         }
-
       },
-      error: () => window.location = '/ui/',
+      error: function(data){
+        if(callback){
+          callback(data, false)
+        }else{
+          window.location = '/ui/'
+        }
+      },
       failure: () => window.location = '/ui/'
     })
   }

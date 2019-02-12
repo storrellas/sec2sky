@@ -10,7 +10,6 @@
 <div class="row fullheight" >
  <div class="offset-lg-1 col-lg-10">
 
-
    <div class="text-right">
      <button type="button" data-toggle="modal" data-target="#edit" data-uid="-1" class="btn create btn-info"><i class="fa fa-plus"></i> Add New</button>
    </div>
@@ -29,7 +28,13 @@
     </tbody>
     </table>
 
+    <div class="alert alert-danger d-none text-center">
+      <strong>Failed!</strong> Your request has failed
+    </div>
+
   </div>
+
+
 </div>
 
 <div id="edit" class="modal fade" role="dialog">
@@ -153,9 +158,15 @@
         }
 
         if( id < 0 ){
-          APIMgr.create_model("/api/company/", body)
+          APIMgr.create_model("/api/company/", body, function(data, result){
+            if( !result )
+              $('.alert-danger').removeClass('d-none')
+          })
         }else{
-          APIMgr.update_model("/api/company/", id, body)
+          APIMgr.update_model("/api/company/", id, body, function(data, result){
+            if( !result )
+              $('.alert-danger').removeClass('d-none')
+          })
         }
 
       });

@@ -33,6 +33,10 @@
     </tbody>
     </table>
 
+    <div class="alert alert-danger d-none text-center">
+      <strong>Failed!</strong> Your request has failed
+    </div>
+
   </div>
 </div>
 
@@ -198,9 +202,15 @@
       }
 
       if( id < 0 ){
-        APIMgr.create_model("/api/user/", body)
+        APIMgr.create_model("/api/user/", body, function(data, result){
+          if( !result )
+            $('.alert-danger').removeClass('d-none')
+        })
       }else{
-        APIMgr.update_model("/api/user/", id, body)
+        APIMgr.update_model("/api/user/", id, body, function(data, result){
+          if( !result )
+            $('.alert-danger').removeClass('d-none')
+        })
       }
 
     });

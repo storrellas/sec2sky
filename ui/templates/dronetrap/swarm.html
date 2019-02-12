@@ -35,6 +35,10 @@
     </tbody>
    </table>
 
+   <div class="alert alert-danger d-none text-center">
+     <strong>Failed!</strong> Your request has failed
+   </div>
+
   </div>
 </div>
 
@@ -245,12 +249,16 @@
           }
 
           if( id < 0 ){
-            APIMgr.create_model("/api/swarm/", body, function(data){
+            APIMgr.create_model("/api/swarm/", body, function(data, result){
+              if( !result )
+                return reject()
               id = data.id
               resolve()
             })
           }else{
             APIMgr.update_model("/api/swarm/", id, body, function(data){
+              if( !result )
+                return reject()
               resolve()
             })
           }
@@ -281,6 +289,8 @@
             failure: () => window.location = '/ui/'
           })
 
+        }).catch( function(){
+                $('.alert-danger').removeClass('d-none')
         })
 
 
