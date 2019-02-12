@@ -175,6 +175,7 @@ if __name__ == "__main__":
     client.on_connect = on_connect
     client.on_message = on_message
 
+    logger.info("Connecting to " + settings.MQTT['hostname'] + " ...")
     client.connect(settings.MQTT['hostname'], 1883, 60)
 
 
