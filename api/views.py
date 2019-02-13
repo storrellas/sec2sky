@@ -141,8 +141,9 @@ class UserViewSet(viewsets.ModelViewSet):
             serializer.save()
 
             # Update password
-            user.set_password(serializer.data['password'])
-            user.save()
+            if 'password' in serializer.validated_data.keys():
+                user.set_password(serializer.validated_data['password'])
+                user.save()
 
             # Generate response
             serializer = self.serializer_class(user)

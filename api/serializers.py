@@ -24,6 +24,7 @@ class UserExtendedSerializer(serializers.ModelSerializer):
         fields = ('id', 'username', 'role', 'company_detail', 'swarms')
 
 class UserSerializer(serializers.ModelSerializer):
+    password = serializers.CharField(required=False)
     class Meta:
         model = User
         fields = ('id', 'username', 'password', 'role', 'company')
