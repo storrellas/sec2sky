@@ -149,7 +149,7 @@
 
         // Select company if exists
         let companyid = -1
-        if(user_dict[user].company)
+        if(user_dict[user] && user_dict[user].company)
           companyid = user_dict[user].company
 
         const table_template = `<tr>` +
@@ -265,7 +265,7 @@
               resolve()
             })
           }else{
-            APIMgr.update_model("/api/swarm/", id, body, function(data){
+            APIMgr.update_model("/api/swarm/", id, body, function(data, result){
               if( !result )
                 return reject()
               resolve()
