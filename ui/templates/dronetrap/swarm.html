@@ -169,7 +169,7 @@
 
     }
 
-    function userSetConfiguration(companyid){
+    function userSetConfiguration(companyid, user_list_selected){
       // $(".select-user").find('option').not(':first').remove();
       $(".select-user").find('option').remove();
 
@@ -179,7 +179,11 @@
       // Fill user list
       const user_list = company_dict[companyid]
       for (const item of user_list) {
-        const template = `<option value="${item.id}">${item.username}</option>`;
+        let selected = ""
+        if( user_list_selected.indexOf(item.id) >= 0 )
+          selected = "selected"
+
+        const template = `<option ${selected} value="${item.id}">${item.username}</option>`;
         $(".select-user").append(template)
       }
 
@@ -205,12 +209,17 @@
         $('#input-name').val($(item_name).text())
         $('#input-description').val($(item_description).text())
         const companyid = $(item_users).data('companyid')
+        const userlist_val = $(item_users).data('userlist').toString()
+        let user_list_str =  userlist_val.split(',')
+        let user_list_selected = []
+        for (const id of user_list_str)
+          user_list_selected.push(parseInt(id))
         $('#select-company').val(companyid)
-        userSetConfiguration(companyid)
+        userSetConfiguration(companyid, user_list_selected)
       })
 
       $('#select-company').change( function(){
-        userSetConfiguration($(this).val())
+        userSetConfiguration($(this).val(), [])
       })
     }
 
