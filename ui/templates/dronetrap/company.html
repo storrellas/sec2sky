@@ -159,13 +159,19 @@
 
         if( id < 0 ){
           APIMgr.create_model("/api/company/", body, function(data, result){
-            if( !result )
+            if( !result ){
               $('.alert-danger').removeClass('d-none')
+              return
+            }
+            location.reload()
           })
         }else{
           APIMgr.update_model("/api/company/", id, body, function(data, result){
-            if( !result )
+            if( !result ){
               $('.alert-danger').removeClass('d-none')
+              return
+            }
+            location.reload()
           })
         }
 
