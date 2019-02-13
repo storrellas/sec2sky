@@ -67,7 +67,7 @@
             <label for="select-company" class="col-sm-2 col-form-label">Company</label>
             <div class="col-sm-10">
               <select class="custom-select" id="select-company">
-                <!-- <option val="" selected>NONE</option> -->
+                <option value="-1" selected>NONE</option>
               </select>
             </div>
           </div>
@@ -75,7 +75,7 @@
             <label for="select-user" class="col-sm-2 col-form-label">UserSet</label>
             <div class="col-sm-10">
               <select class="custom-select select-user" multiple>
-                <!-- <option val="" selected>NONE</option> -->
+                <!-- <option value="" selected>NONE</option> -->
               </select>
             </div>
           </div>
@@ -147,12 +147,16 @@
           user_list = user_list + user_dict[user].username + ", "
         }
 
+        // Select company if exists
+        let companyid = -1
+        if(user_dict[user].company)
+          companyid = user_dict[user].company
 
         const table_template = `<tr>` +
           `<th scope="row">${item.id}</th>` +
           `<td>${item.name}</td>` +
           `<td>${item.description}</td>` +
-          `<td data-companyid="${user_dict[user].company}" data-userlist="${item.user_set}">${user_list}</td>` +
+          `<td data-companyid="${companyid}" data-userlist="${item.user_set}">${user_list}</td>` +
           `<td>${sensor_list}</td>` +
           `<td class="text-right">` +
             `<button type="button" data-toggle="modal" data-target="#edit" data-uid="${item.id}" class="update btn btn-warning btn-sm"><i class="fa fa-pencil-ruler fa-fw"></i></button>` +
@@ -166,8 +170,13 @@
     }
 
     function userSetConfiguration(companyid){
-      //$(".select-user").find('option').not(':first').remove();
+      // $(".select-user").find('option').not(':first').remove();
       $(".select-user").find('option').remove();
+
+      // If no company selected
+      if(companyid == "-1") return
+
+      // Fill user list
       const user_list = company_dict[companyid]
       for (const item of user_list) {
         const template = `<option value="${item.id}">${item.username}</option>`;
@@ -266,7 +275,7 @@
           const select_user_array = $('.select-user').val()
           const user_set = []
           for (user of select_user_array) {
-            user_set.push( parseInt(user))
+            user_set.push( parseInt(user) )
           }
           const body = {
             user_set: user_set
